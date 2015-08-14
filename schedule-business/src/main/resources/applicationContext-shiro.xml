@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <description>Shiro安全配置</description>
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="cacheManager" ref="shiroEhcacheManager"/>
+        <property name="realm" ref="shiroDbrealm"/>
+    </bean>
+
+    <bean id="shiroDbrealm" class="com.haige.schedule.rbac.ShiroDbRealm"/>
+
+    <bean id="authc" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
+        <property name="loginUrl" value="/login"/>
+        <property name="successUrl" value="/index"/>
+    </bean>
+    <bean id="logout" class="org.apache.shiro.web.filter.authc.LogoutFilter">
+        <property name="redirectUrl" value="/login"/>
+    </bean>
+
+    <!--Shiro Filter -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/login"/>
+        <property name="successUrl" value="/index"/>
+        <property name="unauthorizedUrl" value="/login"/>
+        <property name="filterChainDefinitions">
+            <value>
+                /asset/** = anon
+                /exam/new =anon
+                /exam/fetch = anon
+                /exam/commitAnswer = anon
+                /exam/commit = anon
+                /exam/examSchedule = anon
+                /exam/scheduleExamRecords = anon
+                /exam/examRecords = anon
+                /exam/examAnswers = anon
+                /exam/examAnswersWithStats = anon
+                /train/sequenceLoad = anon
+                /train/randomLoad = anon
+                /index.jsp = anon
+                /store/major = anon
+                /store/student = anon
+                /favicon.ico = anon
+                /login = authc
+                /logout = logout
+                /** = user
+            </value>
+        </property>
+    </bean>
+
+    <!--用户授权信息Cache, 采用EhCache-->
+    <bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManagerConfigFile" value="classpath:ehcache-shiro.xml"/>
+    </bean>
+
+    <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+    <!--支持 Shiro对Controller的方法级AOP安全控制-->
+    <!-- 开启Shiro注解的Spring配置方式的beans。在lifecycleBeanPostProcessor之后运行 -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor">
+        <property name="proxyTargetClass" value="true"/>
+    </bean>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+</beans>
