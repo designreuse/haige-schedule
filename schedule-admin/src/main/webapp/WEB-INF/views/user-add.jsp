@@ -63,8 +63,10 @@
                                 <label for="comment" class="col-sm-2 control-label">备注</label>
 
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="comment" id="comment"
-                                           placeholder="备注">
+                                    <div class="col-sm-5">
+                                    <textarea type="text" class="form-control" name="comment" id="comment"
+                                              placeholder="备注"></textarea>
+                                    </div>
                                 </div>
                             </div>
 

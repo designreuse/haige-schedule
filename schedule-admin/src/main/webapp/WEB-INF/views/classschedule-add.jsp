@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <aside class="right-side">
     <!-- Main content -->
@@ -9,20 +9,17 @@
             <div class="col-md-10">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">修改客户</h3>
+                        <h3 class="box-title">添加客户</h3>
                     </div>
-                    <form role="form" class="form-horizontal" method="post" id="classMemberEditForm"
+                    <form role="form" class="form-horizontal" method="post" id="scheduleAddForm"
                           action="${ctx}/member/save">
                         <div class="box-body">
-                            <input type="hidden" id="id" name="id" value="${member.id}"/>
-
-
                             <div class="form-group">
                                 <label for="memberName" class="col-sm-2 control-label">用户名</label>
 
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="memberName" id="memberName"
-                                           value="${member.memberName}" placeholder="用户名">
+                                           placeholder="用户名">
                                 </div>
                             </div>
 
@@ -31,7 +28,7 @@
 
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="realName" id="realName"
-                                           value="${member.realName}" placeholder="姓名">
+                                           placeholder="姓名">
                                 </div>
                             </div>
 
@@ -40,11 +37,10 @@
 
                                 <div class="col-sm-5">
                                     <select name="sex" id="sex" style="width: 100%">
-                                        <c:forEach items="${sex}" var="r">
-                                            <option value="${r}"
-                                                    <c:if test="${member.sex==r}">selected</c:if>>${r.realName}</option>
+                                        <option value=""></option>
+                                        <c:forEach items="${sex}" var="r">--%>
+                                            <option value="${r}">${r.realName}</option>
                                         </c:forEach>
-
                                     </select>
                                 </div>
                             </div>
@@ -54,7 +50,6 @@
 
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="birthday" id="birthday"
-                                           value="<fmt:formatDate value="${member.birthday}"  type="date"/>"
                                            placeholder="出生日期">
                                 </div>
                             </div>
@@ -64,9 +59,9 @@
 
                                 <div class="col-sm-5">
                                     <select name="advisorId" id="advisorId" style="width: 100%">
+                                        <option value=""></option>
                                         <c:forEach items="${advisors}" var="r">
-                                            <option value="${r.id}"
-                                                    <c:if test="${member.advisor.id==r.id}">selected</c:if> >${r.realName}</option>
+                                            <option value="${r.id}">${r.realName}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -77,7 +72,7 @@
 
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="address" id="address"
-                                           value="${member.address}" placeholder="地址">
+                                           placeholder="地址">
                                 </div>
                             </div>
 
@@ -87,7 +82,7 @@
                                 <div class="col-sm-5">
                                     <div class="col-sm-5">
                                     <textarea type="text" class="form-control" name="comment" id="comment"
-                                              placeholder="备注">${member.comment}</textarea>
+                                              placeholder="备注"></textarea>
                                     </div>
                                 </div>
                             </div>

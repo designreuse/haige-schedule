@@ -59,7 +59,7 @@
 
 
                         </form>
-                        <table id="typeTable" style="margin-top: 10px" class="table table-bordered table-striped">
+                        <table id="useTable" style="margin-top: 10px" class="table table-bordered table-striped">
                             <thead>
                             <tr>
                                 <th class="text-center">登陆名</th>

@@ -8,7 +8,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            客户管理
+            课程安排管理
         </h1>
         <ol class="breadcrumb">
             <li><a href="${ctx}/index"><i class="fa fa-dashboard"></i> 首页</a></li>
@@ -20,35 +20,20 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">客户列表</h3>
+                        <h3 class="box-title">课程安排列表</h3>
 
                         <div class="box-tools pull-right" style="margin-right: 80px;">
                             <a class="btn btn-primary btn-flat" style="color: #ffffff;" role="button"
-                               onclick="addNewMember();">新增客户</a>
+                               onclick="addNewSchedule();">新增课程安排</a>
                         </div>
                     </div>
                     <div class="box-body table-responsive">
                         <form class="form-horizontal" role="form" method="post" action="${ctx}/member/list">
                             <div class="form-group">
-                                <label for="queryName" class="col-sm-1 control-label">姓名:</label>
+                                <label for="queryClassId" class="col-sm-1 control-label">课程:</label>
 
                                 <div class="col-sm-2">
-                                    <input type="text" value="${queryName}" class="form-control" id="queryName"
-                                           name="queryName" placeholder="姓名">
-                                </div>
-
-                                <label for="queryBirthYear" class="col-sm-2 control-label">出生年:</label>
-
-                                <div class="col-sm-2">
-                                    <input type="text" value="${queryBirthYear}" class="form-control"
-                                           id="queryBirthYear"
-                                           name="queryBirthYear" placeholder="出生年">
-                                </div>
-
-                                <label for="queryAdvisorId" class="col-sm-1 control-label">顾问:</label>
-
-                                <div class="col-sm-2">
-                                    <select name="queryAdvisorId" id="queryAdvisorId" style="width: 100%">
+                                    <select name="queryClassId" id="queryClassId" style="width: 100%">
                                         <option value=""></option>
                                         <c:forEach items="${advisors}" var="r">
                                             <option value="${r.id}"
@@ -56,6 +41,27 @@
                                         </c:forEach>
                                     </select>
                                 </div>
+
+                                <label for="queryTeacherId" class="col-sm-1 control-label">教练:</label>
+
+                                <div class="col-sm-2">
+                                    <select name="queryTeacherId" id="queryTeacherId" style="width: 100%">
+                                        <option value=""></option>
+                                        <c:forEach items="${advisors}" var="r">
+                                            <option value="${r.id}"
+                                                    <c:if test="${queryAdvisorId==r.id}">selected</c:if> >${r.realName}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+
+                                <label for="queryBirthYear" class="col-sm-2 control-label">日期:</label>
+
+                                <div class="col-sm-2">
+                                    <input type="text" value="${queryBirthYear}" class="form-control"
+                                           id="queryBirthYear"
+                                           name="queryBirthYear" placeholder="出生年">
+                                </div>
+
 
                                 <div class="col-sm-2">
                                 <span class="input-group-btn">
@@ -68,35 +74,37 @@
 
 
                         </form>
-                        <table id="memberTable" style="margin-top: 10px" class="table table-bordered table-striped">
+                        <table id="scheduleTable" style="margin-top: 10px" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th class="text-center">用户名</th>
-                                <th class="text-center">姓名</th>
-                                <th class="text-center">性别</th>
-                                <th class="text-center">年龄</th>
-                                <th class="text-center">出生日期</th>
-                                <th class="text-center">顾问</th>
-                                <th class="text-center">地址</th>
+                                <th class="text-center">课程</th>
+                                <th class="text-center">教练</th>
+                                <th class="text-center">日期</th>
+                                <th class="text-center">开始时间</th>
+                                <th class="text-center">结束时间</th>
+                                <th class="text-center">备注</th>
                                 <th class="text-center">操 作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:if test="${not empty members}">
-                                <c:forEach items="${members}" var="item">
+                            <c:if test="${not empty schedules}">
+                                <c:forEach items="${schedules}" var="item">
                                     <tr>
-                                        <td class="text-center">${item.memberName}</td>
-                                        <td class="text-center">${item.realName}</td>
-                                        <td class="text-center">${item.sex.realName}</td>
-                                        <td class="text-center">${item.age}</td>
-                                        <td class="text-center">${item.birthday}</td>
-                                        <td class="text-center">${item.advisor.realName}</td>
-                                        <td class="text-center">${item.address}</td>
+                                        <td class="text-center">${item.classBase.name}-${item.classBase.type}</td>
+                                        <td class="text-center">${item.teacher.realName}</td>
+                                        <td class="text-center">${item.scheduleDate}</td>
                                         <td class="text-center">
-                                            <a class="btn btn-primary btn-xs" onclick="editMember(${item.id});">
+                                            <fmt:formatDate value="${item.startTime}" pattern="HH:mm"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <fmt:formatDate value="${item.endTime}" pattern="HH:mm"/>
+                                        </td>
+                                        <td class="text-center">${item.comment}</td>
+                                        <td class="text-center">
+                                            <a class="btn btn-primary btn-xs" onclick="editSchedule(${item.id});">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a class="btn btn-primary btn-xs" onclick="deleteMember(${item.id});">
+                                            <a class="btn btn-primary btn-xs" onclick="deleteSchedule(${item.id});">
                                                 <i class="fa fa-times"></i>
                                             </a>
                                         </td>

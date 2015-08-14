@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -15,11 +16,15 @@ public class ClassSchedule implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-    private Date startTime;
+    @Temporal(TemporalType.DATE)
+    @Column(length = 10)
+    private Date scheduleDate;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-    private Date endTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+    private Time startTime;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+    private Time endTime;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "classId", nullable = false)
@@ -43,20 +48,27 @@ public class ClassSchedule implements Serializable {
         this.id = id;
     }
 
+    public Date getScheduleDate() {
+        return scheduleDate;
+    }
 
-    public Date getStartTime() {
+    public void setScheduleDate(Date scheduleDate) {
+        this.scheduleDate = scheduleDate;
+    }
+
+    public Time getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public Time getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(Time endTime) {
         this.endTime = endTime;
     }
 

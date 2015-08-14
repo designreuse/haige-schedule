@@ -45,6 +45,10 @@ public class RBACService {
         return userDao.findByRoleId((long) 3);
     }
 
+    public List<User> getAllTeacher() {
+        return userDao.findByRoleId((long) 2);
+    }
+
     public Page<User> queryUsers(final String userName, Long roleId, Pageable page) {
         Map<String, Object> map = new HashMap<String, Object>();
         if (!StringUtils.isEmpty(userName)) {
