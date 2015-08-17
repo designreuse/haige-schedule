@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Time;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,8 +16,7 @@ public class ClassSchedule implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @Temporal(TemporalType.DATE)
-    @Column(length = 10)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date scheduleDate;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")

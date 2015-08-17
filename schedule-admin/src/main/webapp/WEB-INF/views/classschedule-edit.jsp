@@ -59,7 +59,7 @@
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" name="startTime" id="startTime"
                                            value="<fmt:formatDate value="${schedule.startTime}"  pattern="HH:mm"/>"
-                                           placeholder="开始时间">
+                                           placeholder="开始时间" readonly style="cursor:pointer">
                                 </div>
                             </div>
 
@@ -69,7 +69,7 @@
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" name="endTime" id="endTime"
                                            value="<fmt:formatDate value="${schedule.endTime}"  pattern="HH:mm"/>"
-                                           placeholder="结束时间">
+                                           placeholder="结束时间" readonly style="cursor:pointer">
                                 </div>
                             </div>
 

@@ -23,7 +23,7 @@ public class MemberPayment {
     @Column(length = 50)
     private Date payPerson;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date payDate;
 
     @Column(precision = 12, scale = 2)
