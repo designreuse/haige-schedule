@@ -32,7 +32,7 @@
                                         <option value=""></option>
                                         <c:forEach items="${roles}" var="r">
                                             <option value="${r.id}"
-                                                    <c:if test="${user.role.id==r.id}">selected</c:if> >${r.roleName}</option>
+                                                    <c:if test="${user.role.id==r.id}">selected</c:if> >${r.realName}</option>
                                         </c:forEach>
 
                                     </select>

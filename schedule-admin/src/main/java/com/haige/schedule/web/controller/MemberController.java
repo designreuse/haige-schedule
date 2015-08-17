@@ -3,7 +3,7 @@ package com.haige.schedule.web.controller;
 import com.haige.schedule.entity.Member;
 import com.haige.schedule.service.MemberService;
 import com.haige.schedule.service.RBACService;
-import com.haige.schedule.utils.Types;
+import com.haige.schedule.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -56,7 +56,7 @@ public class MemberController {
     public String showAddPage(ModelMap map) {
 
         map.addAttribute("advisors", rbacService.getAllAdvisor());
-        map.addAttribute("sex", Types.Sex.values());
+        map.addAttribute("sex", Constants.Sex.values());
         return "haige.member-add";
     }
 
@@ -64,7 +64,7 @@ public class MemberController {
     @RequestMapping(value = "/edit/{id}")
     public String showEditPage(@PathVariable("id") Long id, ModelMap map) {
         map.addAttribute("advisors", rbacService.getAllAdvisor());
-        map.addAttribute("sex", Types.Sex.values());
+        map.addAttribute("sex", Constants.Sex.values());
 
         Member member = null;
         if (id != null) {

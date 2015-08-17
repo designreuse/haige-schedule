@@ -4,7 +4,7 @@ import com.haige.schedule.entity.ClassSchedule;
 import com.haige.schedule.service.ClassBaseService;
 import com.haige.schedule.service.ClassScheduleService;
 import com.haige.schedule.service.RBACService;
-import com.haige.schedule.utils.Types;
+import com.haige.schedule.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -59,7 +59,7 @@ public class ClassScheduleController {
     public String showAddPage(ModelMap map) {
 
         map.addAttribute("advisors", rbacService.getAllAdvisor());
-        map.addAttribute("sex", Types.Sex.values());
+        map.addAttribute("sex", Constants.Sex.values());
         return "haige.classschedule-add";
     }
 

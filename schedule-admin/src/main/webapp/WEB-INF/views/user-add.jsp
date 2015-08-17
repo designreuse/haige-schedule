@@ -28,7 +28,7 @@
                                     <select name="role.id" id="role.id" style="width: 100%">
                                         <option value=""></option>
                                         <c:forEach items="${roles}" var="r">
-                                            <option value="${r.id}">${r.roleName}</option>
+                                            <option value="${r.id}">${r.realName}</option>
                                         </c:forEach>
                                     </select>
                                 </div>

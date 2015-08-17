@@ -23,71 +23,44 @@
         <ul class="sidebar-menu">
             <li class="active">
                 <a href="${ctx}/index">
-                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                    <i class="fa fa-dashboard"></i> <span>个人面板</span>
                 </a>
             </li>
             <li class="treeview active">
                 <a href="#">
                     <i class="fa fa-bar-chart-o"></i>
-                    <span>题库管理</span>
+                    <span>课程管理</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <shiro:hasRole name="admin">
-                        <li><a href="${ctx}/store/list"><i class="fa fa-angle-double-right"></i> 题库分类</a></li>
-                    </shiro:hasRole>
-                    <c:if test="${questionListType=='db'}">
-                        <li><a href="${ctx}/question/list"><i class="fa fa-angle-double-right"></i> 试题管理</a></li>
-                    </c:if>
-                    <c:if test="${questionListType=='index'}">
-                        <li><a href="${ctx}/question/indexedList"><i class="fa fa-angle-double-right"></i> 试题管理</a></li>
-                    </c:if>
-                    <li><a href="${ctx}/question/import"><i class="fa fa-angle-double-right"></i> 试题导入</a></li>
-                    <li><a href="${ctx}/store/pushSetting"><i class="fa fa-angle-double-right"></i> 题库推送</a></li>
+                    <li><a href="${ctx}/store/list"><i class="fa fa-angle-double-right"></i>课程分类</a></li>
+                    <li><a href="${ctx}/store/list"><i class="fa fa-angle-double-right"></i>课程信息</a></li>
+                    <li><a href="${ctx}/question/list"><i class="fa fa-angle-double-right"></i>课程安排</a></li>
                 </ul>
             </li>
             <li class="treeview active">
                 <a href="#">
                     <i class="fa fa-laptop"></i>
-                    <span>方案管理</span>
+                    <span>客户管理</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="${ctx}/template/new"><i class="fa fa-angle-double-right"></i> 方案制定</a></li>
-                    <li><a href="${ctx}/template/list"><i class="fa fa-angle-double-right"></i> 方案管理</a></li>
+                    <li><a href="${ctx}/template/new"><i class="fa fa-angle-double-right"></i>客户信息</a></li>
                     <%--<li><a href="paper.jsp"><i class="fa fa-angle-double-right"></i> 试卷生成</a></li>--%>
                 </ul>
             </li>
+
             <li class="treeview active">
                 <a href="#">
-                    <i class="fa fa-edit"></i> <span>管理</span>
+                    <i class="fa fa-edit"></i> <span>系统管理</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="${ctx}/examschedule/list"><i class="fa fa-angle-double-right"></i> 计划管理</a></li>
-                    <li><a href="${ctx}/examquery/list"><i class="fa fa-angle-double-right"></i> 记录查询</a></li>
-                    <li><a href="${ctx}/examquery/passlist"><i class="fa fa-angle-double-right"></i> 通过查询</a></li>
-                    <li><a href="${ctx}/examquery/notpasslist"><i class="fa fa-angle-double-right"></i> 未通过查询</a></li>
-                    <li><a href="${ctx}/examquery/notParticipate"><i class="fa fa-angle-double-right"></i> 未考查询</a></li>
-                    <%--<li><a href="${ctx}/examquery/passratelist"><i class="fa fa-angle-double-right"></i> 成绩统计</a></li>--%>
-                </ul>
+                    <li><a href="${ctx}/index/admin"><i class="fa fa-angle-double-right"></i>用户管理</a></li>
+                    <li><a href="${ctx}/rbac/userRolesList"><i class="fa fa-angle-double-right"></i>用户角色管理</a></li>
             </li>
-            <shiro:hasRole name="admin">
-                <li class="treeview active">
-                    <a href="#">
-                        <i class="fa fa-edit"></i> <span>系统管理</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <c:if test="${questionListType=='index'}">
-                            <li><a href="${ctx}/index/admin"><i class="fa fa-angle-double-right"></i> 索引管理</a></li>
-                        </c:if>
-                        <li><a href="${ctx}/rbac/userRolesList"><i class="fa fa-angle-double-right"></i> 用户角色管理</a></li>
-                        <li><a href="${ctx}/rbac/rolePermissionList"><i class="fa fa-angle-double-right"></i> 角色权限管理</a>
-                        </li>
-                    </ul>
-                </li>
-            </shiro:hasRole>
+        </ul>
+        </li>
         </ul>
     </section>
     <!-- /.sidebar -->

@@ -2,7 +2,7 @@ package com.haige.schedule.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.haige.schedule.utils.AgeUtil;
-import com.haige.schedule.utils.Types;
+import com.haige.schedule.utils.Constants;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -28,7 +28,7 @@ public class Member {
 
     @Enumerated
     @Column(nullable = false)
-    private Types.Sex sex;
+    private Constants.Sex sex;
 
     @Temporal(TemporalType.DATE)
     @Column(length = 10)
@@ -91,11 +91,11 @@ public class Member {
         this.nickName = nickName;
     }
 
-    public Types.Sex getSex() {
+    public Constants.Sex getSex() {
         return sex;
     }
 
-    public void setSex(Types.Sex sex) {
+    public void setSex(Constants.Sex sex) {
         this.sex = sex;
     }
 
