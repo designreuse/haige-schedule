@@ -28,18 +28,14 @@
                         </div>
                     </div>
                     <div class="box-body table-responsive">
-                        <form class="form-horizontal" role="form" method="post" action="${ctx}/member/list">
+                        <form class="form-horizontal" role="form" method="post" action="${ctx}/schedule /list">
                             <div class="form-group">
-                                <label for="queryClassId" class="col-sm-1 control-label">课程:</label>
+                                <label for="queryName" class="col-sm-1 control-label">课程:</label>
 
                                 <div class="col-sm-2">
-                                    <select name="queryClassId" id="queryClassId" style="width: 100%">
-                                        <option value=""></option>
-                                        <c:forEach items="${advisors}" var="r">
-                                            <option value="${r.id}"
-                                                    <c:if test="${queryAdvisorId==r.id}">selected</c:if> >${r.realName}</option>
-                                        </c:forEach>
-                                    </select>
+                                    <input type="text" value="${queryName}" class="form-control"
+                                           id="queryName"
+                                           name="queryName" placeholder="课程">
                                 </div>
 
                                 <label for="queryTeacherId" class="col-sm-1 control-label">教练:</label>
@@ -47,19 +43,19 @@
                                 <div class="col-sm-2">
                                     <select name="queryTeacherId" id="queryTeacherId" style="width: 100%">
                                         <option value=""></option>
-                                        <c:forEach items="${advisors}" var="r">
+                                        <c:forEach items="${teachers}" var="r">
                                             <option value="${r.id}"
-                                                    <c:if test="${queryAdvisorId==r.id}">selected</c:if> >${r.realName}</option>
+                                                    <c:if test="${queryTeacherId==r.id}">selected</c:if> >${r.realName}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
 
-                                <label for="queryBirthYear" class="col-sm-2 control-label">日期:</label>
+                                <label for="queryDate" class="col-sm-2 control-label">日期:</label>
 
                                 <div class="col-sm-2">
-                                    <input type="text" value="${queryBirthYear}" class="form-control"
-                                           id="queryBirthYear"
-                                           name="queryBirthYear" placeholder="出生年">
+                                    <input type="text" value="${queryScheduleDate}" class="form-control"
+                                           id="queryDate"
+                                           name="queryDate" placeholder="日期">
                                 </div>
 
 

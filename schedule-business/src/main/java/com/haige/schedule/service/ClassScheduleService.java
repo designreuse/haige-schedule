@@ -2,17 +2,15 @@ package com.haige.schedule.service;
 
 import com.haige.schedule.entity.ClassSchedule;
 import com.haige.schedule.repository.ClassScheduleDao;
-import com.haige.schedule.sql.builder.SqlQueryModelBuilder;
-import com.haige.schedule.sql.model.SqlQueryItem;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class ClassScheduleService {
@@ -25,18 +23,25 @@ public class ClassScheduleService {
         return classScheduleDao.findAll(page);
     }
 
-    public Page<ClassSchedule> queryClassSchedules(final String classScheduleName, Long roleId, Pageable page) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        if (!StringUtils.isEmpty(classScheduleName)) {
-            map.put("classScheduleName", classScheduleName);
-        }
-        if (roleId != null) {
-            map.put("role.id", roleId);
-        }
-        SqlQueryModelBuilder builder = new SqlQueryModelBuilder();
-        List<SqlQueryItem> itemList = builder.builder(map);
 
-        return classScheduleDao.queryResult(itemList, null, page);
+    public Page<ClassSchedule> queryClassSchedules(String classBasename, Long queryTeacherId, Date queryScheduleDate, Pageable page) {
+        List<Object> params = new ArrayList<>();
+        String sql = "select * from class_schedule cs \n" +
+                "left join classes c on cs.classId = c.id where 1=1 ";
+        if (!StringUtils.isEmpty(classBasename)) {
+            sql += " and ( c.name like ?1 or c.type like ?1)";
+            params.add("%" + classBasename + "%");
+        }
+        if (queryScheduleDate != null) {
+            sql += " and cs.scheduleDate = ?2 ";
+            params.add(queryScheduleDate);
+        }
+        if (queryTeacherId != null) {
+            sql += " and cs.teacherId = ?3 ";
+            params.add(queryTeacherId);
+        }
+
+        return classScheduleDao.queryNativeSqlListEntity(sql, params.toArray(), page);
     }
 
 

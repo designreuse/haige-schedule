@@ -4,7 +4,6 @@ import com.haige.schedule.entity.ClassSchedule;
 import com.haige.schedule.service.ClassBaseService;
 import com.haige.schedule.service.ClassScheduleService;
 import com.haige.schedule.service.RBACService;
-import com.haige.schedule.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.sql.Date;
 
 /**
  * @author lzheng
@@ -36,17 +37,17 @@ public class ClassScheduleController {
 
     @RequestMapping(value = "/list")
     public ModelAndView scheduleList(@RequestParam(value = "queryName", required = false) String queryName,
-                                     @RequestParam(value = "queryBirthYear", required = false) String queryBirthYear,
-                                     @RequestParam(value = "queryAdvisorId", required = false) Long queryAdvisorId,
+                                     @RequestParam(value = "queryTeacherId", required = false) Long queryTeacherId, @RequestParam(value = "queryDate", required = false) Date queryDate,
+                                     @RequestParam(value = "queryDate", required = false) Date queryScheduleDate,
                                      @PageableDefault Pageable page) {
         ModelAndView mv = new ModelAndView("haige.classschedule-list");
-        Page<ClassSchedule> schedules = scheduleService.getAllClassSchedule(page);
+        Page<ClassSchedule> schedules = scheduleService.queryClassSchedules(queryName, queryTeacherId, queryScheduleDate, page);
         mv.addObject("schedules", schedules.getContent());
 
-        mv.addObject("advisors", rbacService.getAllAdvisor());
+        mv.addObject("teachers", rbacService.getAllTeacher());
         mv.addObject("queryName", queryName);
-        mv.addObject("queryBirthYear", queryBirthYear);
-        mv.addObject("queryAdvisorId", queryAdvisorId);
+        mv.addObject("queryScheduleDate", queryScheduleDate);
+        mv.addObject("queryTeacherId", queryTeacherId);
 
 
         mv.addObject("page", schedules.getNumber() + 1);
@@ -57,9 +58,8 @@ public class ClassScheduleController {
 
     @RequestMapping(value = "/add")
     public String showAddPage(ModelMap map) {
-
-        map.addAttribute("advisors", rbacService.getAllAdvisor());
-        map.addAttribute("sex", Constants.Sex.values());
+        map.addAttribute("teachers", rbacService.getAllTeacher());
+        map.addAttribute("classes", classService.getAllClassBases());
         return "haige.classschedule-add";
     }
 

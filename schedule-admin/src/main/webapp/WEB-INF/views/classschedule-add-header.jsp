@@ -25,7 +25,7 @@
     }
 
     $(document).ready(function () {
-        $("#birthday").datetimepicker({format: 'yyyy-mm-dd', language: 'zh-CN', minView: 2, autoclose: true});
+        $("#scheduleDate").datetimepicker({format: 'yyyy-mm-dd', language: 'zh-CN', minView: 2, autoclose: true});
 
         $("#startTime").datetimepicker({
             format: 'hh:ii',
