@@ -117,7 +117,7 @@
                                                     <td class="text-center">${item.member.address}</td>
                                                     <td class="text-center">
                                                         <a class="btn btn-primary btn-xs"
-                                                           onclick="deleteCM(${item.id});">
+                                                           onclick="deleteCM(${item.member.id});">
                                                             <i class="fa fa-times"></i>
                                                         </a>
                                                     </td>
@@ -202,7 +202,6 @@
                         <th class="text-center">出生日期</th>
                         <th class="text-center">顾问</th>
                         <th class="text-center">地址</th>
-                        <th class="text-center">操 作</th>
                     </tr>
                     </thead>
                     <tbody id="memberTableBody">
@@ -215,7 +214,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.reload()">关闭
+                </button>
                 <button type="button" class="btn btn-primary" id="mcBtn" onclick="saveMC()">添加</button>
             </div>
         </div>

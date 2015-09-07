@@ -1,11 +1,10 @@
 package com.haige.schedule.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "class_members")
-public class ClassMember implements Serializable {
+public class ClassMember {
     @Id
     @Column(nullable = false, unique = true)
     @GeneratedValue

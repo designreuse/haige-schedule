@@ -1,7 +1,7 @@
 package com.haige.schedule.web.controller;
 
+import com.haige.schedule.dao.RBACService;
 import com.haige.schedule.entity.User;
-import com.haige.schedule.service.RBACService;
 import com.haige.schedule.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

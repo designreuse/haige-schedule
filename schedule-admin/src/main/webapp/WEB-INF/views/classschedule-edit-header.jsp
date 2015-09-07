@@ -32,38 +32,10 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 
 <script id="advisorItem" type="text/x-jsrender">
     <option value="{{:id}}">{{:realName}}</option>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -162,8 +134,24 @@
         }
     }
 
+
+    function deleteCM(memberId) {
+        $.post("${ctx}/schedule/mc/deleteMember", {
+            'scheduleId':${schedule.id},
+            'memberId': memberId
+        }, function (data) {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert(data.message);
+            }
+        });
+
+    }
+
     function loadCMData(page) {
         $.get("${ctx}/member/cmQuery", {
+            cmScheduleId: $("#id").val(),
             cmQueryName: $("#cmQueryName").val(),
             cmQueryAdvisorId: $("#cmQueryAdvisorId").val(),
             page: page,

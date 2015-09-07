@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:util="http://www.springframework.org/schema/util"
+       xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
@@ -21,7 +21,7 @@
 
     <context:property-placeholder location="classpath:application.properties"/>
     <context:component-scan
-            base-package="com.haige.schedule.service,com.haige.schedule.business,com.haige.schedule.utils"/>
+            base-package="com.haige.schedule.dao,com.haige.schedule.business,com.haige.schedule.utils"/>
 
     <util:properties id="appConfig" location="classpath:appConfig.properties"/>
 
@@ -96,15 +96,15 @@
     </tx:advice>
 
     <aop:config>
-        <aop:pointcut id="serviceTxPc" expression="execution(* com.haige.schedule.service.*.*(..))"/>
+        <aop:pointcut id="serviceTxPc" expression="execution(* com.haige.schedule.dao.*.*(..))"/>
         <aop:advisor pointcut-ref="serviceTxPc" advice-ref="txAdvice"/>
     </aop:config>
     <!-- 后台保存和试题的线程池-->
-    <bean id="examPaperSaveExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
-        <property name="corePoolSize" value="${threadpool.exampaper.coreSize}"/>
-        <property name="maxPoolSize" value="${threadpool.exampaper.maxPoolSize}"/>
-        <property name="queueCapacity" value="${threadpool.exampaper.queueCapacity}"/>
-    </bean>
+    <!--<bean id="examPaperSaveExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">-->
+    <!--<property name="corePoolSize" value="${threadpool.exampaper.coreSize}"/>-->
+    <!--<property name="maxPoolSize" value="${threadpool.exampaper.maxPoolSize}"/>-->
+    <!--<property name="queueCapacity" value="${threadpool.exampaper.queueCapacity}"/>-->
+    <!--</bean>-->
 
     <bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:ehcache_spring.xml"></property>

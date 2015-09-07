@@ -1,10 +1,10 @@
 package com.haige.schedule.web.controller;
 
+import com.haige.schedule.dao.ClassBaseService;
+import com.haige.schedule.dao.ClassScheduleService;
+import com.haige.schedule.dao.RBACService;
 import com.haige.schedule.entity.ClassSchedule;
 import com.haige.schedule.entity.Result;
-import com.haige.schedule.service.ClassBaseService;
-import com.haige.schedule.service.ClassScheduleService;
-import com.haige.schedule.service.RBACService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,6 +117,23 @@ public class ClassScheduleController {
         } catch (Exception e) {
             e.printStackTrace();
             result = new Result(false, "保存课程学员失败！");
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/mc/deleteMember", method = RequestMethod.POST)
+    @ResponseBody
+    public Result deleteCSMember(String scheduleId, String memberId) {
+        Result result = null;
+        try {
+
+
+            scheduleService.deleteCSMember(Long.parseLong(scheduleId), Long.parseLong(memberId));
+
+            result = new Result(true, "删除课程学员成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = new Result(false, "删除课程学员失败！");
         }
         return result;
     }

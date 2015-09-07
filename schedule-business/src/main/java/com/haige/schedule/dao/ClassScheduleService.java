@@ -1,7 +1,8 @@
-package com.haige.schedule.service;
+package com.haige.schedule.dao;
 
 import com.haige.schedule.entity.ClassMember;
 import com.haige.schedule.entity.ClassSchedule;
+import com.haige.schedule.entity.Member;
 import com.haige.schedule.repository.ClassMemberDao;
 import com.haige.schedule.repository.ClassScheduleDao;
 import com.haige.schedule.repository.MemberDao;
@@ -78,7 +79,11 @@ public class ClassScheduleService {
             cm.setMember(memberDao.findOne(memberId));
             cmDao.save(cm);
         }
-
     }
 
+    public void deleteCSMember(Long id, Long memberId) {
+        ClassSchedule cs = classScheduleDao.findOne(id);
+        List<Member> members = cs.getMembers();
+
+    }
 }

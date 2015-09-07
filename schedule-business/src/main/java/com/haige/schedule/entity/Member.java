@@ -67,6 +67,10 @@ public class Member {
     @JoinColumn(name = "advisorId")
     private User advisor;
 
+    @ManyToMany(mappedBy = "members")
+    private List<ClassSchedule> schedules;
+
+
     public Long getId() {
         return id;
     }
@@ -198,5 +202,13 @@ public class Member {
 
     public void setLinkman(List<MemberLinkman> linkman) {
         this.linkman = linkman;
+    }
+
+    public List<ClassSchedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<ClassSchedule> schedules) {
+        this.schedules = schedules;
     }
 }

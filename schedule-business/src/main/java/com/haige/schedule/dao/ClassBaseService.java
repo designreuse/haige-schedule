@@ -1,4 +1,4 @@
-package com.haige.schedule.service;
+package com.haige.schedule.dao;
 
 import com.haige.schedule.entity.ClassBase;
 import com.haige.schedule.repository.ClassBaseDao;

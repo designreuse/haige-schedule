@@ -1,4 +1,4 @@
-package com.haige.schedule.service;
+package com.haige.schedule.dao;
 
 import com.haige.schedule.entity.Member;
 import com.haige.schedule.exception.RepositoryException;
@@ -59,7 +59,7 @@ public class MemberService {
         List<Object> params = new ArrayList<>();
         List<String> items = new ArrayList<String>();
 
-        String sql = "select * from members where id not in (select memberid from class_member where scheduleId = :scheduleId) ";
+        String sql = "select * from members where id not in (select memberid from class_members where scheduleId = :scheduleId) ";
         items.add("scheduleId");
         params.add(cmScheduleId);
         if (!StringUtil.isEmptyIncludeBlank(memberName)) {
