@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="box-body table-responsive">
-                        <form class="form-horizontal" role="form" method="post" action="${ctx}/schedule /list">
+                        <form class="form-horizontal" role="form" method="post" action="${ctx}/schedule/list">
                             <div class="form-group">
                                 <label for="queryName" class="col-sm-1 control-label">课程:</label>
 

@@ -31,7 +31,7 @@ public class Member {
     private Constants.Sex sex;
 
     @Temporal(TemporalType.DATE)
-    @Column(length = 10)
+    @Column(nullable = false, length = 10)
     private Date birthday;
 
     private Integer age;

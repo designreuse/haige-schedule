@@ -34,7 +34,7 @@ public class ClassSchedule implements Serializable {
     private User teacher;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "member")
-    private List<ClassMember> members;
+    private List<ClassMember> classMembers;
 
     @Column(length = 5000)
     private String comment;
@@ -87,12 +87,12 @@ public class ClassSchedule implements Serializable {
         this.teacher = teacher;
     }
 
-    public List<ClassMember> getMembers() {
-        return members;
+    public List<ClassMember> getClassMembers() {
+        return classMembers;
     }
 
-    public void setMembers(List<ClassMember> members) {
-        this.members = members;
+    public void setClassMembers(List<ClassMember> classMembers) {
+        this.classMembers = classMembers;
     }
 
     public String getComment() {

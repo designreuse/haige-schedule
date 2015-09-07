@@ -1,6 +1,7 @@
 package com.haige.schedule.service;
 
 import com.haige.schedule.entity.Member;
+import com.haige.schedule.exception.RepositoryException;
 import com.haige.schedule.repository.MemberDao;
 import com.haige.schedule.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,25 +23,58 @@ public class MemberService {
         return memberDao.findAll(page);
     }
 
+    public Page<Member> queryMembers(final String memberName, Long advisorId, Pageable page) {
+        return queryMembers(memberName, null, advisorId, page);
+    }
+
     public Page<Member> queryMembers(final String memberName, String birthYear, Long advisorId, Pageable page) {
         List<Object> params = new ArrayList<>();
+        List<String> items = new ArrayList<String>();
+
         String sql = "select * from members where 1=1 ";
         if (!StringUtil.isEmptyIncludeBlank(memberName)) {
-            sql += " and realName like ? ";
+            sql += " and realName like :realName ";
+            items.add("realName");
             params.add("%" + memberName + "%");
         }
         if (!StringUtil.isEmptyIncludeBlank(birthYear)) {
-            sql += " and year(birthday) = ? ";
+            sql += " and year(birthday) = :birthYear ";
+            items.add("birthYear");
             params.add(birthYear);
         }
         if (advisorId != null) {
-            sql += " and advisorId = ? ";
+            sql += " and advisorId = :advisorId ";
+            items.add("advisorId");
             params.add(advisorId);
         }
-//        SqlQueryModelBuilder builder = new SqlQueryModelBuilder();
-//        List<SqlQueryItem> itemList = builder.builder(map);
 
-        return memberDao.queryNativeSqlListEntity(sql, params.toArray(), page);
+        String[] strArr = new String[items.size()];
+        return memberDao.queryNativeSqlPageEntity(sql, items.toArray(strArr), params.toArray(), page);
+    }
+
+    public Page<Member> queryMembersNotInSchedule(Long cmScheduleId, final String memberName, Long advisorId, Pageable page) throws Exception {
+        if (cmScheduleId == null) {
+            throw new RepositoryException("查询课程之外的客户时课程编号不能为空");
+        }
+        List<Object> params = new ArrayList<>();
+        List<String> items = new ArrayList<String>();
+
+        String sql = "select * from members where id not in (select memberid from class_member where scheduleId = :scheduleId) ";
+        items.add("scheduleId");
+        params.add(cmScheduleId);
+        if (!StringUtil.isEmptyIncludeBlank(memberName)) {
+            sql += " and realName like :realName ";
+            items.add("realName");
+            params.add("%" + memberName + "%");
+        }
+        if (advisorId != null) {
+            sql += " and advisorId = :advisorId ";
+            items.add("advisorId");
+            params.add(advisorId);
+        }
+
+        String[] strArr = new String[items.size()];
+        return memberDao.queryNativeSqlPageEntity(sql, items.toArray(strArr), params.toArray(), page);
     }
 
     public Member getMemberByMemberName(String memberName) {

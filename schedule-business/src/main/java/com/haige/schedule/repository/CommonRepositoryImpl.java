@@ -49,13 +49,13 @@ public class CommonRepositoryImpl<T, ID extends Serializable> extends
                 query.setParameter(i + 1, _params[i]);
             }
         } else {
-            log.info("findæŸ¥è¯¢JPQLå‚æ•°ä¸ºç©º");
+            log.info("find²éÑ¯JPQL²ÎÊıÎª¿Õ");
         }
         Object t = null;
         try {
             t = query.getSingleResult();
         } catch (NoResultException nre) {
-            log.info("æœ¬æŸ¥è¯¢æ¡ä»¶æ²¡æœ‰æŸ¥è¯¢åˆ°å”¯ä¸€çš„å€¼");
+            log.info("±¾²éÑ¯Ìõ¼şÃ»ÓĞ²éÑ¯µ½Î¨Ò»µÄÖµ");
             return null;
         }
         return (T) t;
@@ -134,8 +134,13 @@ public class CommonRepositoryImpl<T, ID extends Serializable> extends
     }
 
     @Override
-    public List<T> queryNativeSqlListEntity(String _nativeSql, Object[] _params) {
+    public List<T> queryNativeSqlListEntity(String _nativeSql, Object[] _params, Pageable _pageable) {
         Query query = getManager().createNativeQuery(_nativeSql, this.getCls());
+        if (_pageable != null) {
+            int maxResult = _pageable.getPageSize();
+            query.setFirstResult(_pageable.getPageNumber() * _pageable.getPageSize());
+            query.setMaxResults(maxResult);
+        }
         if (_params != null) {
             for (int i = 0; i < _params.length; i++) {
                 query.setParameter(i + 1, _params[i]);
@@ -145,19 +150,43 @@ public class CommonRepositoryImpl<T, ID extends Serializable> extends
     }
 
     @Override
-    public Page<T> queryNativeSqlListEntity(String _nativeSql, Object[] _params, Pageable _pageable) {
-        List<T> dataList = queryNativeSqlListEntity(_nativeSql, _params);
-        int count = dataList.size();
-        Page<T> page = new PageImpl<T>(dataList, _pageable, count);
+    public List<T> queryNativeSqlListEntity(String _nativeSql, String[] _items, Object[] _params, Pageable _pageable) {
+
+        Query query = getManager().createNativeQuery(_nativeSql, this.getCls());
+        if (_pageable != null) {
+            int maxResult = _pageable.getPageSize();
+            query.setFirstResult(_pageable.getPageNumber() * _pageable.getPageSize());
+            query.setMaxResults(maxResult);
+        }
+        if (_params != null) {
+            for (int i = 0; i < _params.length; i++) {
+                query.setParameter(_items[i], _params[i]);
+            }
+        }
+        return query.getResultList();
+    }
+
+    @Override
+    public Page<T> queryNativeSqlPageEntity(String _nativeSql, Object[] _params, Pageable _pageable) {
+        List<T> dataList = queryNativeSqlListEntity(_nativeSql, _params, _pageable);
+        java.math.BigInteger count = getNativeResultCount(_nativeSql, _params);
+        Page<T> page = new PageImpl<T>(dataList, _pageable, count.longValue());
         return page;
     }
 
+    @Override
+    public Page<T> queryNativeSqlPageEntity(String _nativeSql, String[] _items, Object[] _params, Pageable _pageable) {
+        List<T> dataList = queryNativeSqlListEntity(_nativeSql, _items, _params, _pageable);
+        java.math.BigInteger count = getNativeResultCount(_nativeSql, _items, _params);
+        Page<T> page = new PageImpl<T>(dataList, _pageable, count.longValue());
+        return page;
+    }
 
     private List<T> queryResultList(List<SqlQueryItem> _paramList,
                                     List<SqlSortItem> _sortList, Pageable _pageable) {
         String jpql = createQueryJpql(_paramList, _sortList);
         Query query = createQueryParam(jpql, _paramList, _pageable);
-        log.info("æ‰§è¡ŒJpql Sqlè¯­å¥:æŸ¥è¯¢è®°å½•" + jpql);
+        log.info("Ö´ĞĞJpql SqlÓï¾ä:²éÑ¯¼ÇÂ¼" + jpql);
         return query.getResultList();
     }
 
@@ -170,10 +199,36 @@ public class CommonRepositoryImpl<T, ID extends Serializable> extends
         return page;
     }
 
+    private java.math.BigInteger getNativeResultCount(String _nativeSql, Object[] _params) {
+        int iStart = _nativeSql.indexOf("select") + 6;
+        int iEnd = _nativeSql.indexOf("from");
+        String countSql = _nativeSql.replace(_nativeSql.substring(iStart, iEnd), " count(*) ");
+        Query query = getManager().createNativeQuery(countSql);
+        if (_params != null) {
+            for (int i = 0; i < _params.length; i++) {
+                query.setParameter(i + 1, _params[i]);
+            }
+        }
+        return (java.math.BigInteger) query.getSingleResult();
+    }
+
+    private java.math.BigInteger getNativeResultCount(String _nativeSql, String[] _items, Object[] _params) {
+        int iStart = _nativeSql.indexOf("select") + 6;
+        int iEnd = _nativeSql.indexOf("from");
+        String countSql = _nativeSql.replace(_nativeSql.substring(iStart, iEnd), " count(*) ");
+        Query query = getManager().createNativeQuery(countSql);
+        if (_params != null) {
+            for (int i = 0; i < _params.length; i++) {
+                query.setParameter(_items[i], _params[i]);
+            }
+        }
+        return (java.math.BigInteger) query.getSingleResult();
+    }
+
     private Long getResultCount(List<SqlQueryItem> _paramList) {
         String jpql = createQueryCountJpql(_paramList);
         Query query = createQueryParam(jpql, _paramList, null);
-        log.info("æ‰§è¡ŒJpql Sqlè¯­å¥,æŸ¥è¯¢æ€»æ•°é‡:" + jpql);
+        log.info("Ö´ĞĞJpql SqlÓï¾ä,²éÑ¯×ÜÊıÁ¿:" + jpql);
         return (Long) query.getSingleResult();
     }
 

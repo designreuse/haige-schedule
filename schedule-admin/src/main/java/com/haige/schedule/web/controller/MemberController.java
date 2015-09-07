@@ -10,11 +10,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author lzheng
@@ -50,6 +50,24 @@ public class MemberController {
         mv.addObject("totalPage", members.getTotalPages());
         mv.addObject("totalCount", members.getTotalElements());
         return mv;
+    }
+
+    @RequestMapping(value = "/cmQuery", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public Map<String, Object> cmQuery(Long cmScheduleId, String cmQueryName, Long cmQueryAdvisorId, Pageable page) throws Exception {
+        Map<String, Object> result = new HashMap<>();
+
+        Page<Member> members = memberService.queryMembersNotInSchedule(cmScheduleId, cmQueryName, cmQueryAdvisorId, page);
+        result.put("members", members.getContent());
+
+        result.put("advisors", rbacService.getAllAdvisor());
+        result.put("cmQueryName", cmQueryName);
+        result.put("cmQueryAdvisorId", cmQueryAdvisorId);
+
+        result.put("page", members.getNumber() + 1);
+        result.put("totalPage", members.getTotalPages());
+        result.put("totalCount", members.getTotalElements());
+        return result;
     }
 
     @RequestMapping(value = "/add")

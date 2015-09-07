@@ -52,12 +52,10 @@
     }
 
     $(document).ready(function () {
-        var hasData =
-        ${totalPage} >
-        0;
-        if (hasData) {
+        if (${totalPage>0}) {
             createPaginator("paginator", ${page}, ${totalPage}, "${ctx}/member/list");
         }
     });
+    ;
 
 </script>

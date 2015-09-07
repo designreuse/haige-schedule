@@ -87,7 +87,7 @@
                                     <tr>
                                         <td class="text-center">${item.memberName}</td>
                                         <td class="text-center">${item.realName}</td>
-                                        <td class="text-center">${item.sex.realName}</td>
+                                        <td class="text-center">${item.sex.title}</td>
                                         <td class="text-center">${item.age}</td>
                                         <td class="text-center">${item.birthday}</td>
                                         <td class="text-center">${item.advisor.realName}</td>

@@ -1,6 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
+
+<script type="text/javascript" src="${ctx}/asset/js/plugins/datetimepicke/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript"
+        src="${ctx}/asset/js/plugins/datetimepicke/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<link type="text/css" href="${ctx}/asset/js/plugins/datetimepicke/css/bootstrap-datetimepicker.min.css"
+      rel="stylesheet"/>
+
 <style>
     .box .box-tools a {
         color: #ffffff;
@@ -52,10 +59,14 @@
     }
 
     $(document).ready(function () {
-        var hasData =
-        ${totalPage} >
-        0;
-        if (hasData) {
+        $("#queryDate").datetimepicker({
+            format: 'yyyy-mm-dd', language: 'zh-CN',
+            pickDate: true,
+            pickTime: false,
+            minView: 2, autoclose: true
+        });
+
+        if (${totalPage>0}) {
             createPaginator("paginator", ${page}, ${totalPage}, "${ctx}/schedule/list");
         }
     });

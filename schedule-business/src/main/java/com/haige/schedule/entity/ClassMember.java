@@ -11,11 +11,11 @@ public class ClassMember implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "scheduleId", nullable = false)
     private ClassSchedule schedule;
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "memberId", nullable = false)
     private Member member;
 
