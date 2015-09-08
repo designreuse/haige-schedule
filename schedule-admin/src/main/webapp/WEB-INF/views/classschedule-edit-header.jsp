@@ -24,10 +24,12 @@
         <td class="text-center">{{:advisor.realName}}</td>
         <td class="text-center">{{:address}}</td>
     </tr>
+
 </script>
 
 <script id="advisorItem" type="text/x-jsrender">
     <option value="{{:id}}">{{:realName}}</option>
+
 </script>
 
 
@@ -149,7 +151,6 @@
                     contentType: 'application/json',
                     dataType: "json",
                     success: function (data) {
-                        alert(data);
                         if (data.totalPage > 0) {
                             $("#cmQueryName").val(data.cmQueryName);
 
