@@ -105,19 +105,19 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:if test="${not empty schedule.classMembers}">
-                                            <c:forEach items="${schedule.classMembers}" var="item">
+                                        <c:if test="${not empty schedule.members}">
+                                            <c:forEach items="${schedule.members}" var="item">
                                                 <tr>
-                                                    <td class="text-center">${item.member.memberName}</td>
-                                                    <td class="text-center">${item.member.realName}</td>
-                                                    <td class="text-center">${item.member.sex.title}</td>
-                                                    <td class="text-center">${item.member.age}</td>
-                                                    <td class="text-center">${item.member.birthday}</td>
-                                                    <td class="text-center">${item.member.advisor.realName}</td>
-                                                    <td class="text-center">${item.member.address}</td>
+                                                    <td class="text-center">${item.memberName}</td>
+                                                    <td class="text-center">${item.realName}</td>
+                                                    <td class="text-center">${item.sex.title}</td>
+                                                    <td class="text-center">${item.age}</td>
+                                                    <td class="text-center">${item.birthday}</td>
+                                                    <td class="text-center">${item.advisor.realName}</td>
+                                                    <td class="text-center">${item.address}</td>
                                                     <td class="text-center">
                                                         <a class="btn btn-primary btn-xs"
-                                                           onclick="deleteCM(${item.member.id});">
+                                                           onclick="deleteCM(${item.id});">
                                                             <i class="fa fa-times"></i>
                                                         </a>
                                                     </td>

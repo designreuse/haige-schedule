@@ -1,9 +1,7 @@
 package com.haige.schedule.dao;
 
-import com.haige.schedule.entity.ClassMember;
 import com.haige.schedule.entity.ClassSchedule;
 import com.haige.schedule.entity.Member;
-import com.haige.schedule.repository.ClassMemberDao;
 import com.haige.schedule.repository.ClassScheduleDao;
 import com.haige.schedule.repository.MemberDao;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ClassScheduleService {
@@ -24,8 +23,6 @@ public class ClassScheduleService {
 
     @Autowired
     private MemberDao memberDao;
-    @Autowired
-    private ClassMemberDao cmDao;
 
     public Page<ClassSchedule> getAllClassSchedule(Pageable page) {
         return classScheduleDao.findAll(page);
@@ -74,16 +71,22 @@ public class ClassScheduleService {
     public void addCSMembers(Long id, List<Long> memberIds) {
         ClassSchedule cs = classScheduleDao.findOne(id);
         for (Long memberId : memberIds) {
-            ClassMember cm = new ClassMember();
-            cm.setSchedule(cs);
-            cm.setMember(memberDao.findOne(memberId));
-            cmDao.save(cm);
+            Member member = memberDao.findOne(memberId);
+            cs.getMembers().add(member);
+            classScheduleDao.save(cs);
         }
     }
 
     public void deleteCSMember(Long id, Long memberId) {
         ClassSchedule cs = classScheduleDao.findOne(id);
-        List<Member> members = cs.getMembers();
+        Set<Member> members = cs.getMembers();
+        for (Member member : members) {
+            if (member.getId().equals(memberId)) {
+                members.remove(member);
+                classScheduleDao.save(cs);
+                break;
+            }
+        }
 
     }
 }

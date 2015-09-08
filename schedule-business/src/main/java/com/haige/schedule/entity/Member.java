@@ -6,7 +6,9 @@ import com.haige.schedule.utils.Constants;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "members")
@@ -67,8 +69,8 @@ public class Member {
     @JoinColumn(name = "advisorId")
     private User advisor;
 
-    @ManyToMany(mappedBy = "members")
-    private List<ClassSchedule> schedules;
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "members")
+    private Set<ClassSchedule> schedules = new HashSet<ClassSchedule>();
 
 
     public Long getId() {
@@ -204,11 +206,11 @@ public class Member {
         this.linkman = linkman;
     }
 
-    public List<ClassSchedule> getSchedules() {
+    public Set<ClassSchedule> getSchedules() {
         return schedules;
     }
 
-    public void setSchedules(List<ClassSchedule> schedules) {
+    public void setSchedules(Set<ClassSchedule> schedules) {
         this.schedules = schedules;
     }
 }

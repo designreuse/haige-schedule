@@ -100,11 +100,11 @@
         <aop:advisor pointcut-ref="serviceTxPc" advice-ref="txAdvice"/>
     </aop:config>
     <!-- 后台保存和试题的线程池-->
-    <!--<bean id="examPaperSaveExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">-->
-    <!--<property name="corePoolSize" value="${threadpool.exampaper.coreSize}"/>-->
-    <!--<property name="maxPoolSize" value="${threadpool.exampaper.maxPoolSize}"/>-->
-    <!--<property name="queueCapacity" value="${threadpool.exampaper.queueCapacity}"/>-->
-    <!--</bean>-->
+    <bean id="examPaperSaveExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="${threadpool.exampaper.coreSize}"/>
+        <property name="maxPoolSize" value="${threadpool.exampaper.maxPoolSize}"/>
+        <property name="queueCapacity" value="${threadpool.exampaper.queueCapacity}"/>
+    </bean>
 
     <bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:ehcache_spring.xml"></property>

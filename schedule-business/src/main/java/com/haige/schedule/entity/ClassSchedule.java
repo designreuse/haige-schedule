@@ -6,7 +6,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "class_schedule")
@@ -37,11 +38,11 @@ public class ClassSchedule implements Serializable {
     private String comment;
 
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JoinTable(name = "class_memberes",
-            joinColumns = {@JoinColumn(name = "scheduleId", referencedColumnName = "scheduleId")},
-            inverseJoinColumns = {@JoinColumn(name = "memberId", referencedColumnName = "memberId")})
-    private List<Member> members;
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinTable(name = "class_members",
+            joinColumns = {@JoinColumn(name = "scheduleId", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "memberId", referencedColumnName = "id")})
+    private Set<Member> members = new HashSet<Member>();
 
 
     public Long getId() {
@@ -92,11 +93,11 @@ public class ClassSchedule implements Serializable {
         this.teacher = teacher;
     }
 
-    public List<Member> getMembers() {
+    public Set<Member> getMembers() {
         return members;
     }
 
-    public void setMembers(List<Member> members) {
+    public void setMembers(Set<Member> members) {
         this.members = members;
     }
 
