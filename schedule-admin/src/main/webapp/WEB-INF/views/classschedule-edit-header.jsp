@@ -24,26 +24,10 @@
         <td class="text-center">{{:advisor.realName}}</td>
         <td class="text-center">{{:address}}</td>
     </tr>
-
-
-
-
-
-
-
-
 </script>
 
 <script id="advisorItem" type="text/x-jsrender">
     <option value="{{:id}}">{{:realName}}</option>
-
-
-
-
-
-
-
-
 </script>
 
 
@@ -150,47 +134,96 @@
     }
 
     function loadCMData(page) {
-        $.get("${ctx}/member/cmQuery", {
-            cmScheduleId: $("#id").val(),
-            cmQueryName: $("#cmQueryName").val(),
-            cmQueryAdvisorId: $("#cmQueryAdvisorId").val(),
-            page: page,
-            size: 10
-        }, function (data) {
-            if (data.totalPage > 0) {
-                $("#cmQueryName").val(data.cmQueryName);
+        $.ajax(
+                {
+                    type: "GET",
+                    url: "${ctx}/member/cmQuery",
+                    timeout: 5000, //超时时间设置，单位毫秒
+                    data: {
+                        cmScheduleId: $("#id").val(),
+                        cmQueryName: $("#cmQueryName").val(),
+                        cmQueryAdvisorId: $("#cmQueryAdvisorId").val(),
+                        page: page,
+                        size: 10
+                    },
+                    contentType: 'application/json',
+                    dataType: "json",
+                    success: function (data) {
+                        alert(data);
+                        if (data.totalPage > 0) {
+                            $("#cmQueryName").val(data.cmQueryName);
 
-                $("#memberTableBody").empty();
+                            $("#memberTableBody").empty();
 
-                var tpl = $.templates("#memberTableItems");
-                $("#memberTableBody").html(tpl.render(data.members));
-                bindCheckboxChangeEvent();
+                            var tpl = $.templates("#memberTableItems");
+                            $("#memberTableBody").html(tpl.render(data.members));
+                            bindCheckboxChangeEvent();
 
-                $("#cmQueryAdvisorId").empty();
-                var tplAd = $.templates("#advisorItem");
-                $("#cmQueryAdvisorId").html("<option value=''></option>" + tplAd.render(data.advisors));
-                $("#cmQueryAdvisorId").val(data.cmQueryAdvisorId);
+                            $("#cmQueryAdvisorId").empty();
+                            var tplAd = $.templates("#advisorItem");
+                            $("#cmQueryAdvisorId").html("<option value=''></option>" + tplAd.render(data.advisors));
+                            $("#cmQueryAdvisorId").val(data.cmQueryAdvisorId);
 
-                if (data.totalPage > 0) {
-                    createPaginator("#mcPaginator", data.page, data.totalPage);
-                    $("#mcPaginator").bootstrapPaginator({
-                        onPageClicked: function (e, originalEvent, type, page) {
-                            var p = page - 1;
-                            loadCMData(p);
+                            if (data.totalPage > 0) {
+                                createPaginator("#mcPaginator", data.page, data.totalPage);
+                                $("#mcPaginator").bootstrapPaginator({
+                                    onPageClicked: function (e, originalEvent, type, page) {
+                                        var p = page - 1;
+                                        loadCMData(p);
+                                    }
+                                });
+                            }
                         }
-                    });
-                }
-            } else {
-                $("#memberTableBody").empty();
-                $("#mcPaginator").empty();
-            }
-        });
+                        $('#cmModal').modal('show');
+                    },
+                    error: function () {
+                        $("#memberTableBody").empty();
+                        $("#mcPaginator").empty();
+                        alert("加载失败！");
+                    }
+                });
+
+        <%--$.get("${ctx}/member/cmQuery", {--%>
+        <%--cmScheduleId: $("#id").val(),--%>
+        <%--cmQueryName: $("#cmQueryName").val(),--%>
+        <%--cmQueryAdvisorId: $("#cmQueryAdvisorId").val(),--%>
+        <%--page: page,--%>
+        <%--size: 10--%>
+        <%--}, function (data) {--%>
+        <%--alert(data);--%>
+        <%--if (data.totalPage > 0) {--%>
+        <%--$("#cmQueryName").val(data.cmQueryName);--%>
+
+        <%--$("#memberTableBody").empty();--%>
+
+        <%--var tpl = $.templates("#memberTableItems");--%>
+        <%--$("#memberTableBody").html(tpl.render(data.members));--%>
+        <%--bindCheckboxChangeEvent();--%>
+
+        <%--$("#cmQueryAdvisorId").empty();--%>
+        <%--var tplAd = $.templates("#advisorItem");--%>
+        <%--$("#cmQueryAdvisorId").html("<option value=''></option>" + tplAd.render(data.advisors));--%>
+        <%--$("#cmQueryAdvisorId").val(data.cmQueryAdvisorId);--%>
+
+        <%--if (data.totalPage > 0) {--%>
+        <%--createPaginator("#mcPaginator", data.page, data.totalPage);--%>
+        <%--$("#mcPaginator").bootstrapPaginator({--%>
+        <%--onPageClicked: function (e, originalEvent, type, page) {--%>
+        <%--var p = page - 1;--%>
+        <%--loadCMData(p);--%>
+        <%--}--%>
+        <%--});--%>
+        <%--}--%>
+        <%--} else {--%>
+        <%--$("#memberTableBody").empty();--%>
+        <%--$("#mcPaginator").empty();--%>
+        <%--}--%>
+        <%--});--%>
     }
 
 
     function addCM() {
         loadCMData();
-        $('#cmModal').modal('show');
     }
 
 

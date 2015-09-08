@@ -1,8 +1,8 @@
 package com.haige.schedule.web.controller;
 
-import com.haige.schedule.dao.MemberService;
-import com.haige.schedule.dao.RBACService;
 import com.haige.schedule.entity.Member;
+import com.haige.schedule.service.MemberService;
+import com.haige.schedule.service.RBACService;
 import com.haige.schedule.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -54,20 +54,28 @@ public class MemberController {
 
     @RequestMapping(value = "/cmQuery", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public Map<String, Object> cmQuery(Long cmScheduleId, String cmQueryName, Long cmQueryAdvisorId, Pageable page) throws Exception {
-        Map<String, Object> result = new HashMap<>();
+    public Map<String, Object> cmQuery(Long cmScheduleId, String cmQueryName, Long cmQueryAdvisorId, Pageable page) {
+        try {
+            Map<String, Object> result = new HashMap<>();
 
-        Page<Member> members = memberService.queryMembersNotInSchedule(cmScheduleId, cmQueryName, cmQueryAdvisorId, page);
-        result.put("members", members.getContent());
+            Page<Member> members = memberService.queryMembersNotInSchedule(cmScheduleId, cmQueryName, cmQueryAdvisorId, page);
+//            Page<Member> members = memberService.queryMembers(null, null, page);
 
-        result.put("advisors", rbacService.getAllAdvisor());
-        result.put("cmQueryName", cmQueryName);
-        result.put("cmQueryAdvisorId", cmQueryAdvisorId);
+//            Page<User> members = rbacService.getAllUser(page);
+            result.put("members", members.getContent());
 
-        result.put("page", members.getNumber() + 1);
-        result.put("totalPage", members.getTotalPages());
-        result.put("totalCount", members.getTotalElements());
-        return result;
+            result.put("advisors", rbacService.getAllAdvisor());
+            result.put("cmQueryName", cmQueryName);
+            result.put("cmQueryAdvisorId", cmQueryAdvisorId);
+//
+            result.put("page", members.getNumber() + 1);
+            result.put("totalPage", members.getTotalPages());
+            result.put("totalCount", members.getTotalElements());
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @RequestMapping(value = "/add")

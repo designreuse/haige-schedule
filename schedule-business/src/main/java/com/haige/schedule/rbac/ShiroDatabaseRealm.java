@@ -1,7 +1,7 @@
 package com.haige.schedule.rbac;
 
-import com.haige.schedule.dao.RBACService;
 import com.haige.schedule.entity.User;
+import com.haige.schedule.service.RBACService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;

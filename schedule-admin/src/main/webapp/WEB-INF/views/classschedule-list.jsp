@@ -78,7 +78,7 @@
                                 <th class="text-center">日期</th>
                                 <th class="text-center">开始时间</th>
                                 <th class="text-center">结束时间</th>
-                                <th class="text-center">备注</th>
+                                <th class="text-center">学员</th>
                                 <th class="text-center">操 作</th>
                             </tr>
                             </thead>
@@ -95,7 +95,11 @@
                                         <td class="text-center">
                                             <fmt:formatDate value="${item.endTime}" pattern="HH:mm"/>
                                         </td>
-                                        <td class="text-center">${item.comment}</td>
+                                        <td class="text-center">
+                                            <c:forEach items="${item.members}" var="member">
+                                                ${member.realName}
+                                            </c:forEach>
+                                        </td>
                                         <td class="text-center">
                                             <a class="btn btn-primary btn-xs" onclick="editSchedule(${item.id});">
                                                 <i class="fa fa-edit"></i>

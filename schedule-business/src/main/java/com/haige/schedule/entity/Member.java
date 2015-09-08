@@ -6,9 +6,7 @@ import com.haige.schedule.utils.Constants;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "members")
@@ -44,7 +42,7 @@ public class Member {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
 
-    @Column(length = 50)
+    @Column(length = 50, nullable = false)
     private String realName;
 
     @Column(length = 50)
@@ -66,11 +64,17 @@ public class Member {
     private List<MemberPayment> payment;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "advisorId")
+    @JoinColumn(name = "advisorId", nullable = false)
     private User advisor;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "members")
-    private Set<ClassSchedule> schedules = new HashSet<ClassSchedule>();
+    //    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+//    @org.hibernate.annotations.Fetch(FetchMode.SELECT)
+//    @JoinTable(name = "class_members",
+//            joinColumns = {@JoinColumn(name = "memberId", referencedColumnName = "id")},
+//            inverseJoinColumns = {@JoinColumn(name = "scheduleId", referencedColumnName = "id")})
+//    @ManyToMany(mappedBy = "members", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+//    @OrderBy("id")
+//    private Set<ClassSchedule> schedules = new HashSet<ClassSchedule>(0);
 
 
     public Long getId() {
@@ -206,11 +210,11 @@ public class Member {
         this.linkman = linkman;
     }
 
-    public Set<ClassSchedule> getSchedules() {
-        return schedules;
-    }
-
-    public void setSchedules(Set<ClassSchedule> schedules) {
-        this.schedules = schedules;
-    }
+//    public Set<ClassSchedule> getSchedules() {
+//        return schedules;
+//    }
+//
+//    public void setSchedules(Set<ClassSchedule> schedules) {
+//        this.schedules = schedules;
+//    }
 }

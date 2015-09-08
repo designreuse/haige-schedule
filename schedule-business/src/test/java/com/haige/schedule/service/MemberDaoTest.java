@@ -1,16 +1,11 @@
-package com.haige.schedule.dao;
+package com.haige.schedule.service;
 
-import com.haige.schedule.entity.ClassSchedule;
-import com.haige.schedule.entity.Member;
-import com.haige.schedule.repository.ClassScheduleDao;
+import com.haige.schedule.repository.MemberDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.util.Assert;
-
-import java.util.Set;
 
 /**
  * @author lcheng
@@ -19,15 +14,13 @@ import java.util.Set;
  */
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
-public class ClassMemberDaoTest {
+public class MemberDaoTest {
     @Autowired
-    private ClassScheduleDao csDao;
+    private MemberDao mDao;
 
     @Test
     public void testSelect() {
-        ClassSchedule cs = csDao.findOne(Long.valueOf(3));
-        Set<Member> members = cs.getMembers();
-        Assert.notEmpty(members);
+        mDao.delete((long) 17);
     }
 
 }

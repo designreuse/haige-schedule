@@ -1,10 +1,10 @@
 package com.haige.schedule.web.controller;
 
-import com.haige.schedule.dao.ClassBaseService;
-import com.haige.schedule.dao.ClassScheduleService;
-import com.haige.schedule.dao.RBACService;
 import com.haige.schedule.entity.ClassSchedule;
 import com.haige.schedule.entity.Result;
+import com.haige.schedule.service.ClassBaseService;
+import com.haige.schedule.service.ClassScheduleService;
+import com.haige.schedule.service.RBACService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +91,16 @@ public class ClassScheduleController {
         return "redirect:/schedule/list";
     }
 
+    @RequestMapping(value = "/saveNew", method = RequestMethod.POST)
+    public String newClassSchedule(ClassSchedule schedule,
+                                   @RequestParam(value = "classId", required = false) Long classId,
+                                   @RequestParam(value = "teacherId", required = false) Long teacherId) {
+        schedule.setClassBase(classService.getClassBase(classId));
+        schedule.setTeacher(rbacService.getUserById(teacherId));
+        scheduleService.saveClassSchedule(schedule);
+        return "redirect:/schedule/edit/" + schedule.getId();
+    }
+
     @RequestMapping(value = "/delete/{id}")
     public String deleteStore(@PathVariable("id") long id) {
         scheduleService.deleteClassSchedule(id);
@@ -126,8 +136,6 @@ public class ClassScheduleController {
     public Result deleteCSMember(String scheduleId, String memberId) {
         Result result = null;
         try {
-
-
             scheduleService.deleteCSMember(Long.parseLong(scheduleId), Long.parseLong(memberId));
 
             result = new Result(true, "删除课程学员成功！");

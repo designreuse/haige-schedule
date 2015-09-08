@@ -12,7 +12,7 @@
                         <h3 class="box-title">修改课程安排</h3>
                     </div>
                     <form role="form" class="form-horizontal" method="post" id="scheduleAddForm"
-                          action="${ctx}/schedule/save">
+                          action="${ctx}/schedule/saveNew">
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="classId" class="col-sm-2 control-label">课程</label>
@@ -68,43 +68,43 @@
                                 </div>
                             </div>
 
-                            <div class="box box-info">
-                                <h4 class="box-title">修改课程学员<span class="text-muted">(修改后将会自动保存)</span></h4>
+                            <%--<div class="box box-info">--%>
+                            <%--<h4 class="box-title">修改课程学员<span class="text-muted">(修改后将会自动保存)</span></h4>--%>
 
-                                <div class="box-header" style="text-align: center;margin: 0">
-                                    <button id="addCMBtn" class="btn btn-primary btn-flat">添加学员</button>
-                                </div>
+                            <%--<div class="box-header" style="text-align: center;margin: 0">--%>
+                            <%--<button id="addCMBtn" class="btn btn-primary btn-flat" onclick="addCM()">添加学员</button>--%>
+                            <%--</div>--%>
 
-                                <div class="box-body">
-                                    <table id="memberTable" style="margin-top: 10px"
-                                           class="table table-bordered table-striped">
-                                        <thead>
-                                        <tr>
-                                            <th class="text-center">用户名</th>
-                                            <th class="text-center">姓名</th>
-                                            <th class="text-center">性别</th>
-                                            <th class="text-center">年龄</th>
-                                            <th class="text-center">出生日期</th>
-                                            <th class="text-center">顾问</th>
-                                            <th class="text-center">地址</th>
-                                            <th class="text-center">操 作</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
+                            <%--<div class="box-body">--%>
+                            <%--<table id="memberTable" style="margin-top: 10px"--%>
+                            <%--class="table table-bordered table-striped">--%>
+                            <%--<thead>--%>
+                            <%--<tr>--%>
+                            <%--<th class="text-center">用户名</th>--%>
+                            <%--<th class="text-center">姓名</th>--%>
+                            <%--<th class="text-center">性别</th>--%>
+                            <%--<th class="text-center">年龄</th>--%>
+                            <%--<th class="text-center">出生日期</th>--%>
+                            <%--<th class="text-center">顾问</th>--%>
+                            <%--<th class="text-center">地址</th>--%>
+                            <%--<th class="text-center">操 作</th>--%>
+                            <%--</tr>--%>
+                            <%--</thead>--%>
+                            <%--<tbody>--%>
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="box-footer" style="text-align: center;margin: 0">
-                                    <p class="pull-left">共 <span>${totalCount}</span> 项&nbsp;&nbsp;页次 : <span><span
-                                            style="color: red; "><c:choose><c:when
-                                            test="${totalPage==0}">0</c:when><c:otherwise>${page}</c:otherwise></c:choose></span> / ${totalPage}</span>
-                                    </p>
-                                    <ul id="paginator" class="pagination">
-                                    </ul>
-                                </div>
+                            <%--</tbody>--%>
+                            <%--</table>--%>
+                            <%--</div>--%>
+                            <%--<div class="box-footer" style="text-align: center;margin: 0">--%>
+                            <%--<p class="pull-left">共 <span>${totalCount}</span> 项&nbsp;&nbsp;页次 : <span><span--%>
+                            <%--style="color: red; "><c:choose><c:when--%>
+                            <%--test="${totalPage==0}">0</c:when><c:otherwise>${page}</c:otherwise></c:choose></span> / ${totalPage}</span>--%>
+                            <%--</p>--%>
+                            <%--<ul id="paginator" class="pagination">--%>
+                            <%--</ul>--%>
+                            <%--</div>--%>
 
-                            </div>
+                            <%--</div>--%>
 
 
                             <div class="box-footer" style="text-align: center;margin: 0">

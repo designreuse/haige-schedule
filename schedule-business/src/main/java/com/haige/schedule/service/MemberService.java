@@ -1,4 +1,4 @@
-package com.haige.schedule.dao;
+package com.haige.schedule.service;
 
 import com.haige.schedule.entity.Member;
 import com.haige.schedule.exception.RepositoryException;
@@ -52,14 +52,15 @@ public class MemberService {
         return memberDao.queryNativeSqlPageEntity(sql, items.toArray(strArr), params.toArray(), page);
     }
 
-    public Page<Member> queryMembersNotInSchedule(Long cmScheduleId, final String memberName, Long advisorId, Pageable page) throws Exception {
+    public Page<Member> queryMembersNotInSchedule(Long cmScheduleId, final String memberName, Long advisorId, Pageable page) {
         if (cmScheduleId == null) {
             throw new RepositoryException("查询课程之外的客户时课程编号不能为空");
         }
+
         List<Object> params = new ArrayList<>();
         List<String> items = new ArrayList<String>();
 
-        String sql = "select * from members where id not in (select memberid from class_members where scheduleId = :scheduleId) ";
+        String sql = "select * from members where id not in (select memberid from class_schedule_members where scheduleId = :scheduleId) ";
         items.add("scheduleId");
         params.add(cmScheduleId);
         if (!StringUtil.isEmptyIncludeBlank(memberName)) {
@@ -75,6 +76,7 @@ public class MemberService {
 
         String[] strArr = new String[items.size()];
         return memberDao.queryNativeSqlPageEntity(sql, items.toArray(strArr), params.toArray(), page);
+
     }
 
     public Member getMemberByMemberName(String memberName) {

@@ -38,11 +38,12 @@ public class ClassSchedule implements Serializable {
     private String comment;
 
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinTable(name = "class_members",
-            joinColumns = {@JoinColumn(name = "scheduleId", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "memberId", referencedColumnName = "id")})
-    private Set<Member> members = new HashSet<Member>();
+    @ManyToMany(cascade = CascadeType.REFRESH)
+//    @org.hibernate.annotations.Fetch(FetchMode.SELECT)
+    @JoinTable(joinColumns = {@JoinColumn(name = "scheduleId")},
+            inverseJoinColumns = {@JoinColumn(name = "memberId")})
+    @OrderBy("id")
+    private Set<Member> members = new HashSet<Member>(0);
 
 
     public Long getId() {

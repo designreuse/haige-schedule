@@ -138,7 +138,7 @@
                                 <button type="submit" class="btn btn-primary btn-flat">保存</button>
 
                                 <button type="button" class="btn btn-success btn-flat" style="margin-right: 20px"
-                                        onclick="window.history.go(-1);">返回
+                                        onclick="window.location.href = '${ctx}/schedule/list'">返回
                                 </button>
                             </div>
                         </div>
@@ -209,7 +209,7 @@
                     </tbody>
                 </table>
                 <div class="margin" style="height: 30px;">
-                    <ul id="mcPaginator" class="pagination pagination-sm no-margin pull-right">asdf
+                    <ul id="mcPaginator" class="pagination pagination-sm no-margin pull-right">
                     </ul>
                 </div>
             </div>
