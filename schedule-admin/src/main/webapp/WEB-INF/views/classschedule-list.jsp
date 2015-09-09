@@ -95,7 +95,7 @@
                                         <td class="text-center">
                                             <fmt:formatDate value="${item.endTime}" pattern="HH:mm"/>
                                         </td>
-                                        <td class="text-center">
+                                        <td class="text-center" style="WORD-WRAP: break-word" width="10%">
                                             <c:forEach items="${item.members}" var="member">
                                                 ${member.realName}
                                             </c:forEach>
