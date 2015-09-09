@@ -1,8 +1,7 @@
 package com.haige.schedule.web.controller;
 
-import com.haige.schedule.entity.ClassifClassType;
-import com.haige.schedule.service.ClassifClassTypeService;
-import com.haige.schedule.service.RBACService;
+import com.haige.schedule.entity.ClassBase;
+import com.haige.schedule.service.ClassBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,52 +13,44 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/classtype")
-public class ClassifClassTypeController {
+@RequestMapping(value = "/classbase")
+public class ClassBaseController {
 
     @Autowired
-    private ClassifClassTypeService typeService;
-    @Autowired
-    private RBACService rbacService;
+    private ClassBaseService classBaseService;
 
     //    @RequiresRoles({"admin"})
     @RequestMapping(value = "/list")
     public ModelAndView getClassTypeList() {
-        ModelAndView mv = new ModelAndView("haige.classtype-list");
-        List<ClassifClassType> allTypes = typeService.getAllClassTypes();
-        mv.addObject("allTypes", allTypes);
+        ModelAndView mv = new ModelAndView("haige.classbase-list");
+        List<ClassBase> allClasses = classBaseService.getAllClassBases();
+        mv.addObject("allClasses", allClasses);
         return mv;
     }
 
     @RequestMapping(value = "/add")
     public String showAddPage() {
-
-        return "haige.classtype-add";
+        return "haige.classbase-add";
     }
 
 
     @RequestMapping(value = "/edit/{id}")
     public String showEditPage(@PathVariable("id") Long id, ModelMap map) {
-        ClassifClassType type = null;
-        if (id != null) {
-            type = typeService.getClassType(id);
-        }
-
-        map.addAttribute("type", type);
-
-        return "haige.classtype-edit";
+        ClassBase classbase = classBaseService.getClassBase(id);
+        map.addAttribute("classbase", classbase);
+        return "haige.classbase-edit";
     }
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveClassType(ClassifClassType type) {
-        typeService.save(type);
-        return "redirect:/classtype/list";
+    public String saveClassType(ClassBase classBase) {
+        classBaseService.save(classBase);
+        return "redirect:/classbase/list";
     }
 
     @RequestMapping(value = "/delete/{id}")
     public String deleteStore(@PathVariable("id") long id) {
-        typeService.delete(id);
-        return "redirect:/classtype/list";
+        classBaseService.delete(id);
+        return "redirect:/classbase/list";
     }
 }
