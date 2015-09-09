@@ -47,6 +47,10 @@
         window.location.href = "${ctx}/schedule/add";
     }
 
+    function finishSchedule(id) {
+        $('#ev_scheduleid').val(id);
+        $('#cmModal').modal('show');
+    }
 
     function deleteSchedule(id) {
         if (window.confirm("您确定要删除该客户吗？")) {

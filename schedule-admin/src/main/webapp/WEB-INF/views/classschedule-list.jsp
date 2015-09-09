@@ -78,8 +78,8 @@
                                 <th class="text-center">日期</th>
                                 <th class="text-center">开始时间</th>
                                 <th class="text-center">结束时间</th>
-                                <th class="text-center">学员</th>
-                                <th class="text-center">操 作</th>
+                                <th class="text-center" width="10%">学员</th>
+                                <th class="text-center" style="width: 100px">操 作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -95,13 +95,16 @@
                                         <td class="text-center">
                                             <fmt:formatDate value="${item.endTime}" pattern="HH:mm"/>
                                         </td>
-                                        <td class="text-center" style="WORD-WRAP: break-word" width="10%">
+                                        <td class="text-center" style="WORD-WRAP: break-word">
                                             <c:forEach items="${item.members}" var="member">
                                                 ${member.realName}
                                             </c:forEach>
                                         </td>
                                         <td class="text-center">
-                                            <a class="btn btn-primary btn-xs" onclick="editSchedule(${item.id});">
+                                            <a class="btn btn-primary btn-xs" onclick="finishSchedule(${item.id});">
+                                                <i class="fa fa-play"></i>
+                                            </a>
+                                            <a class="btn btn-primary btn-xs" onclick="editSchedule (${item.id});">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                             <a class="btn btn-primary btn-xs" onclick="deleteSchedule(${item.id});">
@@ -131,3 +134,41 @@
     </section>
 </aside>
 
+
+<div class="modal fade" id="cmModal" tabindex="-100" role="dialog" aria-labelledby="mcModalTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <form role="form" class="form-horizontal" method="post" id="scheduleEditForm"
+              action="${ctx}/schedule/finish">
+            <div class="modal-content" style="width: 550px;">
+                <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="cmModalTitle">结束课程</h4>
+                </div>
+                <div class="modal-body" style="height: 100px;">
+
+                    <div class="box-body">
+                        <input type="hidden" id="ev_scheduleid" name="ev_scheduleid"/>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="evaluation" class="col-sm-2 control-label">评价</label>
+
+                                <div class="col-sm-10">
+                                    <textarea type="text" class="form-control" name="evaluation" id="evaluation"
+                                              placeholder="评价"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-flat">结束课程</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

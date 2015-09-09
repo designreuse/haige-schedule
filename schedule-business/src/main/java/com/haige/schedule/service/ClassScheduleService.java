@@ -64,6 +64,12 @@ public class ClassScheduleService {
         classScheduleDao.save(classSchedule);
     }
 
+    public void finishClassSchedule(Long evScheduleid, String evaluation) {
+        classScheduleDao.recordHisSchedule(evScheduleid, evaluation);
+        classScheduleDao.delete(evScheduleid);
+    }
+
+
     public void deleteClassSchedule(Long id) {
         classScheduleDao.delete(id);
     }

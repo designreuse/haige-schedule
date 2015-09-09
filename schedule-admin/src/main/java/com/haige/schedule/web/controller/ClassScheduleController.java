@@ -91,6 +91,13 @@ public class ClassScheduleController {
         return "redirect:/schedule/list";
     }
 
+    @RequestMapping(value = "/finish", method = RequestMethod.POST)
+    public String saveClassSchedule(@RequestParam(value = "ev_scheduleid", required = true) Long evScheduleid,
+                                    @RequestParam(value = "evaluation", required = true) String evaluation) {
+        scheduleService.finishClassSchedule(evScheduleid, evaluation);
+        return "redirect:/schedule/list";
+    }
+
     @RequestMapping(value = "/saveNew", method = RequestMethod.POST)
     public String newClassSchedule(ClassSchedule schedule,
                                    @RequestParam(value = "classId", required = false) Long classId,
