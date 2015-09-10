@@ -5,12 +5,12 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">添加课程</h3>
                     </div>
-                    <form role="form" class="form-horizontal" method="post" id="classTypeAddForm"
+                    <form role="form" class="form-horizontal" method="post" id="classBaseAddForm"
                           action="${ctx}/classbase/save">
                         <div class="box-body">
                             <div class="form-group">
@@ -22,15 +22,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="name" class="col-sm-2 control-label">课程类型</label>
-
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="type" id="type" placeholder="课程类型">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="comment" class="col-sm-2 control-label">课程介绍</label>
+                                <label for="recommend" class="col-sm-2 control-label">课程介绍</label>
 
                                 <div class="col-sm-10">
                                     <textarea type="text" class="form-control" name="recommend" id="recommend"

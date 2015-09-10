@@ -1,12 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <aside class="right-side">
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">修改课程安排</h3>
@@ -20,7 +21,7 @@
                                 <div class="col-sm-3">
                                     <select name="classId" id="classId" style="width: 100%">
                                         <c:forEach items="${classes}" var="r">
-                                            <option value="${r.id}">${r.name}-${r.type}</option>
+                                            <option value="${r.id}">${r.name}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -108,8 +109,9 @@
 
 
                             <div class="box-footer" style="text-align: center;margin: 0">
-                                <button type="submit" class="btn btn-primary btn-flat">保存</button>
-
+                                <shiro:hasAnyRoles name="root,admin">
+                                    <button type="submit" class="btn btn-primary btn-flat">保存</button>
+                                </shiro:hasAnyRoles>
                                 <button type="button" class="btn btn-success btn-flat" style="margin-right: 20px"
                                         onclick="window.history.go(-1);">返回
                                 </button>

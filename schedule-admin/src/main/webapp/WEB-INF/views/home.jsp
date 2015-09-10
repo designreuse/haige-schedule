@@ -1,4 +1,5 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Right side column. Contains the navbar and content of the page -->
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
@@ -25,14 +26,22 @@
                             ${mCount}
                         </h3>
 
-                        <p>我的会员数</p>
+                        <p>会员数</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
-                    <a href="${ctx}/member/list" class="small-box-footer">
-                        查看 <i class="fa fa-arrow-circle-right"></i>
-                    </a>
+
+                    <shiro:hasAnyRoles name="root,admin,advisor">
+                        <a href="${ctx}/member/list" class="small-box-footer">
+                            查看我的会员 <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </shiro:hasAnyRoles>
+                    <shiro:hasAnyRoles name="coach">
+                        <div class="small-box-footer">
+                            <i class="fa fa-arrow-circle-right"></i>
+                        </div>
+                    </shiro:hasAnyRoles>
                 </div>
             </div>
             <!-- ./col -->
@@ -44,7 +53,7 @@
                             ${csCount}
                         </h3>
 
-                        <p>我的课程安排数</p>
+                        <p>当前课程安排</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
@@ -73,8 +82,10 @@
                                 <button class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown"><i
                                         class="fa fa-bars"></i></button>
                                 <ul class="dropdown-menu pull-right" role="menu">
-                                    <li><a href="${ctx}/schedule/add">添加计划</a></li>
-                                    <li><a href="${ctx}/schedule/list">查看计划</a></li>
+                                    <shiro:hasAnyRoles name="root,admin">
+                                        <li><a href="${ctx}/schedule/add">添加课程计划</a></li>
+                                    </shiro:hasAnyRoles>
+                                    <li><a href="${ctx}/schedule/list">查看课程计划</a></li>
                                 </ul>
                             </div>
                         </div>

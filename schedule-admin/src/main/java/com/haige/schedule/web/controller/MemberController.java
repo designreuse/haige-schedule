@@ -2,8 +2,11 @@ package com.haige.schedule.web.controller;
 
 import com.haige.schedule.entity.Member;
 import com.haige.schedule.service.MemberService;
+import com.haige.schedule.service.PhaseService;
 import com.haige.schedule.service.RBACService;
 import com.haige.schedule.utils.Constants;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +30,10 @@ public class MemberController {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private PhaseService phaseService;
+
     @Autowired
     private RBACService rbacService;
 
@@ -34,15 +41,26 @@ public class MemberController {
     @RequestMapping(value = "/list")
     public ModelAndView memberList(@RequestParam(value = "queryName", required = false) String queryName,
                                    @RequestParam(value = "queryBirthYear", required = false) String queryBirthYear,
+                                   @RequestParam(value = "queryPhaseId", required = false) Long queryPhaseId,
                                    @RequestParam(value = "queryAdvisorId", required = false) Long queryAdvisorId,
                                    @PageableDefault Pageable page) {
         ModelAndView mv = new ModelAndView("haige.member-list");
-        Page<Member> members = memberService.queryMembers(queryName, queryBirthYear, queryAdvisorId, page);
+        Page<Member> members = null;
+        Subject currentUser = SecurityUtils.getSubject();
+        if (currentUser.hasRole("root") || currentUser.hasRole("admin")) {
+            members = memberService.queryMembers(queryName, queryBirthYear, queryPhaseId, queryAdvisorId, page);
+        } else if (currentUser.hasRole("advisor")) {
+            members = memberService.queryMembers(queryName, queryBirthYear, queryPhaseId, rbacService.getCurrentUser().getId(), page);
+        }
+
         mv.addObject("members", members.getContent());
 
         mv.addObject("advisors", rbacService.getAllAdvisor());
+        mv.addObject("phases", phaseService.getAllPhases());
+
         mv.addObject("queryName", queryName);
         mv.addObject("queryBirthYear", queryBirthYear);
+        mv.addObject("queryPhaseId", queryPhaseId);
         mv.addObject("queryAdvisorId", queryAdvisorId);
 
 
@@ -54,18 +72,23 @@ public class MemberController {
 
     @RequestMapping(value = "/cmQuery", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public Map<String, Object> cmQuery(Long cmScheduleId, String cmQueryName, Long cmQueryAdvisorId, Pageable page) {
+    public Map<String, Object> cmQuery(Long cmScheduleId, String cmQueryName, Long cmQueryPhaseId, Long cmQueryAdvisorId, Pageable page) {
         try {
             Map<String, Object> result = new HashMap<>();
+            Page<Member> members = null;
+            Subject currentUser = SecurityUtils.getSubject();
+            if (currentUser.hasRole("root") || currentUser.hasRole("admin")) {
+                members = memberService.queryMembersNotInSchedule(cmScheduleId, cmQueryName, cmQueryPhaseId, cmQueryAdvisorId, page);
+            } else if (currentUser.hasRole("advisor")) {
+                members = memberService.queryMembersNotInSchedule(cmScheduleId, cmQueryName, cmQueryPhaseId, rbacService.getCurrentUser().getId(), page);
+            }
 
-            Page<Member> members = memberService.queryMembersNotInSchedule(cmScheduleId, cmQueryName, cmQueryAdvisorId, page);
-//            Page<Member> members = memberService.queryMembers(null, null, page);
-
-//            Page<User> members = rbacService.getAllUser(page);
             result.put("members", members.getContent());
 
             result.put("advisors", rbacService.getAllAdvisor());
+            result.put("phases", phaseService.getAllPhases());
             result.put("cmQueryName", cmQueryName);
+            result.put("cmQueryPhaseId", cmQueryPhaseId);
             result.put("cmQueryAdvisorId", cmQueryAdvisorId);
 //
             result.put("page", members.getNumber() + 1);
@@ -80,9 +103,10 @@ public class MemberController {
 
     @RequestMapping(value = "/add")
     public String showAddPage(ModelMap map) {
-
         map.addAttribute("advisors", rbacService.getAllAdvisor());
+        map.addAttribute("phases", phaseService.getAllPhases());
         map.addAttribute("sex", Constants.Sex.values());
+
         return "haige.member-add";
     }
 
@@ -90,6 +114,7 @@ public class MemberController {
     @RequestMapping(value = "/edit/{id}")
     public String showEditPage(@PathVariable("id") Long id, ModelMap map) {
         map.addAttribute("advisors", rbacService.getAllAdvisor());
+        map.addAttribute("phases", phaseService.getAllPhases());
         map.addAttribute("sex", Constants.Sex.values());
 
         Member member = null;
@@ -104,8 +129,18 @@ public class MemberController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveMember(Member member,
+                             @RequestParam(value = "phaseId", required = true) Long phaseId,
                              @RequestParam(value = "advisorId", required = false) Long advisorId) {
-        member.setAdvisor(rbacService.getUserById(advisorId));
+
+        Subject currentUser = SecurityUtils.getSubject();
+        if (currentUser.hasRole("root") || currentUser.hasRole("admin")) {
+            member.setAdvisor(rbacService.getUserById(advisorId));
+        } else if (currentUser.hasRole("advisor")) {
+            member.setAdvisor(rbacService.getUserById(rbacService.getCurrentUser().getId()));
+        }
+
+        member.setPhase(phaseService.getPhase(phaseId));
+
         memberService.saveMember(member);
         return "redirect:/member/list";
     }

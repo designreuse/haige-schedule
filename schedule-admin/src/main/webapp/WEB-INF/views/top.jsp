@@ -33,7 +33,7 @@
                             <img src="${ctx}/asset/img/avatar3.png" class="img-circle" alt="User Image"/>
 
                             <p>
-                                <shiro:principal/> - 管理员
+                                <shiro:principal/>
                                 <c:set value="<%= new Date()%>" var="now"></c:set>
                                 <small><fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/></small>
                             </p>

@@ -8,7 +8,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            客户管理
+            会员管理
         </h1>
         <ol class="breadcrumb">
             <li><a href="${ctx}/index"><i class="fa fa-dashboard"></i> 首页</a></li>
@@ -20,24 +20,24 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">客户列表</h3>
+                        <h3 class="box-title">会员列表</h3>
 
                         <div class="box-tools pull-right" style="margin-right: 80px;">
                             <a class="btn btn-primary btn-flat" style="color: #ffffff;" role="button"
-                               onclick="addNewMember();">新增客户</a>
+                               onclick="addNewMember();">新增会员</a>
                         </div>
                     </div>
                     <div class="box-body table-responsive">
                         <form class="form-horizontal" role="form" method="post" action="${ctx}/member/list">
                             <div class="form-group">
-                                <label for="queryName" class="col-sm-1 control-label">姓名:</label>
+                                <label for="queryName" class="col-sm-1 control-label">姓名</label>
 
                                 <div class="col-sm-2">
                                     <input type="text" value="${queryName}" class="form-control" id="queryName"
                                            name="queryName" placeholder="姓名">
                                 </div>
 
-                                <label for="queryBirthYear" class="col-sm-2 control-label">出生年:</label>
+                                <label for="queryBirthYear" class="col-sm-2 control-label">出生年</label>
 
                                 <div class="col-sm-2">
                                     <input type="text" value="${queryBirthYear}" class="form-control"
@@ -45,9 +45,21 @@
                                            name="queryBirthYear" placeholder="出生年">
                                 </div>
 
-                                <label for="queryAdvisorId" class="col-sm-1 control-label">顾问:</label>
+                                <label for="queryPhaseId" class="col-sm-1 control-label">阶段</label>
 
-                                <div class="col-sm-2">
+                                <div class="col-sm-1">
+                                    <select name="queryPhaseId" id="queryPhaseId" style="width: 100%">
+                                        <option value=""></option>
+                                        <c:forEach items="${phases}" var="r">
+                                            <option value="${r.id}"
+                                                    <c:if test="${queryPhaseId==r.id}">selected</c:if> >${r.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+
+                                <label for="queryAdvisorId" class="col-sm-1 control-label">顾问</label>
+
+                                <div class="col-sm-1">
                                     <select name="queryAdvisorId" id="queryAdvisorId" style="width: 100%">
                                         <option value=""></option>
                                         <c:forEach items="${advisors}" var="r">
@@ -57,7 +69,7 @@
                                     </select>
                                 </div>
 
-                                <div class="col-sm-2">
+                                <div class="col-sm-1">
                                 <span class="input-group-btn">
                                     <button type="submit"
                                             class="btn btn-primary btn-flat">查询
@@ -76,6 +88,7 @@
                                 <th class="text-center">性别</th>
                                 <th class="text-center">年龄</th>
                                 <th class="text-center">出生日期</th>
+                                <th class="text-center">阶段</th>
                                 <th class="text-center">顾问</th>
                                 <th class="text-center">地址</th>
                                 <th class="text-center">操 作</th>
@@ -90,6 +103,7 @@
                                         <td class="text-center">${item.sex.title}</td>
                                         <td class="text-center">${item.age}</td>
                                         <td class="text-center">${item.birthday}</td>
+                                        <td class="text-center">${item.phase.name}</td>
                                         <td class="text-center">${item.advisor.realName}</td>
                                         <td class="text-center">${item.address}</td>
                                         <td class="text-center">

@@ -22,6 +22,7 @@
         <td class="text-center">{{:age}}</td>
         <td class="text-center">{{:birthday}}</td>
         <td class="text-center">{{:advisor.realName}}</td>
+        <td class="text-center">{{:phase.name}}</td>
         <td class="text-center">{{:address}}</td>
     </tr>
 </script>
@@ -29,7 +30,10 @@
 <script id="advisorItem" type="text/x-jsrender">
     <option value="{{:id}}">{{:realName}}</option>
 </script>
+<script id="phaseItem" type="text/x-jsrender">
+    <option value="{{:id}}">{{:name}}</option>
 
+</script>
 
 <script type="text/javascript">
     var mcIds = [];
@@ -145,6 +149,7 @@
                 cmScheduleId: $("#id").val(),
                 cmQueryName: $("#cmQueryName").val(),
                 cmQueryAdvisorId: $("#cmQueryAdvisorId").val(),
+                cmQueryPhaseId: $("#cmQueryPhaseId").val(),
                 page: page,
                 size: 10
             },
@@ -163,6 +168,10 @@
                     var tplAd = $.templates("#advisorItem");
                     $("#cmQueryAdvisorId").html("<option value=''></option>" + tplAd.render(data.advisors));
                     $("#cmQueryAdvisorId").val(data.cmQueryAdvisorId);
+
+                    var tplPhase = $.templates("#phaseItem");
+                    $("#cmQueryPhaseId").html("<option value=''></option>" + tplPhase.render(data.phases));
+                    $("#cmQueryPhaseId").val(data.cmQueryPhaseId);
 
                     if (data.totalPage > 0) {
                         createPaginator("#mcPaginator", data.page, data.totalPage);

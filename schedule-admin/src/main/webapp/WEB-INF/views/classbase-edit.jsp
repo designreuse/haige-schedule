@@ -6,12 +6,12 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">编辑课程</h3>
                     </div>
-                    <form id="classTypeEditForm" role="form" class="form-horizontal" method="post"
+                    <form id="classBaseEditForm" role="form" class="form-horizontal" method="post"
                           action="${ctx}/classbase/save">
                         <div class="box-body">
                             <input type="hidden" id="id" name="id" value="${classbase.id}"/>
@@ -26,20 +26,11 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="name" class="col-sm-2 control-label">课程类型</label>
-
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="type" id="type" placeholder="类型"
-                                           value="${classbase.type}"/>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
                                 <label for="comment" class="col-sm-2 control-label">课程介绍</label>
 
                                 <div class="col-sm-10">
                                     <textarea type="text" class="form-control" name="recommend" id="recommend"
-                                              value="${classbase.recommend}" placeholder="课程介绍"></textarea>
+                                              placeholder="课程介绍">${classbase.recommend}</textarea>
                                 </div>
                             </div>
 
@@ -48,7 +39,7 @@
 
                                 <div class="col-sm-10">
                                     <textarea type="text" class="form-control" name="comment" id="comment"
-                                              value="${classbase.comment}" placeholder="备注"></textarea>
+                                              placeholder="备注">${classbase.comment}</textarea>
                                 </div>
                             </div>
 

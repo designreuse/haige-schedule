@@ -1,17 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <aside class="right-side">
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">添加客户</h3>
+                        <h3 class="box-title">添加会员</h3>
                     </div>
-                    <form role="form" class="form-horizontal" method="post" id="classMemberAddForm"
+                    <form role="form" class="form-horizontal" method="post" id="memberAddForm"
                           action="${ctx}/member/save">
                         <div class="box-body">
                             <div class="form-group">
@@ -55,25 +56,39 @@
 
                                 <label for="sex" class="col-sm-2 control-label">性别</label>
 
-                                <div class="col-sm-4">
+                                <div class="col-sm-2">
                                     <select name="sex" id="sex" style="width: 100%">
                                         <option value=""></option>
                                         <c:forEach items="${sex}" var="r">--%>
-                                            <option value="${r}">${r}</option>
+                                            <option value="${r}">${r.title}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
 
-                                <label for="advisorId" class="col-sm-2 control-label">顾问</label>
+                                <label for="phaseId" class="col-sm-2 control-label">阶段</label>
 
-                                <div class="col-sm-4">
-                                    <select name="advisorId" id="advisorId" style="width: 100%">
+                                <div class="col-sm-2">
+                                    <select name="phaseId" id="phaseId" style="width: 100%">
                                         <option value=""></option>
-                                        <c:forEach items="${advisors}" var="r">
-                                            <option value="${r.id}">${r.realName}</option>
+                                        <c:forEach items="${phases}" var="r">
+                                            <option value="${r.id}">${r.name}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
+
+                                <shiro:hasAnyRoles name="root,admin">
+                                    <label for="advisorId" class="col-sm-2 control-label">顾问</label>
+
+                                    <div class="col-sm-2">
+                                        <select name="advisorId" id="advisorId" style="width: 100%">
+                                            <option value=""></option>
+                                            <c:forEach items="${advisors}" var="r">
+                                                <option value="${r.id}">${r.realName}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </shiro:hasAnyRoles>
+
                             </div>
 
                             <div class="form-group">

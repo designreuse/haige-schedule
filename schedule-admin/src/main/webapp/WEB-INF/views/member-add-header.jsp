@@ -13,7 +13,7 @@
 <script type="text/javascript">
 
     function initValidator() {
-        return $("#classMemberAddForm").validate({
+        return $("#memberAddForm").validate({
             rules: {
                 "memberName": {required: true},
                 "sex": {required: true},

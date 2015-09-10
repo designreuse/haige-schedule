@@ -6,10 +6,10 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">修改客户</h3>
+                        <h3 class="box-title">修改会员</h3>
                     </div>
                     <form role="form" class="form-horizontal" method="post" id="classMemberEditForm"
                           action="${ctx}/member/save">
@@ -51,9 +51,11 @@
                             </div>
 
                             <div class="form-group">
+
+
                                 <label for="sex" class="col-sm-2 control-label">性别</label>
 
-                                <div class="col-sm-4">
+                                <div class="col-sm-2">
                                     <select name="sex" id="sex" style="width: 100%">
                                         <c:forEach items="${sex}" var="r">
                                             <option value="${r}"
@@ -63,9 +65,21 @@
                                     </select>
                                 </div>
 
+                                <label for="phaseId" class="col-sm-2 control-label">阶段</label>
+
+                                <div class="col-sm-2">
+                                    <select name="phaseId" id="phaseId" style="width: 100%">
+                                        <c:forEach items="${phases}" var="r">
+                                            <option value="${r.id}"
+                                                    <c:if test="${member.phase.id==r.id}">selected</c:if>>${r.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+
+
                                 <label for="advisorId" class="col-sm-2 control-label">顾问</label>
 
-                                <div class="col-sm-4">
+                                <div class="col-sm-2">
                                     <select name="advisorId" id="advisorId" style="width: 100%">
                                         <c:forEach items="${advisors}" var="r">
                                             <option value="${r.id}"

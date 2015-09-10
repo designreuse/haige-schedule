@@ -1,6 +1,8 @@
+<%@ page import="java.util.Date" %>
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html lang="zh">
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
@@ -21,11 +23,12 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">课程安排列表</h3>
-
-                        <div class="box-tools pull-right" style="margin-right: 80px;">
-                            <a class="btn btn-primary btn-flat" style="color: #ffffff;" role="button"
-                               onclick="addNewSchedule();">新增课程安排</a>
-                        </div>
+                        <shiro:hasAnyRoles name="root,admin">
+                            <div class="box-tools pull-right" style="margin-right: 80px;">
+                                <a class="btn btn-primary btn-flat" style="color: #ffffff;" role="button"
+                                   onclick="addNewSchedule();">新增课程安排</a>
+                            </div>
+                        </shiro:hasAnyRoles>
                     </div>
                     <div class="box-body table-responsive">
                         <form class="form-horizontal" role="form" method="post" action="${ctx}/schedule/list">
@@ -86,9 +89,12 @@
                             <c:if test="${not empty schedules}">
                                 <c:forEach items="${schedules}" var="item">
                                     <tr>
-                                        <td class="text-center">${item.classBase.name}-${item.classBase.type}</td>
+                                        <td class="text-center">${item.classBase.name}</td>
                                         <td class="text-center">${item.teacher.realName}</td>
-                                        <td class="text-center">${item.scheduleDate}</td>
+                                        <c:set var="nowDate" value="<%=new Date()%>"></c:set>
+                                        <td class="text-center"
+                                                <c:if test="${item.scheduleDate < nowDate}"> style="background-color: indianred" </c:if>
+                                                >${item.scheduleDate}</td>
                                         <td class="text-center">
                                             <fmt:formatDate value="${item.startTime}" pattern="HH:mm"/>
                                         </td>
@@ -101,15 +107,20 @@
                                             </c:forEach>
                                         </td>
                                         <td class="text-center">
-                                            <a class="btn btn-primary btn-xs" onclick="finishSchedule(${item.id});">
-                                                <i class="fa fa-play"></i>
-                                            </a>
+                                            <shiro:hasAnyRoles name="root,coach">
+                                                <a class="btn btn-primary btn-xs" onclick="finishSchedule(${item.id});">
+                                                    <i class="fa fa-play"></i>
+                                                </a>
+                                            </shiro:hasAnyRoles>
+
                                             <a class="btn btn-primary btn-xs" onclick="editSchedule (${item.id});">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a class="btn btn-primary btn-xs" onclick="deleteSchedule(${item.id});">
-                                                <i class="fa fa-times"></i>
-                                            </a>
+                                            <shiro:hasAnyRoles name="root,admin">
+                                                <a class="btn btn-primary btn-xs" onclick="deleteSchedule(${item.id});">
+                                                    <i class="fa fa-times"></i>
+                                                </a>
+                                            </shiro:hasAnyRoles>
                                         </td>
                                     </tr>
                                 </c:forEach>

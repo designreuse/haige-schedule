@@ -42,7 +42,7 @@
 
 
     function deleteMember(id) {
-        if (window.confirm("您确定要删除该客户吗？")) {
+        if (window.confirm("您确定要删除该会员吗？")) {
             window.location.href = "${ctx}/member/delete/" + id;
         }
     }

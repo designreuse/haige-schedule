@@ -31,7 +31,6 @@
                             <thead>
                             <tr>
                                 <th class="text-center">名 称</th>
-                                <th class="text-center">类 型</th>
                                 <th class="text-center">介 绍</th>
                                 <th class="text-center">备 注</th>
                                 <th class="text-center">操 作</th>
@@ -42,7 +41,6 @@
                                 <c:forEach items="${allClasses}" var="item">
                                     <tr>
                                         <td class="text-center">${item.name}</td>
-                                        <td class="text-center">${item.type}</td>
                                         <td class="text-center">${item.recommend}</td>
                                         <td class="text-center">${item.comment}</td>
                                         <td class="text-center">

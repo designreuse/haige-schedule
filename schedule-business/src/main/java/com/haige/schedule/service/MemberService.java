@@ -23,11 +23,11 @@ public class MemberService {
         return memberDao.findAll(page);
     }
 
-    public Page<Member> queryMembers(final String memberName, Long advisorId, Pageable page) {
-        return queryMembers(memberName, null, advisorId, page);
-    }
+//    public Page<Member> queryMembers(final String memberName, Long advisorId, Pageable page) {
+//        return queryMembers(memberName, null, advisorId, page);
+//    }
 
-    public Page<Member> queryMembers(final String memberName, String birthYear, Long advisorId, Pageable page) {
+    public Page<Member> queryMembers(final String memberName, String birthYear, Long phaseId, Long advisorId, Pageable page) {
         List<Object> params = new ArrayList<>();
         List<String> items = new ArrayList<String>();
 
@@ -42,6 +42,11 @@ public class MemberService {
             items.add("birthYear");
             params.add(birthYear);
         }
+        if (phaseId != null) {
+            sql += " and phaseId = :phaseId ";
+            items.add("phaseId");
+            params.add(phaseId);
+        }
         if (advisorId != null) {
             sql += " and advisorId = :advisorId ";
             items.add("advisorId");
@@ -52,9 +57,9 @@ public class MemberService {
         return memberDao.queryNativeSqlPageEntity(sql, items.toArray(strArr), params.toArray(), page);
     }
 
-    public Page<Member> queryMembersNotInSchedule(Long cmScheduleId, final String memberName, Long advisorId, Pageable page) {
+    public Page<Member> queryMembersNotInSchedule(Long cmScheduleId, final String memberName, Long phaseId, Long advisorId, Pageable page) {
         if (cmScheduleId == null) {
-            throw new RepositoryException("查询课程之外的客户时课程编号不能为空");
+            throw new RepositoryException("查询课程之外的会员时课程编号不能为空");
         }
 
         List<Object> params = new ArrayList<>();
@@ -67,6 +72,11 @@ public class MemberService {
             sql += " and realName like :realName ";
             items.add("realName");
             params.add("%" + memberName + "%");
+        }
+        if (phaseId != null) {
+            sql += " and phaseId = :phaseId ";
+            items.add("phaseId");
+            params.add(phaseId);
         }
         if (advisorId != null) {
             sql += " and advisorId = :advisorId ";

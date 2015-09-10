@@ -105,7 +105,7 @@ public class ClassScheduleService {
         List<ClassSchedule> scheduleList = classScheduleDao.findScheduleByDateFilter(beginDate, endDate);
         List<ScheduleDateVO> retList = new ArrayList<>();
         for (ClassSchedule cs : scheduleList) {
-            String title = cs.getClassBase().getName() + " " + cs.getClassBase().getType() + " " + cs.getTeacher().getRealName();
+            String title = cs.getClassBase().getName() + " " + cs.getTeacher().getRealName();
             Calendar calStart = Calendar.getInstance();
             calStart.setTime(cs.getScheduleDate());
             Calendar calTmp = Calendar.getInstance();

@@ -70,6 +70,11 @@ public class Member {
     @JoinColumn(name = "advisorId", nullable = false)
     private User advisor;
 
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "phaseId", nullable = false)
+    private Phase phase;
+
+
     //    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 //    @org.hibernate.annotations.Fetch(FetchMode.SELECT)
 //    @JoinTable(name = "class_members",
@@ -221,6 +226,13 @@ public class Member {
         this.proType = proType;
     }
 
+    public Phase getPhase() {
+        return phase;
+    }
+
+    public void setPhase(Phase phase) {
+        this.phase = phase;
+    }
 
     //    public Set<ClassSchedule> getSchedules() {
 //        return schedules;

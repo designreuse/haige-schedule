@@ -10,8 +10,8 @@ import java.io.Serializable;
  * @version 1.0
  */
 @Entity
-@Table(name = "classes")
-public class ClassBase implements Serializable {
+@Table(name = "phase")
+public class Phase implements Serializable {
     @Id
     @Column(nullable = false, unique = true)
     @GeneratedValue
@@ -23,8 +23,6 @@ public class ClassBase implements Serializable {
     @Column(length = 5000)
     private String recommend;
 
-    @Column(length = 5000)
-    private String comment;
 
     public Long getId() {
         return id;
@@ -48,13 +46,5 @@ public class ClassBase implements Serializable {
 
     public void setRecommend(String recommend) {
         this.recommend = recommend;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
     }
 }

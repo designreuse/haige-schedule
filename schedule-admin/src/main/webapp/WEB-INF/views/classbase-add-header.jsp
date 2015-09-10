@@ -8,10 +8,9 @@
 <script type="text/javascript">
 
     function initValidator() {
-        return $("#classTypeAddForm").validate({
+        return $("#classBaseAddForm").validate({
             rules: {
-                "name": {required: true},
-                "type": {required: true}
+                "name": {required: true}
             }
         });
     }
