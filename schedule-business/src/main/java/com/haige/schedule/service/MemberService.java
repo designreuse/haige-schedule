@@ -95,4 +95,8 @@ public class MemberService {
         memberDao.delete(id);
     }
 
+
+    public Long getCount() {
+        return memberDao.count();
+    }
 }

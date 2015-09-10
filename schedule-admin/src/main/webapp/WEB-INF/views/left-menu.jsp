@@ -33,9 +33,8 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="${ctx}/store/list"><i class="fa fa-angle-double-right"></i>课程分类</a></li>
-                    <li><a href="${ctx}/store/list"><i class="fa fa-angle-double-right"></i>课程信息</a></li>
-                    <li><a href="${ctx}/question/list"><i class="fa fa-angle-double-right"></i>课程安排</a></li>
+                    <li><a href="${ctx}/classbase/list"><i class="fa fa-angle-double-right"></i>课程基本信息</a></li>
+                    <li><a href="${ctx}/schedule/list"><i class="fa fa-angle-double-right"></i>课程安排</a></li>
                 </ul>
             </li>
             <li class="treeview active">
@@ -45,8 +44,7 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="${ctx}/template/new"><i class="fa fa-angle-double-right"></i>客户信息</a></li>
-                    <%--<li><a href="paper.jsp"><i class="fa fa-angle-double-right"></i> 试卷生成</a></li>--%>
+                    <li><a href="${ctx}/member/list"><i class="fa fa-angle-double-right"></i>客户信息</a></li>
                 </ul>
             </li>
 
@@ -56,11 +54,23 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="${ctx}/index/admin"><i class="fa fa-angle-double-right"></i>用户管理</a></li>
-                    <li><a href="${ctx}/rbac/userRolesList"><i class="fa fa-angle-double-right"></i>用户角色管理</a></li>
+                    <li><a href="${ctx}/rbac/userList"><i class="fa fa-angle-double-right"></i>用户管理</a></li>
+                </ul>
             </li>
-        </ul>
-        </li>
+
+            <li class="treeview active">
+                <a href="#">
+                    <i class="fa fa-laptop"></i>
+                    <span>报表统计</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="${ctx}/member/list"><i class="fa fa-angle-double-right"></i>课程安排</a></li>
+                    <li><a href="${ctx}/member/list"><i class="fa fa-angle-double-right"></i>历史课程</a></li>
+                    <li><a href="${ctx}/member/list"><i class="fa fa-angle-double-right"></i>客户信息</a></li>
+
+                </ul>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->

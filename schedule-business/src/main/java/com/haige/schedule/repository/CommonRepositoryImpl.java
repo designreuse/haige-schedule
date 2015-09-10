@@ -49,13 +49,13 @@ public class CommonRepositoryImpl<T, ID extends Serializable> extends
                 query.setParameter(i + 1, _params[i]);
             }
         } else {
-            log.info("find²éÑ¯JPQL²ÎÊıÎª¿Õ");
+            log.info("findæŸ¥è¯¢JPQLå‚æ•°ä¸ºç©º");
         }
         Object t = null;
         try {
             t = query.getSingleResult();
         } catch (NoResultException nre) {
-            log.info("±¾²éÑ¯Ìõ¼şÃ»ÓĞ²éÑ¯µ½Î¨Ò»µÄÖµ");
+            log.info("æœ¬æŸ¥è¯¢æ¡ä»¶æ²¡æœ‰æŸ¥è¯¢åˆ°å”¯ä¸€çš„å€¼");
             return null;
         }
         return (T) t;
@@ -186,7 +186,7 @@ public class CommonRepositoryImpl<T, ID extends Serializable> extends
                                     List<SqlSortItem> _sortList, Pageable _pageable) {
         String jpql = createQueryJpql(_paramList, _sortList);
         Query query = createQueryParam(jpql, _paramList, _pageable);
-        log.info("Ö´ĞĞJpql SqlÓï¾ä:²éÑ¯¼ÇÂ¼" + jpql);
+        log.info("æ‰§è¡ŒJpql Sqlè¯­å¥:æŸ¥è¯¢è®°å½•" + jpql);
         return query.getResultList();
     }
 
@@ -228,7 +228,7 @@ public class CommonRepositoryImpl<T, ID extends Serializable> extends
     private Long getResultCount(List<SqlQueryItem> _paramList) {
         String jpql = createQueryCountJpql(_paramList);
         Query query = createQueryParam(jpql, _paramList, null);
-        log.info("Ö´ĞĞJpql SqlÓï¾ä,²éÑ¯×ÜÊıÁ¿:" + jpql);
+        log.info("æ‰§è¡ŒJpql Sqlè¯­å¥,æŸ¥è¯¢æ€»æ•°é‡:" + jpql);
         return (Long) query.getSingleResult();
     }
 

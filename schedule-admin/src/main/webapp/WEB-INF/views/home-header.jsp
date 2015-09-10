@@ -2,8 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
-<link href="${ctx}/asset/css/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css" />
-<link href="${ctx}/asset/js/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/asset/css/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css"/>
 <script src="${ctx}/asset/js/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
 <%--<script src="${ctx}/asset/js/plugins/raphael/raphael-min.js" type="text/javascript"></script>--%>
 <%--<script src="${ctx}/asset/js/plugins/morris/morris.min.js" type="text/javascript"></script>--%>
@@ -33,8 +32,8 @@
         $('#calendar').fullCalendar({
             editable: false, //Enable drag and drop
             events: '${ctx}/getCalendarDate',
-            eventClick: function(event) {
-                window.location.href = "${ctx}/examschedule/edit/"+event.id;
+            eventClick: function (event) {
+                window.location.href = "${ctx}/schedule/edit/" + event.id;
             },
             buttonText: {//This is to add icons to the visible buttons
                 prev: "<span class='fa fa-caret-left'></span>",
@@ -47,13 +46,14 @@
             header: {
                 left: 'title',
                 center: '',
-                right: 'prev,next,month,agendaWeek,agendaDay'
+//                right: 'prev,next,month,agendaWeek,agendaDay'
+                right: 'prev,next,month'
             },
-            monthNames: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月月','十一','十二月'],
-            monthNamesShort: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月月','十一','十二月'],
-            dayNames: ['星期一','星期二','星期三','星期四','星期五','星期六','星期日'],
-            dayNamesShort: ['周一','周二','周三','周四','周五','周六','周日'],
-            allDayText:'全天',
+            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月月', '十一', '十二月'],
+            monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月月', '十一', '十二月'],
+            dayNames: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
+            dayNamesShort: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+            allDayText: '全天',
             titleFormat: {
                 month: 'yyyy 年 MMMM ',
                 week: "MMM d[ yyyy]{ '&#8212;'[ MMM] d yyyy}",
@@ -62,7 +62,7 @@
         });
     });
 
-    function createBarChar(el,data,xkey,ykey,labels) {
+    function createBarChar(el, data, xkey, ykey, labels) {
         var bar = new Morris.Bar({
             element: el,
             resize: true,
@@ -74,9 +74,9 @@
             hideHover: 'auto'
         });
     }
-    function createBarChar(el,data){
-        var barData ={ label: "题库试题数目", data: data, color: "#00a65a" };
-        $.plot("#"+el, [barData], {
+    function createBarChar(el, data) {
+        var barData = {label: "题库试题数目", data: data, color: "#00a65a"};
+        $.plot("#" + el, [barData], {
             grid: {
                 hoverable: true,
                 borderWidth: 1,
@@ -93,20 +93,20 @@
             xaxis: {
                 mode: "categories"
             },
-            legend:{
+            legend: {
                 position: "nw"
             }
         });
-        $("#"+el).bind("plothover",function(event, pos, item){
-              if(item){
-                 var color = item.series.color,
-                     x = item.datapoint[0],
-                     y = item.datapoint[1];
-                  var content =  "<strong>" + item.series.label + "</strong><br>" + item.series.xaxis.ticks[x].label + " : <strong>" + y + "</strong>";
-                  showTooltip(item.pageX,item.pageY,color,content);
-              }else{
-                  $("#tooltip").remove();
-              }
+        $("#" + el).bind("plothover", function (event, pos, item) {
+            if (item) {
+                var color = item.series.color,
+                        x = item.datapoint[0],
+                        y = item.datapoint[1];
+                var content = "<strong>" + item.series.label + "</strong><br>" + item.series.xaxis.ticks[x].label + " : <strong>" + y + "</strong>";
+                showTooltip(item.pageX, item.pageY, color, content);
+            } else {
+                $("#tooltip").remove();
+            }
         });
     }
 
@@ -115,7 +115,7 @@
             position: 'absolute',
             display: 'none',
             top: y - 40,
-            left: x ,
+            left: x,
             border: '2px solid ' + color,
             padding: '3px',
             'font-size': '9px',
@@ -126,14 +126,14 @@
         }).appendTo("body").fadeIn(200);
     }
 
-    function loadStoreQuestionCount(){
-        $.get("${ctx}/question/countForStoreGroup",function(data){
+    function loadStoreQuestionCount() {
+        $.get("${ctx}/question/countForStoreGroup", function (data) {
             //createBarChar("storeQuesChart","name",['count'],['试题数']);
-            createBarChar("storeQuesChart",data);
+            createBarChar("storeQuesChart", data);
         });
     }
 
-    $(document).ready(function(){
-        loadStoreQuestionCount();
+    $(document).ready(function () {
+        //loadStoreQuestionCount();
     });
 </script>

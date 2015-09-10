@@ -19,7 +19,7 @@ public class ClassBaseController {
     @Autowired
     private ClassBaseService classBaseService;
 
-    //    @RequiresRoles({"admin"})
+    //@RequiresRoles({"admin"})
     @RequestMapping(value = "/list")
     public ModelAndView getClassTypeList() {
         ModelAndView mv = new ModelAndView("haige.classbase-list");

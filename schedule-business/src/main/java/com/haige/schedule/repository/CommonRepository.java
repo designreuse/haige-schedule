@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * È«¾Ö»ù´¡Àà¿â£¬Ìá¹©ÁË¶¯Ì¬²éÑ¯·½·¨ºÍ×Ô¶¨ÒåSql£¨JPQL£©µÄÖ´ĞĞ·½·¨£¬¶ÔSpringDataµÄJpaRepositoryÀà½øĞĞÁËÀ©Õ¹
+ * å…¨å±€åŸºç¡€ç±»åº“ï¼Œæä¾›äº†åŠ¨æ€æŸ¥è¯¢æ–¹æ³•å’Œè‡ªå®šä¹‰Sqlï¼ˆJPQLï¼‰çš„æ‰§è¡Œæ–¹æ³•ï¼Œå¯¹SpringDataçš„JpaRepositoryç±»è¿›è¡Œäº†æ‰©å±•
  *
  * @param <T>
  * @param <ID>
@@ -21,13 +21,13 @@ import java.util.List;
 public interface CommonRepository<T, ID extends Serializable> extends JpaRepository<T, ID> {
 
     /**
-     * ¶¯Ì¬Ìõ¼ş²éÑ¯·½·¨£¬Ìá¹©¸ù¾İÌõ¼ş¶¯Ì¬Æ´×°SQLÖ´ĞĞ²éÑ¯µÄ¹¦ÄÜ
-     * Ö÷ÒªÓÃÍ¾ÊÇÒµÎñ¹¦ÄÜµÄ¶¯Ì¬Ìõ¼şÊäÈëËÑË÷ÇøÓò
+     * åŠ¨æ€æ¡ä»¶æŸ¥è¯¢æ–¹æ³•ï¼Œæä¾›æ ¹æ®æ¡ä»¶åŠ¨æ€æ‹¼è£…SQLæ‰§è¡ŒæŸ¥è¯¢çš„åŠŸèƒ½
+     * ä¸»è¦ç”¨é€”æ˜¯ä¸šåŠ¡åŠŸèƒ½çš„åŠ¨æ€æ¡ä»¶è¾“å…¥æœç´¢åŒºåŸŸ
      *
-     * @param _paramList ²éÑ¯²ÎÊı
-     * @param _sortList  ĞèÒªÅÅĞòµÄÊôĞÔ
-     * @param _pageable  ½á¹û¼ÇÂ¼¿ªÊ¼Î»ÖÃ¡¢Ò³Êı¡¢Ã¿Ò³ÌõÊı
-     * @return ²éÑ¯³öµÄÊµÌå¶ÔÏó¼¯ºÏ
+     * @param _paramList æŸ¥è¯¢å‚æ•°
+     * @param _sortList  éœ€è¦æ’åºçš„å±æ€§
+     * @param _pageable  ç»“æœè®°å½•å¼€å§‹ä½ç½®ã€é¡µæ•°ã€æ¯é¡µæ¡æ•°
+     * @return æŸ¥è¯¢å‡ºçš„å®ä½“å¯¹è±¡é›†åˆ
      */
 
     public Page<T> queryResult(List<SqlQueryItem> _paramList, List<SqlSortItem> _sortList, Pageable _pageable);
@@ -37,79 +37,79 @@ public interface CommonRepository<T, ID extends Serializable> extends JpaReposit
     public Page<T> queryNativeSqlPageEntity(String _nativeSql, String[] _items, Object[] _params, Pageable _pageable);
 
     /**
-     * Ö´ĞĞÖ¸¶¨µÄJQPL,²éÑ¯Ò»¸öÊµÌå¶ÔÏó
-     * Èç¹û²éÑ¯Ìõ¼ş²»Î¨Ò»½«Å×³öÒì³£
+     * æ‰§è¡ŒæŒ‡å®šçš„JQPL,æŸ¥è¯¢ä¸€ä¸ªå®ä½“å¯¹è±¡
+     * å¦‚æœæŸ¥è¯¢æ¡ä»¶ä¸å”¯ä¸€å°†æŠ›å‡ºå¼‚å¸¸
      * SQL EXAMPLE: select t from Table t where t.name = ?1 and t.id = ?2
      *
-     * @param _jpql   Ö´ĞĞµÄ²éÑ¯JPQL
-     * @param _params JQPLËù¸½´øµÄ²ÎÊı£¬Èç¹û²»´ø²ÎÊı¿ÉÒÔÖ¸¶¨ÎªNull
-     * @return ²éÑ¯³öµÄÊµÌå¶ÔÏó
+     * @param _jpql   æ‰§è¡Œçš„æŸ¥è¯¢JPQL
+     * @param _params JQPLæ‰€é™„å¸¦çš„å‚æ•°ï¼Œå¦‚æœä¸å¸¦å‚æ•°å¯ä»¥æŒ‡å®šä¸ºNull
+     * @return æŸ¥è¯¢å‡ºçš„å®ä½“å¯¹è±¡
      */
     public T find(String _jpql, Object[] _params);
 
     /**
-     * Ö´ĞĞÖ¸¶¨µÄJQPL,²éÑ¯½á¹û¶ÔÏó¼¯
+     * æ‰§è¡ŒæŒ‡å®šçš„JQPL,æŸ¥è¯¢ç»“æœå¯¹è±¡é›†
      * SQL EXAMPLE: select t from Table t where t.name = ?1 and t.id = ?2
      *
-     * @param _jpql   Ö´ĞĞµÄ²éÑ¯JPQL
-     * @param _params JQPLËù¸½´øµÄ²ÎÊı£¬Èç¹û²»´ø²ÎÊı¿ÉÒÔÖ¸¶¨ÎªNull
-     * @return ²éÑ¯³öµÄÊµÌå¶ÔÏó¼¯ºÏ
+     * @param _jpql   æ‰§è¡Œçš„æŸ¥è¯¢JPQL
+     * @param _params JQPLæ‰€é™„å¸¦çš„å‚æ•°ï¼Œå¦‚æœä¸å¸¦å‚æ•°å¯ä»¥æŒ‡å®šä¸ºNull
+     * @return æŸ¥è¯¢å‡ºçš„å®ä½“å¯¹è±¡é›†åˆ
      */
     public List<T> findList(String _jpql, Object[] _params);
 
     /**
-     * Ö´ĞĞÊı¾İ¿â¸üĞÂ¶¯×÷£¬Ö´ĞĞJPQL Sql
+     * æ‰§è¡Œæ•°æ®åº“æ›´æ–°åŠ¨ä½œï¼Œæ‰§è¡ŒJPQL Sql
      *
-     * @param _jpql   ĞèÒªÖ´ĞĞµÄJQPL¶¯×÷
-     * @param _params JQPLËù¸½´øµÄ²ÎÊı£¬Èç¹û²»´ø²ÎÊı¿ÉÒÔÖ¸¶¨ÎªNull
+     * @param _jpql   éœ€è¦æ‰§è¡Œçš„JQPLåŠ¨ä½œ
+     * @param _params JQPLæ‰€é™„å¸¦çš„å‚æ•°ï¼Œå¦‚æœä¸å¸¦å‚æ•°å¯ä»¥æŒ‡å®šä¸ºNull
      * @return
      */
     public int excute(String _jpql, Object[] _params);
 
     /**
-     * Ö´ĞĞÔ­ÉúÌ¬sqlÓï¾ä£¬¸ÃSQLÓ¦¸ÃÊÇ¶ÔÊı¾İµÄ²Ù×÷ÀàĞÍSQL
+     * æ‰§è¡ŒåŸç”Ÿæ€sqlè¯­å¥ï¼Œè¯¥SQLåº”è¯¥æ˜¯å¯¹æ•°æ®çš„æ“ä½œç±»å‹SQL
      *
-     * @param _nativeSql Ô­ÉúÌ¬sql
-     * @param params     Ô­ÉúÌ¬Ëù¸½´øµÄ²ÎÊı£¬Èç¹û²»´ø²ÎÊı¿ÉÒÔÖ¸¶¨ÎªNull
-     * @return ¸ÃsqlÓï¾äÖ´ĞĞºóËùÓ°ÏìµÄÊı¾İ¼ÇÂ¼¸öÊı
+     * @param _nativeSql åŸç”Ÿæ€sql
+     * @param params     åŸç”Ÿæ€æ‰€é™„å¸¦çš„å‚æ•°ï¼Œå¦‚æœä¸å¸¦å‚æ•°å¯ä»¥æŒ‡å®šä¸ºNull
+     * @return è¯¥sqlè¯­å¥æ‰§è¡Œåæ‰€å½±å“çš„æ•°æ®è®°å½•ä¸ªæ•°
      */
     public int excuteNativeSql(String _nativeSql, Object[] params);
 
     /**
-     * Ö´ĞĞÔ­ÉúÌ¬sql²éÑ¯Óï¾ä£¬²éÑ¯Ò»Ìõ¼ÇÂ¼
-     * Èç¹û¼Ç¹ı´æÔÚ¶àÌõ¼ÇÂ¼£¬½«Å×³öÒì³£
+     * æ‰§è¡ŒåŸç”Ÿæ€sqlæŸ¥è¯¢è¯­å¥ï¼ŒæŸ¥è¯¢ä¸€æ¡è®°å½•
+     * å¦‚æœè®°è¿‡å­˜åœ¨å¤šæ¡è®°å½•ï¼Œå°†æŠ›å‡ºå¼‚å¸¸
      *
-     * @param _nativeSql Ô­ÉúÌ¬sql
-     * @param _params    Ô­ÉúÌ¬Ëù¸½´øµÄ²ÎÊı£¬Èç¹û²»´ø²ÎÊı¿ÉÒÔÖ¸¶¨ÎªNull
-     * @return ·µ»Ø²éÑ¯½á¹û, Object[]£¬Ã¿¸öÔªËØÎª¼ÇÂ¼µÄÃ¿¸ö×Ö¶ÎÖµ
+     * @param _nativeSql åŸç”Ÿæ€sql
+     * @param _params    åŸç”Ÿæ€æ‰€é™„å¸¦çš„å‚æ•°ï¼Œå¦‚æœä¸å¸¦å‚æ•°å¯ä»¥æŒ‡å®šä¸ºNull
+     * @return è¿”å›æŸ¥è¯¢ç»“æœ, Object[]ï¼Œæ¯ä¸ªå…ƒç´ ä¸ºè®°å½•çš„æ¯ä¸ªå­—æ®µå€¼
      */
     public Object queryNativeSql(String _nativeSql, Object[] _params);
 
 
     /**
-     * Ö´ĞĞÔ­ÉúÌ¬sql²éÑ¯Óï¾ä,²¢½«½á¹û×ª»»ÎªÊı¾İ¶ÔÏó
+     * æ‰§è¡ŒåŸç”Ÿæ€sqlæŸ¥è¯¢è¯­å¥,å¹¶å°†ç»“æœè½¬æ¢ä¸ºæ•°æ®å¯¹è±¡
      *
-     * @param _nativeSql Ô­ÉúÌ¬sql
-     * @param _params    Ô­ÉúÌ¬Ëù¸½´øµÄ²ÎÊı£¬Èç¹û²»´ø²ÎÊı¿ÉÒÔÖ¸¶¨ÎªNull
-     * @return ·µ»Ø²éÑ¯Êı¾İ¶ÔÏó£¬¶ÔÏóÀàĞÍÎª¼¯³É¸Ã½Ó¿ÚµÄÉÏ²ã½Ó¿Ú·º»¯Ê±Ö¸¶¨µÄ¾ßÌå²Ù×÷ÊµÌåÀàĞÍ
+     * @param _nativeSql åŸç”Ÿæ€sql
+     * @param _params    åŸç”Ÿæ€æ‰€é™„å¸¦çš„å‚æ•°ï¼Œå¦‚æœä¸å¸¦å‚æ•°å¯ä»¥æŒ‡å®šä¸ºNull
+     * @return è¿”å›æŸ¥è¯¢æ•°æ®å¯¹è±¡ï¼Œå¯¹è±¡ç±»å‹ä¸ºé›†æˆè¯¥æ¥å£çš„ä¸Šå±‚æ¥å£æ³›åŒ–æ—¶æŒ‡å®šçš„å…·ä½“æ“ä½œå®ä½“ç±»å‹
      */
     public T queryNativeSqlEntity(String _nativeSql, Object[] _params);
 
     /**
-     * Ö´ĞĞÔ­ÉúÌ¬sql²éÑ¯Óï¾ä£¬·µ»Ø²éÑ¯½á¹û¼¯
+     * æ‰§è¡ŒåŸç”Ÿæ€sqlæŸ¥è¯¢è¯­å¥ï¼Œè¿”å›æŸ¥è¯¢ç»“æœé›†
      *
-     * @param _nativeSql Ô­ÉúÌ¬sql
-     * @param _params    Ô­ÉúÌ¬Ëù¸½´øµÄ²ÎÊı£¬Èç¹û²»´ø²ÎÊı¿ÉÒÔÖ¸¶¨ÎªNull
-     * @return ·µ»Ø²éÑ¯½á¹ûµÄ¼¯ºÏÊı×é£¬List<Object> ,ÆäÖĞObjectÎªObject[]£¬Ã¿¸öÔªËØÎª¼ÇÂ¼µÄÃ¿¸ö×Ö¶ÎÖµ
+     * @param _nativeSql åŸç”Ÿæ€sql
+     * @param _params    åŸç”Ÿæ€æ‰€é™„å¸¦çš„å‚æ•°ï¼Œå¦‚æœä¸å¸¦å‚æ•°å¯ä»¥æŒ‡å®šä¸ºNull
+     * @return è¿”å›æŸ¥è¯¢ç»“æœçš„é›†åˆæ•°ç»„ï¼ŒList<Object> ,å…¶ä¸­Objectä¸ºObject[]ï¼Œæ¯ä¸ªå…ƒç´ ä¸ºè®°å½•çš„æ¯ä¸ªå­—æ®µå€¼
      */
     public List<?> queryNativeSqlList(String _nativeSql, Object[] _params);
 
     /**
-     * Ö´ĞĞÔ­ÉúÌ¬sql²éÑ¯Óï¾ä£¬·µ»Ø²éÑ¯½á¹û¶ÔÏó¼¯
+     * æ‰§è¡ŒåŸç”Ÿæ€sqlæŸ¥è¯¢è¯­å¥ï¼Œè¿”å›æŸ¥è¯¢ç»“æœå¯¹è±¡é›†
      *
-     * @param _nativeSql Ô­ÉúÌ¬sql
-     * @param _params    Ô­ÉúÌ¬Ëù¸½´øµÄ²ÎÊı£¬Èç¹û²»´ø²ÎÊı¿ÉÒÔÖ¸¶¨ÎªNull
-     * @return ·µ»Ø²éÑ¯½á¹ûµÄÊı¾İ¶ÔÏó¼¯ºÏ
+     * @param _nativeSql åŸç”Ÿæ€sql
+     * @param _params    åŸç”Ÿæ€æ‰€é™„å¸¦çš„å‚æ•°ï¼Œå¦‚æœä¸å¸¦å‚æ•°å¯ä»¥æŒ‡å®šä¸ºNull
+     * @return è¿”å›æŸ¥è¯¢ç»“æœçš„æ•°æ®å¯¹è±¡é›†åˆ
      */
     public List<T> queryNativeSqlListEntity(String _nativeSql, Object[] _params, Pageable _pageable);
 

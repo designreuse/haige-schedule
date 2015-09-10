@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Date;
+import java.util.List;
+
 public interface ClassScheduleDao extends CommonRepository<ClassSchedule, Long> {
     @Modifying
     @Query(nativeQuery = true, value = "" +
@@ -62,4 +65,9 @@ public interface ClassScheduleDao extends CommonRepository<ClassSchedule, Long> 
             "FROM view_all_schedule\n" +
             "WHERE cs_id =:evScheduleid ")
     public void recordHisSchedule(@Param("evScheduleid") Long evScheduleid, @Param("evaluation") String evaluation);
+
+
+    @Query(nativeQuery = true, value = "SELECT * FROM class_schedule WHERE scheduleDate >= :beginDate AND scheduleDate <= :endDate")
+    public List<ClassSchedule> findScheduleByDateFilter(@Param("beginDate") Date beginDate, @Param("endDate") Date endDate);
+
 }
