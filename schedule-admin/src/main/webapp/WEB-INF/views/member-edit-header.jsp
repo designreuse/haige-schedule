@@ -22,8 +22,16 @@
         });
     }
 
+
     $(document).ready(function () {
-        $("#birthday").datetimepicker({format: 'yyyy-mm-dd', language: 'zh-CN', minView: 2, autoclose: true});
+        $("#birthday").datetimepicker({
+            format: 'yyyy-mm-dd',
+            language: 'zh-CN',
+            pickDate: true,
+            pickTime: false,
+            minView: 2,
+            autoclose: true
+        });
 
         initValidator();
     });

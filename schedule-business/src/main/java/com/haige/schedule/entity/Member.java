@@ -5,7 +5,7 @@ import com.haige.schedule.utils.AgeUtil;
 import com.haige.schedule.utils.Constants;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -30,16 +30,16 @@ public class Member {
     @Column(nullable = false)
     private Constants.Sex sex;
 
-    @Temporal(TemporalType.DATE)
-    @Column(nullable = false, length = 10)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @Column(nullable = false)
     private Date birthday;
 
     private Integer age;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date startDate;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date endDate;
 
     @Column(length = 50, nullable = false)
@@ -56,6 +56,9 @@ public class Member {
 
     @Column(length = 5000)
     private String comment;
+
+    @Column(length = 500)
+    private String proType;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "linkMember")
     private List<MemberLinkman> linkman;
@@ -210,7 +213,16 @@ public class Member {
         this.linkman = linkman;
     }
 
-//    public Set<ClassSchedule> getSchedules() {
+    public String getProType() {
+        return proType;
+    }
+
+    public void setProType(String proType) {
+        this.proType = proType;
+    }
+
+
+    //    public Set<ClassSchedule> getSchedules() {
 //        return schedules;
 //    }
 //

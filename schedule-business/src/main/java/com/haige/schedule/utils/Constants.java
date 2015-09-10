@@ -5,7 +5,7 @@ public class Constants {
     public static String DEFAULT_PASSWORD = "123456";
 
     public enum Sex {
-        Male("��"), Female("Ů");
+        Male("男"), Female("女");
         private String title;
 
         private Sex(String title) {

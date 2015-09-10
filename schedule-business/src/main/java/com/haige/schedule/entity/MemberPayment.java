@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name = "member_payment")
@@ -21,9 +21,9 @@ public class MemberPayment {
     private Member linkMember;
 
     @Column(length = 50)
-    private Date payPerson;
+    private String payPerson;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date payDate;
 
     @Column(precision = 12, scale = 2)
@@ -72,11 +72,11 @@ public class MemberPayment {
         this.linkMember = linkMember;
     }
 
-    public Date getPayPerson() {
+    public String getPayPerson() {
         return payPerson;
     }
 
-    public void setPayPerson(Date payPerson) {
+    public void setPayPerson(String payPerson) {
         this.payPerson = payPerson;
     }
 }

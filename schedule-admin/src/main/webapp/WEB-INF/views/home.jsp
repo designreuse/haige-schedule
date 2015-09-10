@@ -30,7 +30,7 @@
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
-                    <a href="${ctx}/template/list" class="small-box-footer">
+                    <a href="${ctx}/member/list" class="small-box-footer">
                         查看 <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -49,7 +49,7 @@
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
                     </div>
-                    <a href="${ctx}/examschedule/list" class="small-box-footer">
+                    <a href="${ctx}/schedule/list" class="small-box-footer">
                         查看 <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>

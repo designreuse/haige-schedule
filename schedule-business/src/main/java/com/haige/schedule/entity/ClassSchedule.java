@@ -18,12 +18,15 @@ public class ClassSchedule implements Serializable {
     private Long id;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @Column(nullable = false)
     private Date scheduleDate;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+    @Column(nullable = false)
     private Time startTime;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+    @Column(nullable = false)
     private Time endTime;
 
     @ManyToOne(cascade = CascadeType.REFRESH)

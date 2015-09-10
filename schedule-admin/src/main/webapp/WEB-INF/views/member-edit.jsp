@@ -20,49 +20,52 @@
                             <div class="form-group">
                                 <label for="memberName" class="col-sm-2 control-label">用户名</label>
 
-                                <div class="col-sm-5">
+                                <div class="col-sm-4">
                                     <input type="text" class="form-control" name="memberName" id="memberName"
                                            value="${member.memberName}" placeholder="用户名">
                                 </div>
-                            </div>
 
-                            <div class="form-group">
                                 <label for="realName" class="col-sm-2 control-label">姓名</label>
 
-                                <div class="col-sm-5">
+                                <div class="col-sm-4">
                                     <input type="text" class="form-control" name="realName" id="realName"
                                            value="${member.realName}" placeholder="姓名">
                                 </div>
                             </div>
 
                             <div class="form-group">
+                                <label for="birthday" class="col-sm-2 control-label">出生日期</label>
+
+                                <div class="col-sm-4">
+
+                                    <input type="text" class="form-control" name="birthday" id="birthday"
+                                           value="${member.birthday}" placeholder="出生日期">
+                                </div>
+
+                                <label for="proType" class="col-sm-2 control-label">产品类型</label>
+
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="proType" id="proType"
+                                           placeholder="产品类型">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="sex" class="col-sm-2 control-label">性别</label>
 
-                                <div class="col-sm-5">
+                                <div class="col-sm-4">
                                     <select name="sex" id="sex" style="width: 100%">
                                         <c:forEach items="${sex}" var="r">
                                             <option value="${r}"
-                                                    <c:if test="${member.sex==r}">selected</c:if>>${r.realName}</option>
+                                                    <c:if test="${member.sex==r}">selected</c:if>>${r.title}</option>
                                         </c:forEach>
 
                                     </select>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="birthday" class="col-sm-2 control-label">出生日期</label>
-
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="birthday" id="birthday"
-                                           value="<fmt:formatDate value="${member.birthday}"  type="date"/>"
-                                           placeholder="出生日期">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
                                 <label for="advisorId" class="col-sm-2 control-label">顾问</label>
 
-                                <div class="col-sm-5">
+                                <div class="col-sm-4">
                                     <select name="advisorId" id="advisorId" style="width: 100%">
                                         <c:forEach items="${advisors}" var="r">
                                             <option value="${r.id}"
@@ -75,7 +78,7 @@
                             <div class="form-group">
                                 <label for="address" class="col-sm-2 control-label">地址</label>
 
-                                <div class="col-sm-5">
+                                <div class="col-sm-10">
                                     <input type="text" class="form-control" name="address" id="address"
                                            value="${member.address}" placeholder="地址">
                                 </div>
@@ -84,11 +87,9 @@
                             <div class="form-group">
                                 <label for="comment" class="col-sm-2 control-label">备注</label>
 
-                                <div class="col-sm-5">
-                                    <div class="col-sm-5">
+                                <div class="col-sm-10">
                                     <textarea type="text" class="form-control" name="comment" id="comment"
                                               placeholder="备注">${member.comment}</textarea>
-                                    </div>
                                 </div>
                             </div>
 
