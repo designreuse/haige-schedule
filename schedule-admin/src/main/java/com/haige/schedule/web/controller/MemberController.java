@@ -9,6 +9,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,7 +47,7 @@ public class MemberController {
                                    @RequestParam(value = "queryAdvisorId", required = false) Long queryAdvisorId,
                                    @PageableDefault Pageable page) {
         ModelAndView mv = new ModelAndView("haige.member-list");
-        Page<Member> members = null;
+        Page<Member> members = new PageImpl<Member>(new ArrayList<Member>());
         Subject currentUser = SecurityUtils.getSubject();
         if (currentUser.hasRole("root") || currentUser.hasRole("admin")) {
             members = memberService.queryMembers(queryName, queryBirthYear, queryPhaseId, queryAdvisorId, page);

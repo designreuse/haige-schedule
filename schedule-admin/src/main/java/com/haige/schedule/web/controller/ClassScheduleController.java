@@ -5,10 +5,13 @@ import com.haige.schedule.entity.Result;
 import com.haige.schedule.service.ClassBaseService;
 import com.haige.schedule.service.ClassScheduleService;
 import com.haige.schedule.service.RBACService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -39,11 +42,18 @@ public class ClassScheduleController {
 
     @RequestMapping(value = "/list")
     public ModelAndView scheduleList(@RequestParam(value = "queryName", required = false) String queryName,
-                                     @RequestParam(value = "queryTeacherId", required = false) Long queryTeacherId, @RequestParam(value = "queryDate", required = false) Date queryDate,
+                                     @RequestParam(value = "queryTeacherId", required = false) Long queryTeacherId,
                                      @RequestParam(value = "queryDate", required = false) Date queryScheduleDate,
                                      @PageableDefault Pageable page) {
         ModelAndView mv = new ModelAndView("haige.classschedule-list");
-        Page<ClassSchedule> schedules = scheduleService.queryClassSchedules(queryName, queryTeacherId, queryScheduleDate, page);
+        Page<ClassSchedule> schedules = new PageImpl<ClassSchedule>(new ArrayList<ClassSchedule>());
+        Subject currentUser = SecurityUtils.getSubject();
+        if (currentUser.hasRole("root") || currentUser.hasRole("admin")) {
+            schedules = scheduleService.queryClassSchedules(queryName, queryTeacherId, queryScheduleDate, page);
+        } else if (currentUser.hasRole("coach")) {
+            schedules = scheduleService.queryClassSchedules(queryName, rbacService.getCurrentUser().getId(), queryScheduleDate, page);
+        }
+
         mv.addObject("schedules", schedules.getContent());
 
         mv.addObject("teachers", rbacService.getAllTeacher());
