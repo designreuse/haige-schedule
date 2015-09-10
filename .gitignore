@@ -1,8 +1,15 @@
 /.idea/
+
 target/
+
 *.iml
+
 .project
+
 exam-update
+
 *.backup
+
 *.lck
+
 *.log
