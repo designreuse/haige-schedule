@@ -34,7 +34,7 @@ public interface ClassScheduleDao extends CommonRepository<ClassSchedule, Long> 
             " m_realName,\n" +
             " m_sex,\n" +
             " m_address,\n" +
-            " p_phase,\n" +
+            " p_name,\n" +
             " cs_evaluation)\n" +
             "SELECT \n" +
             " cs_id,\n" +
@@ -60,7 +60,7 @@ public interface ClassScheduleDao extends CommonRepository<ClassSchedule, Long> 
             " m_realName,\n" +
             " m_sex,\n" +
             " m_address\n," +
-            " p_phase\n," +
+            " p_name\n," +
             " :evaluation\n" +
             "FROM view_all_schedule\n" +
             "WHERE cs_id =:evScheduleid ")
