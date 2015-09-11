@@ -28,9 +28,21 @@
         window.location.href = "${ctx}/member_linkman/edit/" + id;
     }
 
-    $(document).ready(function () {
 
-    });
+    function addNewPayment(memberId) {
+        window.location.href = "${ctx}/member_payment/add?memberId=" + memberId;
+    }
+
+
+    function deletePayment(id) {
+        if (window.confirm("您确定要删除该缴费记录吗？")) {
+            window.location.href = "${ctx}/member_payment/delete/" + id;
+        }
+    }
+
+    function editPayment(id) {
+        window.location.href = "${ctx}/member_payment/edit/" + id;
+    }
 
     function initValidator() {
         return $("#classMemberEditForm").validate({

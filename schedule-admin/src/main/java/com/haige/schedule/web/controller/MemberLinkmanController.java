@@ -60,10 +60,7 @@ public class MemberLinkmanController {
         Member member = linkman.getLinkMember();
         member.getLinkman().remove(linkman);
         memberService.saveMember(member);
-//
-//        linkman.setLinkMember(null);
-//        linkmanService.save(linkman);
-//        linkmanService.delete(id);
+
         return "redirect:/member/edit/" + Long.toString(memberId);
     }
 }

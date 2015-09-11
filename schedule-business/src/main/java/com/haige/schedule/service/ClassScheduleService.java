@@ -27,7 +27,7 @@ public class ClassScheduleService {
     private MemberDao memberDao;
 
     @Autowired
-    private RBACService rbacService;
+    private MemberService memberService;
 
     public Page<ClassSchedule> getAllClassSchedule(Pageable page) {
         return classScheduleDao.findAll(page);
@@ -70,8 +70,14 @@ public class ClassScheduleService {
     }
 
     public void finishClassSchedule(Long evScheduleid, String evaluation) {
+        ClassSchedule classSchedule = classScheduleDao.findOne(evScheduleid);
+        for (Member member : classSchedule.getMembers()) {
+            memberService.changeLeftTime(member.getId(), -1);
+        }
         classScheduleDao.recordHisSchedule(evScheduleid, evaluation);
         classScheduleDao.delete(evScheduleid);
+
+
     }
 
 

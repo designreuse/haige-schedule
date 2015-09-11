@@ -109,7 +109,7 @@ public class ClassScheduleController {
     }
 
     @RequestMapping(value = "/saveNew", method = RequestMethod.POST)
-    public String newClassSchedule(ClassSchedule schedule,
+    public String saveNew(ClassSchedule schedule,
                                    @RequestParam(value = "classId", required = false) Long classId,
                                    @RequestParam(value = "teacherId", required = false) Long teacherId) {
         schedule.setClassBase(classService.getClassBase(classId));

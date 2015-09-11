@@ -26,7 +26,6 @@ public interface ClassScheduleDao extends CommonRepository<ClassSchedule, Long> 
             " c_id,\n" +
             " c_name,\n" +
             " c_recommend,\n" +
-            " c_type,\n" +
             " c_comment,\n" +
             " m_id,\n" +
             " m_memberName,\n" +
@@ -52,7 +51,6 @@ public interface ClassScheduleDao extends CommonRepository<ClassSchedule, Long> 
             " c_id,\n" +
             " c_name,\n" +
             " c_recommend,\n" +
-            " c_type,\n" +
             " c_comment,\n" +
             " m_id,\n" +
             " m_memberName,\n" +
@@ -61,7 +59,7 @@ public interface ClassScheduleDao extends CommonRepository<ClassSchedule, Long> 
             " m_realName,\n" +
             " m_sex,\n" +
             " m_address\n," +
-            ":evaluation\n" +
+            " :evaluation\n" +
             "FROM view_all_schedule\n" +
             "WHERE cs_id =:evScheduleid ")
     public void recordHisSchedule(@Param("evScheduleid") Long evScheduleid, @Param("evaluation") String evaluation);

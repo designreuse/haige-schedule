@@ -57,7 +57,7 @@ public class MemberService {
         return memberDao.queryNativeSqlPageEntity(sql, items.toArray(strArr), params.toArray(), page);
     }
 
-    public Page<Member> queryMembersNotInSchedule(Long cmScheduleId, final String memberName, Long phaseId, Long advisorId, Pageable page) {
+    public Page<Member> queryValidMembers(Long cmScheduleId, final String memberName, Long phaseId, Long advisorId, Pageable page) {
         if (cmScheduleId == null) {
             throw new RepositoryException("查询课程之外的会员时课程编号不能为空");
         }
@@ -109,4 +109,11 @@ public class MemberService {
     public Long getCount() {
         return memberDao.count();
     }
+
+
+    public void changeLeftTime(Long id, Integer changeTiems) {
+        Member member = memberDao.findOne(id);
+        member.setLeftTime(member.getLeftTime() + changeTiems);
+    }
+
 }

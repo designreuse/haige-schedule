@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <aside class="right-side">
     <!-- Main content -->
@@ -65,8 +66,9 @@
 
 
                             <div class="box-footer" style="text-align: center;margin: 0">
-                                <button type="submit" class="btn btn-primary btn-flat">保存</button>
-
+                                <shiro:hasAnyRoles name="root,admin,advisor">
+                                    <button type="submit" class="btn btn-primary btn-flat">保存</button>
+                                </shiro:hasAnyRoles>
                                 <button type="button" class="btn btn-success btn-flat" style="margin-right: 20px"
                                         onclick="window.history.go(-1);">返回
                                 </button>

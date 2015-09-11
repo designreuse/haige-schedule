@@ -15,22 +15,25 @@ public class MemberPayment {
     @GeneratedValue
     private Long id;
 
-
-    @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "memberId")
     private Member linkMember;
 
-    @Column(length = 50)
+    @Column(nullable = false, length = 50)
     private String payPerson;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @Column(nullable = false)
     private Date payDate;
 
-    @Column(precision = 12, scale = 2)
+    @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal payment;
 
-    @Column()
+    @Column(nullable = false)
     private int purchaseCount;
+
+    @Column(length = 5000)
+    private String comment;
 
     public Long getId() {
         return id;
@@ -78,5 +81,13 @@ public class MemberPayment {
 
     public void setPayPerson(String payPerson) {
         this.payPerson = payPerson;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

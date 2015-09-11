@@ -42,14 +42,14 @@ public class MemberController {
 
     @RequestMapping(value = "/list")
     public ModelAndView list(@RequestParam(value = "queryName", required = false) String queryName,
-                                   @RequestParam(value = "queryBirthYear", required = false) String queryBirthYear,
-                                   @RequestParam(value = "queryPhaseId", required = false) Long queryPhaseId,
-                                   @RequestParam(value = "queryAdvisorId", required = false) Long queryAdvisorId,
-                                   @PageableDefault Pageable page) {
+                             @RequestParam(value = "queryBirthYear", required = false) String queryBirthYear,
+                             @RequestParam(value = "queryPhaseId", required = false) Long queryPhaseId,
+                             @RequestParam(value = "queryAdvisorId", required = false) Long queryAdvisorId,
+                             @PageableDefault Pageable page) {
         ModelAndView mv = new ModelAndView("haige.member-list");
         Page<Member> members = new PageImpl<Member>(new ArrayList<Member>());
         Subject currentUser = SecurityUtils.getSubject();
-        if (currentUser.hasRole("root") || currentUser.hasRole("admin")) {
+        if (currentUser.hasRole("root") || currentUser.hasRole("admin") || currentUser.hasRole("cashier")) {
             members = memberService.queryMembers(queryName, queryBirthYear, queryPhaseId, queryAdvisorId, page);
         } else if (currentUser.hasRole("advisor")) {
             members = memberService.queryMembers(queryName, queryBirthYear, queryPhaseId, rbacService.getCurrentUser().getId(), page);
@@ -80,9 +80,9 @@ public class MemberController {
             Page<Member> members = null;
             Subject currentUser = SecurityUtils.getSubject();
             if (currentUser.hasRole("root") || currentUser.hasRole("admin")) {
-                members = memberService.queryMembersNotInSchedule(cmScheduleId, cmQueryName, cmQueryPhaseId, cmQueryAdvisorId, page);
+                members = memberService.queryValidMembers(cmScheduleId, cmQueryName, cmQueryPhaseId, cmQueryAdvisorId, page);
             } else if (currentUser.hasRole("advisor")) {
-                members = memberService.queryMembersNotInSchedule(cmScheduleId, cmQueryName, cmQueryPhaseId, rbacService.getCurrentUser().getId(), page);
+                members = memberService.queryValidMembers(cmScheduleId, cmQueryName, cmQueryPhaseId, rbacService.getCurrentUser().getId(), page);
             }
 
             result.put("members", members.getContent());
@@ -124,16 +124,32 @@ public class MemberController {
             member = memberService.getMemberById(id);
         }
         map.addAttribute("member", member);
-//        map.addAttribute("linkman", member.getLinkman());
 
         return "haige.member-edit";
     }
 
+    @RequestMapping(value = "/saveNew", method = RequestMethod.POST)
+    public String saveNew(Member member,
+                          @RequestParam(value = "phaseId", required = true) Long phaseId,
+                          @RequestParam(value = "advisorId", required = false) Long advisorId) {
+
+        Subject currentUser = SecurityUtils.getSubject();
+        if (currentUser.hasRole("root") || currentUser.hasRole("admin")) {
+            member.setAdvisor(rbacService.getUserById(advisorId));
+        } else if (currentUser.hasRole("advisor")) {
+            member.setAdvisor(rbacService.getUserById(rbacService.getCurrentUser().getId()));
+        }
+
+        member.setPhase(phaseService.getPhase(phaseId));
+
+        memberService.saveMember(member);
+        return "redirect:/member/edit/" + member.getId();
+    }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Member member,
-                             @RequestParam(value = "phaseId", required = true) Long phaseId,
-                             @RequestParam(value = "advisorId", required = false) Long advisorId) {
+                       @RequestParam(value = "phaseId", required = true) Long phaseId,
+                       @RequestParam(value = "advisorId", required = false) Long advisorId) {
 
         Subject currentUser = SecurityUtils.getSubject();
         if (currentUser.hasRole("root") || currentUser.hasRole("admin")) {

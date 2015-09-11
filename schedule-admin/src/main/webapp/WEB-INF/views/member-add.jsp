@@ -13,7 +13,7 @@
                         <h3 class="box-title">添加会员</h3>
                     </div>
                     <form role="form" class="form-horizontal" method="post" id="memberAddForm"
-                          action="${ctx}/member/save">
+                          action="${ctx}/member/saveNew">
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="memberName" class="col-sm-2 control-label">用户名</label>

@@ -37,7 +37,8 @@ public class Member {
 
     private Integer age;
 
-    private Integer leftTime;
+    @Column(nullable = false)
+    private Integer leftTime = 0;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date startDate;

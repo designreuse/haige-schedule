@@ -28,22 +28,23 @@
             </li>
 
 
-            <li class="treeview active">
-                <a href="#">
-                    <i class="fa fa-bar-chart-o"></i>
-                    <span>课程管理</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <shiro:hasAnyRoles name="root">
-                        <li><a href="${ctx}/classbase/list"><i class="fa fa-angle-double-right"></i>课程基本信息</a></li>
-                    </shiro:hasAnyRoles>
-                    <li><a href="${ctx}/schedule/list"><i class="fa fa-angle-double-right"></i>课程安排</a></li>
-                </ul>
-            </li>
+            <shiro:hasAnyRoles name="root,admin,advisor,coach">
+                <li class="treeview active">
+                    <a href="#">
+                        <i class="fa fa-bar-chart-o"></i>
+                        <span>课程管理</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <shiro:hasAnyRoles name="root">
+                            <li><a href="${ctx}/classbase/list"><i class="fa fa-angle-double-right"></i>课程基本信息</a></li>
+                        </shiro:hasAnyRoles>
+                        <li><a href="${ctx}/schedule/list"><i class="fa fa-angle-double-right"></i>课程安排</a></li>
+                    </ul>
+                </li>
+            </shiro:hasAnyRoles>
 
-
-            <shiro:hasAnyRoles name="root,admin,advisor">
+            <shiro:hasAnyRoles name="root,admin,advisor,cashier">
                 <li class="treeview active">
                     <a href="#">
                         <i class="fa fa-laptop"></i>

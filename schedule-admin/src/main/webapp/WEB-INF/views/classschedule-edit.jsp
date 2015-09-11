@@ -140,7 +140,7 @@
                                     <button type="submit" class="btn btn-primary btn-flat">保存</button>
                                 </shiro:hasAnyRoles>
                                 <button type="button" class="btn btn-success btn-flat" style="margin-right: 20px"
-                                        onclick="window.history.go(-1);">返回
+                                        onclick="window.location.href = '${ctx}/schedule/list'">返回
                                 </button>
                             </div>
                         </div>
