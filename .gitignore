@@ -5,3 +5,4 @@ target/
 *.backup
 *.lck
 *.log
+*.log
