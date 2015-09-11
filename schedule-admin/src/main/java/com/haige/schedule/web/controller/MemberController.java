@@ -92,7 +92,7 @@ public class MemberController {
             result.put("cmQueryName", cmQueryName);
             result.put("cmQueryPhaseId", cmQueryPhaseId);
             result.put("cmQueryAdvisorId", cmQueryAdvisorId);
-//
+
             result.put("page", members.getNumber() + 1);
             result.put("totalPage", members.getTotalPages());
             result.put("totalCount", members.getTotalElements());

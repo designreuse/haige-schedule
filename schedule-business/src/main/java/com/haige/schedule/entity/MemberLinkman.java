@@ -1,6 +1,7 @@
 package com.haige.schedule.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.haige.schedule.utils.Constants;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class MemberLinkman {
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "memberId", nullable = false)
+    @JsonBackReference
     private Member linkMember;
 
     @Column(nullable = false, length = 50)

@@ -1,6 +1,7 @@
 package com.haige.schedule.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.haige.schedule.utils.AgeUtil;
 import com.haige.schedule.utils.Constants;
 
@@ -64,10 +65,12 @@ public class Member {
     @Column(length = 500)
     private String proType;
 
-    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = {CascadeType.ALL}, mappedBy = "linkMember")
+    @OneToMany(orphanRemoval = true, cascade = {CascadeType.ALL}, mappedBy = "linkMember")
+    @JsonManagedReference
     private List<MemberLinkman> linkman = new ArrayList<MemberLinkman>();
 
-    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = {CascadeType.ALL}, mappedBy = "linkMember")
+    @OneToMany(orphanRemoval = true, cascade = {CascadeType.ALL}, mappedBy = "linkMember")
+    @JsonManagedReference
     private List<MemberPayment> payment = new ArrayList<MemberPayment>();
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})

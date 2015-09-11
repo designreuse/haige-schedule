@@ -42,9 +42,9 @@ public class ClassScheduleController {
 
     @RequestMapping(value = "/list")
     public ModelAndView list(@RequestParam(value = "queryName", required = false) String queryName,
-                                     @RequestParam(value = "queryTeacherId", required = false) Long queryTeacherId,
-                                     @RequestParam(value = "queryDate", required = false) Date queryScheduleDate,
-                                     @PageableDefault Pageable page) {
+                             @RequestParam(value = "queryTeacherId", required = false) Long queryTeacherId,
+                             @RequestParam(value = "queryDate", required = false) Date queryScheduleDate,
+                             @PageableDefault Pageable page) {
         ModelAndView mv = new ModelAndView("haige.classschedule-list");
         Page<ClassSchedule> schedules = new PageImpl<ClassSchedule>(new ArrayList<ClassSchedule>());
         Subject currentUser = SecurityUtils.getSubject();
@@ -62,7 +62,7 @@ public class ClassScheduleController {
         mv.addObject("queryTeacherId", queryTeacherId);
 
 
-        mv.addObject("page", schedules.getNumber());
+        mv.addObject("page", schedules.getNumber() + 1);
         mv.addObject("totalPage", schedules.getTotalPages());
         mv.addObject("totalCount", schedules.getTotalElements());
         return mv;
@@ -93,8 +93,8 @@ public class ClassScheduleController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(ClassSchedule schedule,
-                                    @RequestParam(value = "classId", required = false) Long classId,
-                                    @RequestParam(value = "teacherId", required = false) Long teacherId) {
+                       @RequestParam(value = "classId", required = false) Long classId,
+                       @RequestParam(value = "teacherId", required = false) Long teacherId) {
         schedule.setClassBase(classService.getClassBase(classId));
         schedule.setTeacher(rbacService.getUserById(teacherId));
         scheduleService.saveClassSchedule(schedule);
@@ -103,15 +103,15 @@ public class ClassScheduleController {
 
     @RequestMapping(value = "/finish", method = RequestMethod.POST)
     public String finish(@RequestParam(value = "ev_scheduleid", required = true) Long evScheduleid,
-                                    @RequestParam(value = "evaluation", required = true) String evaluation) {
+                         @RequestParam(value = "evaluation", required = true) String evaluation) {
         scheduleService.finishClassSchedule(evScheduleid, evaluation);
         return "redirect:/schedule/list";
     }
 
     @RequestMapping(value = "/saveNew", method = RequestMethod.POST)
     public String saveNew(ClassSchedule schedule,
-                                   @RequestParam(value = "classId", required = false) Long classId,
-                                   @RequestParam(value = "teacherId", required = false) Long teacherId) {
+                          @RequestParam(value = "classId", required = false) Long classId,
+                          @RequestParam(value = "teacherId", required = false) Long teacherId) {
         schedule.setClassBase(classService.getClassBase(classId));
         schedule.setTeacher(rbacService.getUserById(teacherId));
         scheduleService.saveClassSchedule(schedule);

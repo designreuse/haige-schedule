@@ -1,5 +1,6 @@
 package com.haige.schedule.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class MemberPayment {
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "memberId")
+    @JsonBackReference
     private Member linkMember;
 
     @Column(nullable = false, length = 50)
