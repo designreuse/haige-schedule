@@ -71,7 +71,7 @@
                                 <![CDATA[${i18n("Export")}]]></Text>
                             <IconName>
                                 <![CDATA[export]]></IconName>
-                            <Buttons pdf="true" excelP="true" excelO="true" excelS="true" word="true" image="true"
+                            <Buttons pdf="true" excelP="false" excelO="true" excelS="false" word="true" image="true"
                                      html="true"/>
                         </Widget>
                         <Widget class="com.fr.report.web.button.Email">
@@ -84,7 +84,7 @@
                     </ToolBar>
                 </ToolBarManager>
             </ToolBars>
-            <WebPage isPage="false" isShowAsImage="false" isAutoScale="false" isTDHeavy="false"/>
+            <WebPage isPage="true" isShowAsImage="false" isAutoScale="true" isTDHeavy="false"/>
         </WebPageContent>
         <WebViewContent>
             <ToolBars>

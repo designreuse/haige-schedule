@@ -18,16 +18,22 @@
 
 
     <definition name="haige.layout" template="/WEB-INF/views/layout.jsp">
-        <put-attribute name="title" value="管理系统"/>
+        <put-attribute name="title" value="海歌管理系统"/>
         <put-attribute name="header" value=""/>
         <put-attribute name="top" value="/WEB-INF/views/top.jsp"/>
         <put-attribute name="left-menu" value="/WEB-INF/views/left-menu.jsp"/>
         <put-attribute name="content" value=""/>
     </definition>
 
+
+    <definition name="report.haige.*" extends="haige.layout">
+        <put-attribute name="content" value="/WEB-INF/views/{1}.jsp"/>
+    </definition>
+
     <definition name="haige.*" extends="haige.layout">
         <put-attribute name="header" value="/WEB-INF/views/{1}-header.jsp"/>
         <put-attribute name="content" value="/WEB-INF/views/{1}.jsp"/>
     </definition>
+
 
 </tiles-definitions>

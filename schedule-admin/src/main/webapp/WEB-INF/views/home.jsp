@@ -53,14 +53,16 @@
                             ${csCount}
                         </h3>
 
-                        <p>当前课程安排</p>
+                        <p>进行中的课程</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
                     </div>
-                    <a href="${ctx}/schedule/list" class="small-box-footer">
-                        查看 <i class="fa fa-arrow-circle-right"></i>
-                    </a>
+                    <shiro:hasAnyRoles name="root,admin,advisor,coach">
+                        <a href="${ctx}/schedule/list" class="small-box-footer">
+                            查看 <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </shiro:hasAnyRoles>
                 </div>
             </div>
             <!-- ./col -->
@@ -85,7 +87,9 @@
                                     <shiro:hasAnyRoles name="root,admin">
                                         <li><a href="${ctx}/schedule/add">添加课程计划</a></li>
                                     </shiro:hasAnyRoles>
-                                    <li><a href="${ctx}/schedule/list">查看课程计划</a></li>
+                                    <shiro:hasAnyRoles name="root,admin,advisor,coach">
+                                        <li><a href="${ctx}/schedule/list">查看课程计划</a></li>
+                                    </shiro:hasAnyRoles>
                                 </ul>
                             </div>
                         </div>
