@@ -34,23 +34,6 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="birthday" class="col-sm-2 control-label">出生日期</label>
-
-                                <div class="col-sm-4">
-
-                                    <input type="text" class="form-control" name="birthday" id="birthday"
-                                           value="${member.birthday}" placeholder="出生日期">
-                                </div>
-
-                                <label for="proType" class="col-sm-2 control-label">产品类型</label>
-
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="proType" id="proType"
-                                           placeholder="产品类型">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
 
 
                                 <label for="sex" class="col-sm-2 control-label">性别</label>
@@ -90,6 +73,33 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="birthday" class="col-sm-2 control-label">出生日期</label>
+
+                                <div class="col-sm-2">
+
+                                    <input type="text" class="form-control" name="birthday" id="birthday"
+                                           value="${member.birthday}" placeholder="出生日期">
+                                </div>
+
+                                <label for="proType" class="col-sm-2 control-label">产品类型</label>
+
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="proType" id="proType"
+                                           placeholder="产品类型">
+                                </div>
+
+                                <label for="registrationChannel" class="col-sm-2 control-label">报名渠道</label>
+
+                                <div class="col-sm-2">
+
+                                    <input type="text" class="form-control" name="registrationChannel"
+                                           id="registrationChannel"
+                                           value="${member.registrationChannel}" placeholder="报名渠道">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
                                 <label for="address" class="col-sm-2 control-label">地址</label>
 
                                 <div class="col-sm-10">
@@ -119,6 +129,50 @@
                     </form>
                 </div>
                 <!-- /.box -->
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">会员联系人</h3>
+
+                        <div class="box-tools pull-right" style="margin-right: 80px;">
+                            <a class="btn btn-primary btn-flat" style="color: #ffffff;" role="button"
+                               onclick="addNewLinkman(${member.id});">添加联系人</a>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table id="linkManTable" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th class="text-center">姓名</th>
+                                <th class="text-center">关系</th>
+                                <th class="text-center">性别</th>
+                                <th class="text-center">电话</th>
+                                <th class="text-center">微信</th>
+                                <th class="text-center">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:if test="${not empty member.linkman}">
+                            <c:forEach items="${member.linkman}" var="item">
+                            <tr>
+                                <td class="text-center">${item.name}</td>
+                                <td class="text-center">${item.relation}</td>
+                                <td class="text-center">${item.sex.title}</td>
+                                <td class="text-center">${item.tel}</td>
+                                <td class="text-center">${item.weChat}</td>
+                                <td class="text-center">
+                                    <a class="btn btn-primary btn-xs" onclick="editLinkman(${item.id});">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a class="btn btn-primary btn-xs" onclick="deleteLinkman(${item.id});">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </c:forEach>
+                            </c:if>
+                        </table>
+                    </div>
+                </div>
             </div>
 
         </div>

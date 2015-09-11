@@ -6,6 +6,7 @@ import com.haige.schedule.utils.Constants;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -36,6 +37,8 @@ public class Member {
 
     private Integer age;
 
+    private Integer leftTime;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date startDate;
 
@@ -60,11 +63,11 @@ public class Member {
     @Column(length = 500)
     private String proType;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "linkMember")
-    private List<MemberLinkman> linkman;
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = {CascadeType.ALL}, mappedBy = "linkMember")
+    private List<MemberLinkman> linkman = new ArrayList<MemberLinkman>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "linkMember")
-    private List<MemberPayment> payment;
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = {CascadeType.ALL}, mappedBy = "linkMember")
+    private List<MemberPayment> payment = new ArrayList<MemberPayment>();
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "advisorId", nullable = false)
@@ -161,6 +164,13 @@ public class Member {
         this.realName = realName;
     }
 
+    public Integer getLeftTime() {
+        return leftTime;
+    }
+
+    public void setLeftTime(Integer leftTime) {
+        this.leftTime = leftTime;
+    }
 
     public byte[] getPic() {
         return pic;

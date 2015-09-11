@@ -16,7 +16,7 @@ public class MemberPayment {
     private Long id;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
     @JoinColumn(name = "memberId")
     private Member linkMember;
 

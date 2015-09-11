@@ -21,7 +21,7 @@ public class ClassBaseController {
 
     //@RequiresRoles({"admin"})
     @RequestMapping(value = "/list")
-    public ModelAndView getClassTypeList() {
+    public ModelAndView list() {
         ModelAndView mv = new ModelAndView("haige.classbase-list");
         List<ClassBase> allClasses = classBaseService.getAllClassBases();
         mv.addObject("allClasses", allClasses);
@@ -43,13 +43,13 @@ public class ClassBaseController {
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveClassType(ClassBase classBase) {
+    public String save(ClassBase classBase) {
         classBaseService.save(classBase);
         return "redirect:/classbase/list";
     }
 
     @RequestMapping(value = "/delete/{id}")
-    public String deleteStore(@PathVariable("id") long id) {
+    public String delete(@PathVariable("id") long id) {
         classBaseService.delete(id);
         return "redirect:/classbase/list";
     }

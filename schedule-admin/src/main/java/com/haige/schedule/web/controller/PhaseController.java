@@ -21,7 +21,7 @@ public class PhaseController {
 
     //@RequiresRoles({"admin"})
     @RequestMapping(value = "/list")
-    public ModelAndView getList() {
+    public ModelAndView list() {
         ModelAndView mv = new ModelAndView("haige.phase-list");
         List<Phase> phases = phaseService.getAllPhases();
         mv.addObject("phases", phases);
@@ -43,13 +43,13 @@ public class PhaseController {
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveClassType(Phase phase) {
+    public String save(Phase phase) {
         phaseService.save(phase);
         return "redirect:/phase/list";
     }
 
     @RequestMapping(value = "/delete/{id}")
-    public String deleteStore(@PathVariable("id") long id) {
+    public String delete(@PathVariable("id") long id) {
         phaseService.delete(id);
         return "redirect:/phase/list";
     }

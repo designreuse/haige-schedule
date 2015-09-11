@@ -12,11 +12,32 @@
 
 <script type="text/javascript">
 
+
+    function addNewLinkman(memberId) {
+        window.location.href = "${ctx}/member_linkman/add?memberId=" + memberId;
+    }
+
+
+    function deleteLinkman(id) {
+        if (window.confirm("您确定要删除该联系人吗？")) {
+            window.location.href = "${ctx}/member_linkman/delete/" + id;
+        }
+    }
+
+    function editLinkman(id) {
+        window.location.href = "${ctx}/member_linkman/edit/" + id;
+    }
+
+    $(document).ready(function () {
+
+    });
+
     function initValidator() {
         return $("#classMemberEditForm").validate({
             rules: {
                 "memberName": {required: true},
                 "sex": {required: true},
+                "birthday": {required: true},
                 "realName": {required: true}
             }
         });

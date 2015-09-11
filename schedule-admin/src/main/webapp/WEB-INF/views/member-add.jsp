@@ -35,21 +35,6 @@
 
                             </div>
 
-                            <div class="form-group">
-                                <label for="birthday" class="col-sm-2 control-label">出生日期</label>
-
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="birthday" id="birthday"
-                                           placeholder="出生日期">
-                                </div>
-
-                                <label for="proType" class="col-sm-2 control-label">产品类型</label>
-
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" name="proType" id="proType"
-                                           placeholder="产品类型">
-                                </div>
-                            </div>
 
                             <div class="form-group">
 
@@ -88,7 +73,31 @@
                                         </select>
                                     </div>
                                 </shiro:hasAnyRoles>
+                            </div>
 
+                            <div class="form-group">
+                                <label for="birthday" class="col-sm-2 control-label">出生日期</label>
+
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="birthday" id="birthday"
+                                           placeholder="出生日期">
+                                </div>
+
+                                <label for="proType" class="col-sm-2 control-label">产品类型</label>
+
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" name="proType" id="proType"
+                                           placeholder="产品类型">
+                                </div>
+
+                                <label for="registrationChannel" class="col-sm-2 control-label">报名渠道</label>
+
+                                <div class="col-sm-2">
+
+                                    <input type="text" class="form-control" name="registrationChannel"
+                                           id="registrationChannel"
+                                           placeholder="报名渠道">
+                                </div>
                             </div>
 
                             <div class="form-group">

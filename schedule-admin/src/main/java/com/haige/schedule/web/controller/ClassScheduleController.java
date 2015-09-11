@@ -41,7 +41,7 @@ public class ClassScheduleController {
 
 
     @RequestMapping(value = "/list")
-    public ModelAndView scheduleList(@RequestParam(value = "queryName", required = false) String queryName,
+    public ModelAndView list(@RequestParam(value = "queryName", required = false) String queryName,
                                      @RequestParam(value = "queryTeacherId", required = false) Long queryTeacherId,
                                      @RequestParam(value = "queryDate", required = false) Date queryScheduleDate,
                                      @PageableDefault Pageable page) {
@@ -92,7 +92,7 @@ public class ClassScheduleController {
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveClassSchedule(ClassSchedule schedule,
+    public String save(ClassSchedule schedule,
                                     @RequestParam(value = "classId", required = false) Long classId,
                                     @RequestParam(value = "teacherId", required = false) Long teacherId) {
         schedule.setClassBase(classService.getClassBase(classId));
@@ -102,7 +102,7 @@ public class ClassScheduleController {
     }
 
     @RequestMapping(value = "/finish", method = RequestMethod.POST)
-    public String saveClassSchedule(@RequestParam(value = "ev_scheduleid", required = true) Long evScheduleid,
+    public String finish(@RequestParam(value = "ev_scheduleid", required = true) Long evScheduleid,
                                     @RequestParam(value = "evaluation", required = true) String evaluation) {
         scheduleService.finishClassSchedule(evScheduleid, evaluation);
         return "redirect:/schedule/list";
@@ -119,14 +119,14 @@ public class ClassScheduleController {
     }
 
     @RequestMapping(value = "/delete/{id}")
-    public String deleteStore(@PathVariable("id") long id) {
+    public String delete(@PathVariable("id") long id) {
         scheduleService.deleteClassSchedule(id);
         return "redirect:/schedule/list";
     }
 
     @RequestMapping(value = "/mc/save", method = RequestMethod.POST)
     @ResponseBody
-    public Result saveClassMember(String params) {
+    public Result saveScheduleMember(String params) {
         Result result = null;
         try {
             JSONObject json = new JSONObject(params);

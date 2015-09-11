@@ -14,17 +14,19 @@ public class MemberLinkman {
     private Long id;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "memberId", nullable = false)
     private Member linkMember;
+
+    @Column(nullable = false, length = 50)
+    private String name;
+
+    @Column(nullable = false, length = 50)
+    private String relation;
 
     @Enumerated
     @Column(nullable = false)
     private Constants.Sex sex;
-
-
-    @Column(length = 50)
-    private String name;
 
     @Column(length = 50)
     private String tel;
@@ -60,6 +62,14 @@ public class MemberLinkman {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getRelation() {
+        return relation;
+    }
+
+    public void setRelation(String relation) {
+        this.relation = relation;
     }
 
     public String getTel() {

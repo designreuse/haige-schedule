@@ -73,7 +73,7 @@ public class RBACController {
     }
 
     @RequestMapping(value = "/deleteUser/{id}")
-    public String deleteStore(@PathVariable("id") long id) {
+    public String deleteUser(@PathVariable("id") long id) {
         rbacService.deleteUser(id);
         return "redirect:/rbac/userList";
     }

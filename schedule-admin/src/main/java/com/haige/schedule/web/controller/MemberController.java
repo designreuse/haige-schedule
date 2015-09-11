@@ -41,7 +41,7 @@ public class MemberController {
 
 
     @RequestMapping(value = "/list")
-    public ModelAndView memberList(@RequestParam(value = "queryName", required = false) String queryName,
+    public ModelAndView list(@RequestParam(value = "queryName", required = false) String queryName,
                                    @RequestParam(value = "queryBirthYear", required = false) String queryBirthYear,
                                    @RequestParam(value = "queryPhaseId", required = false) Long queryPhaseId,
                                    @RequestParam(value = "queryAdvisorId", required = false) Long queryAdvisorId,
@@ -124,13 +124,14 @@ public class MemberController {
             member = memberService.getMemberById(id);
         }
         map.addAttribute("member", member);
+//        map.addAttribute("linkman", member.getLinkman());
 
         return "haige.member-edit";
     }
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveMember(Member member,
+    public String save(Member member,
                              @RequestParam(value = "phaseId", required = true) Long phaseId,
                              @RequestParam(value = "advisorId", required = false) Long advisorId) {
 
@@ -148,7 +149,7 @@ public class MemberController {
     }
 
     @RequestMapping(value = "/delete/{id}")
-    public String deleteStore(@PathVariable("id") long id) {
+    public String delete(@PathVariable("id") long id) {
         memberService.deleteMember(id);
         return "redirect:/member/list";
     }
