@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `his_schedule` (
   `p_name` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `cs_evaluation` varchar(5000) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=164 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=159 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- 正在导出表  haige.his_schedule 的数据：~22 rows (大约)
 /*!40000 ALTER TABLE `his_schedule` DISABLE KEYS */;
@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `members` (
 -- 正在导出表  haige.members 的数据：~16 rows (大约)
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
 INSERT INTO `members` (`id`, `address`, `age`, `birthday`, `comment`, `endDate`, `memberName`, `nickName`, `password`, `pic`, `proType`, `realName`, `registrationChannel`, `sex`, `startDate`, `advisorId`, `phaseId`, `leftTime`) VALUES
-	(1, '1', NULL, '2015-09-01', '1', NULL, '1', NULL, NULL, NULL, '', '1', '', 0, NULL, 3, 2, 3),
+	(1, '1', NULL, '2015-09-01', '1', NULL, '1', NULL, NULL, NULL, '', '1', '', 0, NULL, 3, 2, 2),
 	(9, '', NULL, '2015-09-01', '', NULL, '33', NULL, NULL, NULL, '', '2', NULL, 0, NULL, 4, 3, 4),
 	(11, NULL, NULL, '2015-09-01', NULL, NULL, 'ads', NULL, NULL, NULL, NULL, '3', NULL, 0, NULL, 5, 1, 4),
 	(12, NULL, NULL, '2015-09-01', NULL, NULL, '12', NULL, NULL, NULL, NULL, '4', NULL, 0, NULL, 2, 2, 4),
@@ -209,6 +209,29 @@ INSERT INTO `members` (`id`, `address`, `age`, `birthday`, `comment`, `endDate`,
 	(31, '12', NULL, '2015-09-09', '1', NULL, '112', NULL, NULL, NULL, '1', '1', '1', 0, NULL, 3, 1, 5),
 	(32, '6', NULL, '1899-12-07', '6', NULL, '556', NULL, NULL, NULL, '6', '66', '6', 0, NULL, 3, 2, 5);
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
+
+
+-- 导出  表 haige.member_event 结构
+CREATE TABLE IF NOT EXISTS `member_event` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `comment` varchar(5000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `creator` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `endTime` time NOT NULL,
+  `startTime` time NOT NULL,
+  `memberId` bigint(20) DEFAULT NULL,
+  `costTimes` int(11) NOT NULL,
+  `eventDate` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_esgdjckwcnhtpfo518u7pa45m` (`memberId`),
+  CONSTRAINT `FK_esgdjckwcnhtpfo518u7pa45m` FOREIGN KEY (`memberId`) REFERENCES `members` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- 正在导出表  haige.member_event 的数据：~2 rows (大约)
+/*!40000 ALTER TABLE `member_event` DISABLE KEYS */;
+INSERT INTO `member_event` (`id`, `comment`, `creator`, `endTime`, `startTime`, `memberId`, `costTimes`, `eventDate`) VALUES
+	(1, 'ads', 'a', '15:55:00', '01:05:00', 1, 0, '2015-09-17'),
+	(3, '7', '顾问', '15:35:00', '01:15:00', 1, 1, '2015-09-02');
+/*!40000 ALTER TABLE `member_event` ENABLE KEYS */;
 
 
 -- 导出  表 haige.member_linkman 结构
@@ -284,7 +307,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- 正在导出表  haige.roles 的数据：~5 rows (大约)
+-- 正在导出表  haige.roles 的数据：~4 rows (大约)
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
 INSERT INTO `roles` (`id`, `comment`, `realName`, `roleName`) VALUES
 	(0, NULL, '超级管理员', 'root'),
@@ -314,7 +337,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   CONSTRAINT `FK_rin8hpeky1j0qj4mwj1lcc6mb` FOREIGN KEY (`roleId`) REFERENCES `roles` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- 正在导出表  haige.users 的数据：~14 rows (大约)
+-- 正在导出表  haige.users 的数据：~13 rows (大约)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `comment`, `password`, `pic`, `realName`, `tel`, `tel1`, `tel2`, `userName`, `weChat`, `roleId`) VALUES
 	(1, '', '123456', NULL, '超级管理员', '2', NULL, NULL, 'root', '', 0),
