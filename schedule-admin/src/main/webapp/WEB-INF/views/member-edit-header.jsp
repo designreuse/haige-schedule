@@ -17,6 +17,10 @@
         window.location.href = "${ctx}/member_linkman/add?memberId=" + memberId;
     }
 
+    function addNewLinkman(memberId) {
+        window.location.href = "${ctx}/member_linkman/add?memberId=" + memberId;
+    }
+
 
     function deleteLinkman(id) {
         if (window.confirm("您确定要删除该联系人吗？")) {
@@ -42,6 +46,21 @@
 
     function editPayment(id) {
         window.location.href = "${ctx}/member_payment/edit/" + id;
+    }
+
+    function addNewEvent(memberId) {
+        window.location.href = "${ctx}/member_event/add?memberId=" + memberId;
+    }
+
+
+    function deleteEvent(id) {
+        if (window.confirm("您确定要删除该活动吗？")) {
+            window.location.href = "${ctx}/member_event/delete/" + id;
+        }
+    }
+
+    function editEvent(id) {
+        window.location.href = "${ctx}/member_event/edit/" + id;
     }
 
     function initValidator() {

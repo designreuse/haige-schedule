@@ -88,6 +88,23 @@ where m_id = ${curr_id}]]></Query>
 <![CDATA[select * from view_all_schedule
 where m_id = ${curr_id}]]></Query>
 </TableData>
+<TableData name="ds_event" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="curr_id"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[JDBC]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select * from member_event
+where memberId = ${curr_id}]]></Query>
+</TableData>
 </TableDataMap>
 <Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
 <ReportPageAttr>
@@ -764,6 +781,115 @@ where m_id = ${curr_id}]]></Query>
 <C c="9" r="20" s="3">
 <O t="DSColumn">
 <Attributes dsName="ds_his_schedule" columnName="u_weChat"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="22" cs="6" s="1">
+<O>
+<![CDATA[计次活动信息]]></O>
+<Expand/>
+</C>
+<C c="0" r="23" s="2">
+<O>
+<![CDATA[创建人]]></O>
+<Expand/>
+</C>
+<C c="1" r="23" s="2">
+<O>
+<![CDATA[活动日期]]></O>
+<Expand/>
+</C>
+<C c="2" r="23" s="2">
+<O>
+<![CDATA[开始时间]]></O>
+<Expand/>
+</C>
+<C c="3" r="23" s="2">
+<O>
+<![CDATA[结束时间]]></O>
+<Expand/>
+</C>
+<C c="4" r="23" s="2">
+<O>
+<![CDATA[消耗课时]]></O>
+<Expand/>
+</C>
+<C c="5" r="23" s="2">
+<O>
+<![CDATA[备注]]></O>
+<Expand/>
+</C>
+<C c="0" r="24" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds_event" columnName="creator"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="1" r="24" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds_event" columnName="eventDate"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="2" r="24" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds_event" columnName="startTime"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="3" r="24" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds_event" columnName="endTime"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="4" r="24" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds_event" columnName="costTimes"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="5" r="24" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds_event" columnName="comment"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
 <RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
