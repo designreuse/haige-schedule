@@ -14,11 +14,11 @@
                           action="${ctx}/rbac/saveUser">
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="userName" class="col-sm-2 control-label">登陆名</label>
+                                <label for="userName" class="col-sm-2 control-label">用户名</label>
 
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="userName" id="userName"
-                                           placeholder="登陆名">
+                                           placeholder="用户名">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -35,11 +35,11 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="realName" class="col-sm-2 control-label">用户名</label>
+                                <label for="realName" class="col-sm-2 control-label">真实姓名</label>
 
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="realName" id="realName"
-                                           placeholder="用户名">
+                                           placeholder="真实姓名">
                                 </div>
                             </div>
 

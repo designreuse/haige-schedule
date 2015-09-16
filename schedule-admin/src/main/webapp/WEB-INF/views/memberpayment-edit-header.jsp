@@ -19,7 +19,9 @@
                 "payPerson": {required: true},
                 "payDate": {required: true},
                 "payment": {required: true},
-                "purchaseCount": {required: true}
+                "purchaseCount": {required: true},
+                "tel": {payment: true},
+                "tel": {purchaseCount: true}
             }
         });
     }

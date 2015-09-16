@@ -62,8 +62,8 @@
                         <table id="useTable" style="margin-top: 10px" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th class="text-center">登陆名</th>
                                 <th class="text-center">用户名</th>
+                                <th class="text-center">真实姓名</th>
                                 <th class="text-center">角色</th>
                                 <th class="text-center">联系电话</th>
                                 <th class="text-center">微信</th>

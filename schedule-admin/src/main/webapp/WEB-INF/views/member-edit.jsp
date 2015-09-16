@@ -37,14 +37,11 @@
 
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="leftTime" id="leftTime"
-                                    <shiro:hasAnyRoles name="advisor,coach,cashier"> disabled </shiro:hasAnyRoles>
-                                           value="${member.leftTime}" placeholder="剩余课时">
+                                           disabled value="${member.leftTime}" placeholder="剩余课时">
                                 </div>
                             </div>
 
                             <div class="form-group">
-
-
                                 <label for="sex" class="col-sm-2 control-label">性别</label>
 
                                 <div class="col-sm-2">
@@ -90,33 +87,35 @@
                                     <input type="text" class="form-control" name="birthday" id="birthday"
                                            value="${member.birthday}" placeholder="出生日期">
                                 </div>
+                                <shiro:hasAnyRoles name="root,admin,advisor,coach">
+                                    <label for="proType" class="col-sm-2 control-label">产品类型</label>
 
-                                <label for="proType" class="col-sm-2 control-label">产品类型</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" name="proType" id="proType"
+                                               placeholder="产品类型">
+                                    </div>
 
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" name="proType" id="proType"
-                                           placeholder="产品类型">
-                                </div>
+                                    <label for="registrationChannel" class="col-sm-2 control-label">报名渠道</label>
 
-                                <label for="registrationChannel" class="col-sm-2 control-label">报名渠道</label>
+                                    <div class="col-sm-2">
 
-                                <div class="col-sm-2">
-
-                                    <input type="text" class="form-control" name="registrationChannel"
-                                           id="registrationChannel"
-                                           value="${member.registrationChannel}" placeholder="报名渠道">
-                                </div>
+                                        <input type="text" class="form-control" name="registrationChannel"
+                                               id="registrationChannel"
+                                               value="${member.registrationChannel}" placeholder="报名渠道">
+                                    </div>
+                                </shiro:hasAnyRoles>
                             </div>
 
 
                             <div class="form-group">
-                                <label for="address" class="col-sm-2 control-label">地址</label>
+                                <shiro:hasAnyRoles name="root,admin,advisor,coach">
+                                    <label for="address" class="col-sm-2 control-label">地址</label>
 
-                                <div class="col-sm-4">
+                                    <div class="col-sm-4">
                                     <textarea type="text" class="form-control" name="address" id="address"
                                               placeholder="地址">${member.address}</textarea>
-                                </div>
-
+                                    </div>
+                                </shiro:hasAnyRoles>
                                 <label for="comment" class="col-sm-2 control-label">备注</label>
 
                                 <div class="col-sm-4">
@@ -239,56 +238,58 @@
                 </div>
 
                 <!-- /.box -->
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">会员计次活动</h3>
+                <shiro:hasAnyRoles name="root,admin,advisor,coach">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">会员计次活动</h3>
 
-                        <shiro:hasAnyRoles name="root,admin,advisor">
-                            <div class="box-tools pull-right" style="margin-right: 80px;">
-                                <a class="btn btn-primary btn-flat" style="color: #ffffff;" role="button"
-                                   onclick="addNewEvent(${member.id});">添加计次活动</a>
-                            </div>
-                        </shiro:hasAnyRoles>
+                            <shiro:hasAnyRoles name="root,admin,advisor">
+                                <div class="box-tools pull-right" style="margin-right: 80px;">
+                                    <a class="btn btn-primary btn-flat" style="color: #ffffff;" role="button"
+                                       onclick="addNewEvent(${member.id});">添加计次活动</a>
+                                </div>
+                            </shiro:hasAnyRoles>
+                        </div>
+                        <div class="box-body">
+                            <table id="eventTable" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">创建人</th>
+                                    <th class="text-center">日期</th>
+                                    <th class="text-center">开始时间</th>
+                                    <th class="text-center">结束时间</th>
+                                    <th class="text-center">消耗课时</th>
+                                    <shiro:hasAnyRoles name="root,admin,advisor">
+                                        <th class="text-center">操作</th>
+                                    </shiro:hasAnyRoles>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:if test="${not empty member.event}">
+                                <c:forEach items="${member.event}" var="item">
+                                <tr>
+                                    <td class="text-center">${item.creator}</td>
+                                    <td class="text-center">${item.eventDate}</td>
+                                    <td class="text-center">${item.startTime}</td>
+                                    <td class="text-center">${item.endTime}</td>
+                                    <td class="text-center">${item.costTimes}</td>
+                                    <shiro:hasAnyRoles name="root,admin,advisor">
+                                        <td class="text-center">
+                                            <a class="btn btn-primary btn-xs" onclick="editEvent(${item.id});">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="btn btn-primary btn-xs" onclick="deleteEvent(${item.id});">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </td>
+                                    </shiro:hasAnyRoles>
+                                </tr>
+                                </c:forEach>
+                                </c:if>
+                            </table>
+                        </div>
                     </div>
-                    <div class="box-body">
-                        <table id="eventTable" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th class="text-center">创建人</th>
-                                <th class="text-center">日期</th>
-                                <th class="text-center">开始时间</th>
-                                <th class="text-center">结束时间</th>
-                                <th class="text-center">消耗课时</th>
-                                <shiro:hasAnyRoles name="root,admin,advisor">
-                                    <th class="text-center">操作</th>
-                                </shiro:hasAnyRoles>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:if test="${not empty member.event}">
-                            <c:forEach items="${member.event}" var="item">
-                            <tr>
-                                <td class="text-center">${item.creator}</td>
-                                <td class="text-center">${item.eventDate}</td>
-                                <td class="text-center">${item.startTime}</td>
-                                <td class="text-center">${item.endTime}</td>
-                                <td class="text-center">${item.costTimes}</td>
-                                <shiro:hasAnyRoles name="root,admin,advisor">
-                                    <td class="text-center">
-                                        <a class="btn btn-primary btn-xs" onclick="editEvent(${item.id});">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <a class="btn btn-primary btn-xs" onclick="deleteEvent(${item.id});">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                    </td>
-                                </shiro:hasAnyRoles>
-                            </tr>
-                            </c:forEach>
-                            </c:if>
-                        </table>
-                    </div>
-                </div>
+                </shiro:hasAnyRoles>
             </div>
         </div>
 

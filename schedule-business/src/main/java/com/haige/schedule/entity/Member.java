@@ -65,15 +65,15 @@ public class Member {
     @Column(length = 500)
     private String proType;
 
-    @OneToMany(orphanRemoval = true, cascade = {CascadeType.ALL}, mappedBy = "linkMember")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "linkMember")
     @JsonManagedReference
     private List<MemberLinkman> linkman = new ArrayList<MemberLinkman>();
 
-    @OneToMany(orphanRemoval = true, cascade = {CascadeType.ALL}, mappedBy = "linkMember")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "linkMember")
     @JsonManagedReference
     private List<MemberPayment> payment = new ArrayList<MemberPayment>();
 
-    @OneToMany(orphanRemoval = true, cascade = {CascadeType.ALL}, mappedBy = "linkMember")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "linkMember")
     @JsonManagedReference
     private List<MemberEvent> event = new ArrayList<MemberEvent>();
 

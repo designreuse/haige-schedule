@@ -84,7 +84,7 @@ where m_id is not null]]></Query>
 <RowHeight defaultValue="723900">
 <![CDATA[723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
 <ColumnWidth defaultValue="2743200">
-<![CDATA[2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<![CDATA[0,3596640,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
 <CellElementList>
 <C c="0" r="0" s="0">
 <O>
@@ -93,60 +93,40 @@ where m_id is not null]]></Query>
 </C>
 <C c="1" r="0" s="0">
 <O>
-<![CDATA[课程]]></O>
+<![CDATA[课程日期]]></O>
 <Expand/>
 </C>
 <C c="2" r="0" s="0">
 <O>
-<![CDATA[课程日期]]></O>
+<![CDATA[开始时间]]></O>
 <Expand/>
 </C>
 <C c="3" r="0" s="0">
 <O>
-<![CDATA[开始时间]]></O>
+<![CDATA[结束时间]]></O>
 <Expand/>
 </C>
 <C c="4" r="0" s="0">
 <O>
-<![CDATA[结束时间]]></O>
+<![CDATA[教练]]></O>
 <Expand/>
 </C>
 <C c="5" r="0" s="0">
 <O>
-<![CDATA[教练]]></O>
+<![CDATA[教练评价]]></O>
 <Expand/>
 </C>
 <C c="6" r="0" s="0">
 <O>
-<![CDATA[教练评价]]></O>
+<![CDATA[学员]]></O>
 <Expand/>
 </C>
 <C c="7" r="0" s="0">
 <O>
-<![CDATA[教练电话]]></O>
-<Expand/>
-</C>
-<C c="8" r="0" s="0">
-<O>
-<![CDATA[教练微信]]></O>
-<Expand/>
-</C>
-<C c="9" r="0" s="0">
-<O>
-<![CDATA[学员]]></O>
-<Expand/>
-</C>
-<C c="10" r="0" s="0">
-<O>
 <![CDATA[学员阶段]]></O>
 <Expand/>
 </C>
-<C c="11" r="0" s="0">
-<O>
-<![CDATA[学员生日]]></O>
-<Expand/>
-</C>
-<C c="12" r="0" s="0">
+<C c="8" r="0" s="0">
 <O>
 <![CDATA[学员性别]]></O>
 <Expand/>
@@ -165,18 +145,6 @@ where m_id is not null]]></Query>
 </C>
 <C c="1" r="1" s="1">
 <O t="DSColumn">
-<Attributes dsName="ds_his_schedule" columnName="c_name"/>
-<Condition class="com.fr.data.condition.ListCondition"/>
-<Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
-<Result>
-<![CDATA[$$$]]></Result>
-<Parameters/>
-</O>
-<Expand dir="0"/>
-</C>
-<C c="2" r="1" s="1">
-<O t="DSColumn">
 <Attributes dsName="ds_his_schedule" columnName="cs_date"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
@@ -187,7 +155,7 @@ where m_id is not null]]></Query>
 </O>
 <Expand dir="0"/>
 </C>
-<C c="3" r="1" s="1">
+<C c="2" r="1" s="2">
 <O t="DSColumn">
 <Attributes dsName="ds_his_schedule" columnName="cs_startTime"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -199,7 +167,7 @@ where m_id is not null]]></Query>
 </O>
 <Expand dir="0"/>
 </C>
-<C c="4" r="1" s="1">
+<C c="3" r="1" s="2">
 <O t="DSColumn">
 <Attributes dsName="ds_his_schedule" columnName="cs_endTime"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -211,7 +179,7 @@ where m_id is not null]]></Query>
 </O>
 <Expand dir="0"/>
 </C>
-<C c="5" r="1" s="1">
+<C c="4" r="1" s="1">
 <O t="DSColumn">
 <Attributes dsName="ds_his_schedule" columnName="u_realName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -223,7 +191,7 @@ where m_id is not null]]></Query>
 </O>
 <Expand dir="0"/>
 </C>
-<C c="6" r="1" s="1">
+<C c="5" r="1" s="1">
 <O t="DSColumn">
 <Attributes dsName="ds_his_schedule" columnName="cs_evaluation"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -235,31 +203,7 @@ where m_id is not null]]></Query>
 </O>
 <Expand/>
 </C>
-<C c="7" r="1" s="1">
-<O t="DSColumn">
-<Attributes dsName="ds_his_schedule" columnName="u_tel"/>
-<Condition class="com.fr.data.condition.ListCondition"/>
-<Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
-<Result>
-<![CDATA[$$$]]></Result>
-<Parameters/>
-</O>
-<Expand dir="0"/>
-</C>
-<C c="8" r="1" s="1">
-<O t="DSColumn">
-<Attributes dsName="ds_his_schedule" columnName="u_weChat"/>
-<Condition class="com.fr.data.condition.ListCondition"/>
-<Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
-<Result>
-<![CDATA[$$$]]></Result>
-<Parameters/>
-</O>
-<Expand dir="0"/>
-</C>
-<C c="9" r="1" s="1">
+<C c="6" r="1" s="1">
 <O t="DSColumn">
 <Attributes dsName="ds_his_schedule" columnName="m_realName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -273,7 +217,7 @@ where m_id is not null]]></Query>
 </O>
 <Expand dir="0"/>
 </C>
-<C c="10" r="1" s="1">
+<C c="7" r="1" s="1">
 <O t="DSColumn">
 <Attributes dsName="ds_his_schedule" columnName="p_name"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -285,21 +229,7 @@ where m_id is not null]]></Query>
 </O>
 <Expand/>
 </C>
-<C c="11" r="1" s="1">
-<O t="DSColumn">
-<Attributes dsName="ds_his_schedule" columnName="m_birthday"/>
-<Condition class="com.fr.data.condition.ListCondition"/>
-<Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
-<Result>
-<![CDATA[$$$]]></Result>
-<Parameters/>
-</O>
-<Expand dir="0"/>
-</C>
-<C c="12" r="1" s="1">
+<C c="8" r="1" s="1">
 <O t="DSColumn">
 <Attributes dsName="ds_his_schedule" columnName="m_sex"/>
 <Complex/>
@@ -528,6 +458,18 @@ if( start > end){   //判断开始日期是否大于结束日期
 <StyleList>
 <Style style_name="Head"/>
 <Style style_name="cell"/>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[HH:mm:ss]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1" color="-6697729"/>
+<Bottom style="1" color="-6697729"/>
+<Left style="1" color="-6697729"/>
+<Right style="1" color="-6697729"/>
+</Border>
+</Style>
 </StyleList>
 <DesignerVersion DesignerVersion="HAF"/>
 <PreviewType PreviewType="0"/>

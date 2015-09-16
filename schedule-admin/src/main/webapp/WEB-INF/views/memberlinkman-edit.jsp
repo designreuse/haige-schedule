@@ -48,6 +48,7 @@
                                 </div>
                             </div>
 
+                            <shiro:hasAnyRoles name="root,admin,advisor,coach">
                             <div class="form-group">
                                 <label for="tel" class="col-sm-2 control-label">电话</label>
 
@@ -63,7 +64,7 @@
                                            value="${linkman.weChat}" placeholder="微信"/>
                                 </div>
                             </div>
-
+                            </shiro:hasAnyRoles>
 
                             <div class="box-footer" style="text-align: center;margin: 0">
                                 <shiro:hasAnyRoles name="root,admin,advisor">

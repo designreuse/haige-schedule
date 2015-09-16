@@ -49,8 +49,9 @@ ${if(len(filter_real_name) == 0,"","and m_realName = '" + filter_real_name + "'"
 ${if(len(filter_sex) == 0,"","and m_sex = '" + filter_sex + "'")}
 ${if(len(filter_left_time) == 0,"","and m_leftTime = '" + filter_left_time + "'")}
 ${if(len(filter_advisor_id) == 0,"","and u_id = '" + filter_advisor_id + "'")}
-${if(len(filter_linkman_id) == 0,"","and ml_id = '" + filter_linkman_id + "'")}
-]]></Query>
+
+
+order by m_memberName]]></Query>
 </TableData>
 <TableData name="fil_realName" class="com.fr.data.impl.DBTableData">
 <Parameters/>
@@ -82,17 +83,6 @@ ${if(len(filter_linkman_id) == 0,"","and ml_id = '" + filter_linkman_id + "'")}
 <Query>
 <![CDATA[select distinct u_id,u_realname from view_members]]></Query>
 </TableData>
-<TableData name="fil_linkmanId" class="com.fr.data.impl.DBTableData">
-<Parameters/>
-<Attributes maxMemRowCount="-1"/>
-<Connection class="com.fr.data.impl.NameDatabaseConnection">
-<DatabaseName>
-<![CDATA[JDBC]]></DatabaseName>
-</Connection>
-<Query>
-<![CDATA[select distinct ml_id, ml_name from view_members
-where ml_id is not null]]></Query>
-</TableData>
 </TableDataMap>
 <Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
 <ReportPageAttr>
@@ -104,64 +94,44 @@ where ml_id is not null]]></Query>
 <RowHeight defaultValue="723900">
 <![CDATA[723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
 <ColumnWidth defaultValue="2743200">
-<![CDATA[2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<![CDATA[0,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
 <CellElementList>
 <C c="0" r="0" s="0">
-<O>
-<![CDATA[学员编号]]></O>
-<Expand/>
-</C>
-<C c="1" r="0" s="0">
 <O>
 <![CDATA[学员姓名]]></O>
 <Expand/>
 </C>
-<C c="2" r="0" s="0">
+<C c="1" r="0" s="1">
+<O>
+<![CDATA[学员姓名]]></O>
+<Expand/>
+</C>
+<C c="2" r="0" s="1">
 <O>
 <![CDATA[用户名]]></O>
 <Expand/>
 </C>
-<C c="3" r="0" s="0">
+<C c="3" r="0" s="1">
 <O>
 <![CDATA[顾问]]></O>
 <Expand/>
 </C>
-<C c="4" r="0" s="0">
+<C c="4" r="0" s="1">
 <O>
 <![CDATA[剩余课时]]></O>
 <Expand/>
 </C>
-<C c="5" r="0" s="0">
-<O>
-<![CDATA[生日]]></O>
-<Expand/>
-</C>
-<C c="6" r="0" s="0">
+<C c="5" r="0" s="1">
 <O>
 <![CDATA[性别]]></O>
 <Expand/>
 </C>
-<C c="7" r="0" s="0">
+<C c="6" r="0" s="0">
 <O>
-<![CDATA[联系人]]></O>
+<![CDATA[详细信息]]></O>
 <Expand/>
 </C>
-<C c="8" r="0" s="0">
-<O>
-<![CDATA[联系人关系]]></O>
-<Expand/>
-</C>
-<C c="9" r="0" s="0">
-<O>
-<![CDATA[联系人电话]]></O>
-<Expand/>
-</C>
-<C c="10" r="0" s="0">
-<O>
-<![CDATA[联系人微信]]></O>
-<Expand/>
-</C>
-<C c="0" r="1" s="1">
+<C c="0" r="1" s="2">
 <O t="DSColumn">
 <Attributes dsName="ds_member" columnName="m_id"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -200,7 +170,7 @@ where ml_id is not null]]></Query>
 </NameJavaScriptGroup>
 <Expand dir="0"/>
 </C>
-<C c="1" r="1" s="2">
+<C c="1" r="1" s="3">
 <O t="DSColumn">
 <Attributes dsName="ds_member" columnName="m_realName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -212,7 +182,7 @@ where ml_id is not null]]></Query>
 </O>
 <Expand dir="0"/>
 </C>
-<C c="2" r="1" s="2">
+<C c="2" r="1" s="3">
 <O t="DSColumn">
 <Attributes dsName="ds_member" columnName="m_memberName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -224,7 +194,7 @@ where ml_id is not null]]></Query>
 </O>
 <Expand dir="0"/>
 </C>
-<C c="3" r="1" s="2">
+<C c="3" r="1" s="3">
 <O t="DSColumn">
 <Attributes dsName="ds_member" columnName="u_realName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -236,7 +206,7 @@ where ml_id is not null]]></Query>
 </O>
 <Expand dir="0"/>
 </C>
-<C c="4" r="1" s="2">
+<C c="4" r="1" s="3">
 <O t="DSColumn">
 <Attributes dsName="ds_member" columnName="m_leftTime"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -248,19 +218,7 @@ where ml_id is not null]]></Query>
 </O>
 <Expand dir="0"/>
 </C>
-<C c="5" r="1" s="2">
-<O t="DSColumn">
-<Attributes dsName="ds_member" columnName="m_birthday"/>
-<Condition class="com.fr.data.condition.ListCondition"/>
-<Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
-<Result>
-<![CDATA[$$$]]></Result>
-<Parameters/>
-</O>
-<Expand dir="0"/>
-</C>
-<C c="6" r="1" s="2">
+<C c="5" r="1" s="3">
 <O t="DSColumn">
 <Attributes dsName="ds_member" columnName="m_sex"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -272,54 +230,36 @@ where ml_id is not null]]></Query>
 </O>
 <Expand dir="0"/>
 </C>
-<C c="7" r="1" s="2">
-<O t="DSColumn">
-<Attributes dsName="ds_member" columnName="ml_name"/>
-<Condition class="com.fr.data.condition.ListCondition"/>
-<Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
-<Result>
-<![CDATA[$$$]]></Result>
-<Parameters/>
+<C c="6" r="1" s="2">
+<O>
+<![CDATA[查看详情]]></O>
+<NameJavaScriptGroup>
+<NameJavaScript name="网络报表1">
+<JavaScript class="com.fr.js.ReportletHyperlink">
+<JavaScript class="com.fr.js.ReportletHyperlink">
+<Parameters>
+<Parameter>
+<Attributes name="curr_id"/>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=A2]]></Attributes>
 </O>
-<Expand dir="0"/>
-</C>
-<C c="8" r="1" s="2">
-<O t="DSColumn">
-<Attributes dsName="ds_member" columnName="ml_relation"/>
-<Condition class="com.fr.data.condition.ListCondition"/>
-<Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
-<Result>
-<![CDATA[$$$]]></Result>
-<Parameters/>
-</O>
-<Expand dir="0"/>
-</C>
-<C c="9" r="1" s="2">
-<O t="DSColumn">
-<Attributes dsName="ds_member" columnName="ml_tel"/>
-<Condition class="com.fr.data.condition.ListCondition"/>
-<Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
-<Result>
-<![CDATA[$$$]]></Result>
-<Parameters/>
-</O>
-<Expand dir="0"/>
-</C>
-<C c="10" r="1" s="2">
-<O t="DSColumn">
-<Attributes dsName="ds_member" columnName="ml_weChat"/>
-<Condition class="com.fr.data.condition.ListCondition"/>
-<Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
-<Result>
-<![CDATA[$$$]]></Result>
-<Parameters/>
-</O>
+</Parameter>
+<Parameter>
+<Attributes name="__bypagesize__"/>
+<O>
+<![CDATA[false]]></O>
+</Parameter>
+</Parameters>
+<TargetFrame>
+<![CDATA[_blank]]></TargetFrame>
+<Features width="600" height="400"/>
+<ReportletName showPI="true">
+<![CDATA[/report_member_detail.cpt]]></ReportletName>
+</JavaScript>
+</JavaScript>
+</NameJavaScript>
+</NameJavaScriptGroup>
 <Expand dir="0"/>
 </C>
 </CellElementList>
@@ -399,7 +339,7 @@ where ml_id is not null]]></Query>
 <Hotkeys>
 <![CDATA[enter]]></Hotkeys>
 </InnerWidget>
-<BoundsAttr x="541" y="61" width="80" height="24"/>
+<BoundsAttr x="617" y="61" width="80" height="24"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.ComboBox">
@@ -419,7 +359,7 @@ where ml_id is not null]]></Query>
 <![CDATA[]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="259" y="22" width="80" height="21"/>
+<BoundsAttr x="316" y="22" width="80" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -429,7 +369,7 @@ where ml_id is not null]]></Query>
 <FRFont name="SimSun" style="0" size="72"/>
 <widgetValue>
 <O>
-<![CDATA[用户名：]]></O>
+<![CDATA[昵称：]]></O>
 </widgetValue>
 </InnerWidget>
 <BoundsAttr x="23" y="22" width="87" height="21"/>
@@ -445,7 +385,7 @@ where ml_id is not null]]></Query>
 <![CDATA[姓名：]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="211" y="22" width="48" height="21"/>
+<BoundsAttr x="243" y="22" width="73" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -458,7 +398,7 @@ where ml_id is not null]]></Query>
 <![CDATA[性别：]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="358" y="22" width="63" height="21"/>
+<BoundsAttr x="434" y="22" width="63" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.ComboBox">
@@ -475,7 +415,7 @@ where ml_id is not null]]></Query>
 <![CDATA[]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="421" y="22" width="80" height="21"/>
+<BoundsAttr x="497" y="22" width="80" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -501,7 +441,7 @@ where ml_id is not null]]></Query>
 <![CDATA[顾问：]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="211" y="64" width="48" height="21"/>
+<BoundsAttr x="243" y="64" width="73" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.ComboBox">
@@ -521,40 +461,7 @@ where ml_id is not null]]></Query>
 <![CDATA[]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="259" y="64" width="80" height="21"/>
-</Widget>
-<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
-<InnerWidget class="com.fr.form.ui.ComboBox">
-<WidgetName name="filter_linkman_id"/>
-<WidgetAttr/>
-<Dictionary class="com.fr.data.impl.TableDataDictionary">
-<FormulaDictAttr kiName="ml_id" viName="ml_name"/>
-<TableDataDictAttr>
-<TableData class="com.fr.data.impl.NameTableData">
-<Name>
-<![CDATA[fil_linkmanId]]></Name>
-</TableData>
-</TableDataDictAttr>
-</Dictionary>
-<widgetValue>
-<O>
-<![CDATA[]]></O>
-</widgetValue>
-</InnerWidget>
-<BoundsAttr x="421" y="64" width="80" height="21"/>
-</Widget>
-<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
-<InnerWidget class="com.fr.form.ui.Label">
-<WidgetName name="label3_c_c_c_c"/>
-<WidgetAttr/>
-<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
-<FRFont name="SimSun" style="0" size="72"/>
-<widgetValue>
-<O>
-<![CDATA[联系人：]]></O>
-</widgetValue>
-</InnerWidget>
-<BoundsAttr x="358" y="64" width="63" height="21"/>
+<BoundsAttr x="316" y="64" width="80" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.TextEditor">
@@ -571,6 +478,23 @@ where ml_id is not null]]></Query>
 </ParameterUI>
 </ReportParameterAttr>
 <StyleList>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ImageBackground" specifiedImageWidth="-1.0" specifiedImageHeight="-1.0" layout="2">
+<IM>
+<![CDATA[lO<9(kN.ld@UNU%p%320@UNU)#I6cXfRW$ncQ/@&<0O5<@n=S@[oX!K%L!+t*8LGkV28*<fV
+1DR2+&2#M*'iG9!?fn`jEHhj.>Qf/%>^"4u8^;2W-f-"/[-Ps"#=CT4LGm?)6rkX]Ap9;)cg,
+:Xp=M>^R`IX>57);OBFYLBS"_e1Gss7S9)tL+\09b!LY7c2&TIA?%9m4n<NhHK^]A5-XNuS&?
+,PUblK>Iu.A7%J~
+]]></IM>
+</Background>
+<Border>
+<Top style="1" color="-6697729"/>
+<Bottom style="1" color="-6697729"/>
+<Left style="1" color="-6697729"/>
+<Right style="1" color="-6697729"/>
+</Border>
+</Style>
 <Style style_name="Head"/>
 <Style horizontal_alignment="0" imageLayout="1">
 <FRFont name="SimSun" style="0" size="72" foreground="-16776961" underline="1"/>

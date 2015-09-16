@@ -16,11 +16,11 @@
                           action="${ctx}/member/saveNew">
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="memberName" class="col-sm-2 control-label">用户名</label>
+                                <label for="memberName" class="col-sm-2 control-label">昵称</label>
 
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" name="memberName" id="memberName"
-                                           placeholder="用户名">
+                                           placeholder="昵称">
                                 </div>
 
                                 <label for="realName" class="col-sm-2 control-label">姓名</label>

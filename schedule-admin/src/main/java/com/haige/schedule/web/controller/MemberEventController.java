@@ -71,9 +71,7 @@ public class MemberEventController {
         MemberEvent event = eventService.getMemberEvent(id);
         Long memberId = event.getLinkMember().getId();
 
-        Member member = event.getLinkMember();
-        member.getEvent().remove(event);
-        memberService.saveMember(member);
+        eventService.delete(id);
 
         return "redirect:/member/edit/" + Long.toString(memberId);
     }

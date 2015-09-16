@@ -89,7 +89,7 @@
                         <table id="memberTable" style="margin-top: 10px" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th class="text-center">用户名</th>
+                                <th class="text-center">昵称</th>
                                 <th class="text-center">姓名</th>
                                 <th class="text-center">剩余课时</th>
                                 <th class="text-center">性别</th>
@@ -118,7 +118,8 @@
                                             <a class="btn btn-primary btn-xs" onclick="editMember(${item.id});">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <shiro:hasAnyRoles name="root,admin,advisor">
+
+                                            <shiro:hasAnyRoles name="root,admin">
                                                 <a class="btn btn-primary btn-xs" onclick="deleteMember(${item.id});">
                                                     <i class="fa fa-times"></i>
                                                 </a>

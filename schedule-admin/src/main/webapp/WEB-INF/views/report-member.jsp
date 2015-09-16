@@ -9,7 +9,7 @@
 
     <section class="content">
         <iframe id="reportFrame" style="margin-left: 50px;"
-                src="${ctx}/ReportServer?reportlet=report_member.cpt&__bypagesize__=false"
+                src="${ctx}/ReportServer?reportlet=report_member.cpt&op=view"
                 width="90%" height="800px"></iframe>
     </section>
 

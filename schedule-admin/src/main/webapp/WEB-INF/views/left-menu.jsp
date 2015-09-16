@@ -28,7 +28,7 @@
             </li>
 
 
-            <shiro:hasAnyRoles name="root,admin,advisor,coach">
+            <shiro:hasAnyRoles name="root,admin,advisor,coach,cashier">
                 <li class="treeview active">
                     <a href="#">
                         <i class="fa fa-bar-chart-o"></i>
@@ -65,23 +65,33 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="${ctx}/rbac/userList"><i class="fa fa-angle-double-right"></i>用户管理</a></li>
-                        <li><a href="${ctx}/phase/list"><i class="fa fa-angle-double-right"></i>阶段管理</a></li>
+                        <shiro:hasAnyRoles name="root">
+                            <li><a href="${ctx}/phase/list"><i class="fa fa-angle-double-right"></i>阶段管理</a></li>
+                        </shiro:hasAnyRoles>
                     </ul>
                 </li>
             </shiro:hasAnyRoles>
 
-            <li class="treeview active">
-                <a href="#">
-                    <i class="fa fa-laptop"></i>
-                    <span>报表统计</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="${ctx}/report/schedule"><i class="fa fa-angle-double-right"></i>课程安排</a></li>
-                    <li><a href="${ctx}/report/his_schedule"><i class="fa fa-angle-double-right"></i>历史课程</a></li>
-                    <li><a href="${ctx}/report/member"><i class="fa fa-angle-double-right"></i>会员信息</a></li>
-                </ul>
-            </li>
+            <shiro:hasAnyRoles name="root,admin,advisor,coach">
+                <li class="treeview active">
+                    <a href="#">
+                        <i class="fa fa-laptop"></i>
+                        <span>报表统计</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="${ctx}/report/schedule"><i class="fa fa-angle-double-right"></i>课程安排</a></li>
+                        <li><a href="${ctx}/report/his_schedule"><i class="fa fa-angle-double-right"></i>历史课程</a></li>
+                        <shiro:hasAnyRoles name="root,admin,advisor">
+                            <li><a href="${ctx}/report/member"><i class="fa fa-angle-double-right"></i>会员信息</a></li>
+                        </shiro:hasAnyRoles>
+                        <shiro:hasAnyRoles name="coach">
+                            <li><a href="${ctx}/report/coach_member"><i class="fa fa-angle-double-right"></i>会员信息</a>
+                            </li>
+                        </shiro:hasAnyRoles>
+                    </ul>
+                </li>
+            </shiro:hasAnyRoles>
         </ul>
     </section>
     <!-- /.sidebar -->

@@ -15,7 +15,7 @@ public class MemberLinkman {
     private Long id;
 
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @JoinColumn(name = "memberId", nullable = false)
     @JsonBackReference
     private Member linkMember;

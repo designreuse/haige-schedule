@@ -108,9 +108,12 @@
                                         </td>
                                         <td class="text-center">
                                             <shiro:hasAnyRoles name="root,coach">
-                                                <a class="btn btn-primary btn-xs" onclick="finishSchedule(${item.id});">
-                                                    <i class="fa fa-play"></i>
-                                                </a>
+                                                <c:if test="${currUserId== item.teacher.id}">
+                                                    <a class="btn btn-primary btn-xs"
+                                                       onclick="finishSchedule(${item.id});">
+                                                        <i class="fa fa-play"></i>
+                                                    </a>
+                                                </c:if>
                                             </shiro:hasAnyRoles>
 
                                             <a class="btn btn-primary btn-xs" onclick="editSchedule (${item.id});">

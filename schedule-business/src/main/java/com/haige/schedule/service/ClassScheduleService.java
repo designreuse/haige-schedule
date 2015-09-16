@@ -56,6 +56,7 @@ public class ClassScheduleService {
             items.add("scheduleDate");
             params.add(queryScheduleDate);
         }
+        sql += " order by scheduleDate ";
         String[] strArr = new String[items.size()];
         return classScheduleDao.queryNativeSqlPageEntity(sql, items.toArray(strArr), params.toArray(), page);
     }

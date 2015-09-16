@@ -2,6 +2,7 @@ package com.haige.schedule.web.controller;
 
 import com.haige.schedule.entity.ClassSchedule;
 import com.haige.schedule.entity.Result;
+import com.haige.schedule.entity.User;
 import com.haige.schedule.service.ClassBaseService;
 import com.haige.schedule.service.ClassScheduleService;
 import com.haige.schedule.service.RBACService;
@@ -48,11 +49,16 @@ public class ClassScheduleController {
         ModelAndView mv = new ModelAndView("haige.classschedule-list");
         Page<ClassSchedule> schedules = new PageImpl<ClassSchedule>(new ArrayList<ClassSchedule>());
         Subject currentUser = SecurityUtils.getSubject();
-        if (currentUser.hasRole("root") || currentUser.hasRole("admin")) {
-            schedules = scheduleService.queryClassSchedules(queryName, queryTeacherId, queryScheduleDate, page);
-        } else if (currentUser.hasRole("coach")) {
-            schedules = scheduleService.queryClassSchedules(queryName, rbacService.getCurrentUser().getId(), queryScheduleDate, page);
-        }
+//        if (currentUser.hasRole("root") || currentUser.hasRole("admin")
+//                || currentUser.hasRole("advisor") || currentUser.hasRole("cashier")) {
+//            schedules = scheduleService.queryClassSchedules(queryName, queryTeacherId, queryScheduleDate, page);
+//        } else if (currentUser.hasRole("coach")) {
+//            schedules = scheduleService.queryClassSchedules(queryName, rbacService.getCurrentUser().getId(), queryScheduleDate, page);
+//        }
+        User user = rbacService.getCurrentUser();
+        mv.addObject("currUserId", user.getId());
+
+        schedules = scheduleService.queryClassSchedules(queryName, null, queryScheduleDate, page);
 
         mv.addObject("schedules", schedules.getContent());
 

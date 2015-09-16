@@ -107,6 +107,20 @@
                             <IconName>
                                 <![CDATA[preview]]></IconName>
                         </Widget>
+                        <Widget class="com.fr.report.web.button.ExcelO">
+                            <WidgetAttr/>
+                            <Text>
+                                <![CDATA[${i18n('Export-Excel-Simple')}]]></Text>
+                            <IconName>
+                                <![CDATA[excel]]></IconName>
+                        </Widget>
+                        <Widget class="com.fr.report.web.button.Word">
+                            <WidgetAttr/>
+                            <Text>
+                                <![CDATA[Word]]></Text>
+                            <IconName>
+                                <![CDATA[word]]></IconName>
+                        </Widget>
                         <Widget class="com.fr.report.web.button.FlashPrint">
                             <WidgetAttr/>
                             <Text>
@@ -114,29 +128,19 @@
                             <IconName>
                                 <![CDATA[flashprint]]></IconName>
                         </Widget>
-                        <Widget class="com.fr.report.web.button.Print">
+                        <Widget class="com.fr.report.web.button.AppletPrint">
                             <WidgetAttr/>
                             <Text>
-                                <![CDATA[${i18n('Print')}]]></Text>
+                                <![CDATA[${i18n('Applet_Print')}]]></Text>
                             <IconName>
-                                <![CDATA[print]]></IconName>
-                            <PrintButtons/>
+                                <![CDATA[appletprint]]></IconName>
                         </Widget>
-                        <Widget class="com.fr.report.web.button.Export">
+                        <Widget class="com.fr.report.web.button.PDFPrint">
                             <WidgetAttr/>
                             <Text>
-                                <![CDATA[${i18n('Export')}]]></Text>
+                                <![CDATA[${i18n('Utils-Print[Client]A')}]]></Text>
                             <IconName>
-                                <![CDATA[export]]></IconName>
-                            <Buttons pdf="true" excelP="true" excelO="true" excelS="true" word="true" image="true"
-                                     html="true"/>
-                        </Widget>
-                        <Widget class="com.fr.report.web.button.Email">
-                            <WidgetAttr/>
-                            <Text>
-                                <![CDATA[${i18n('Email')}]]></Text>
-                            <IconName>
-                                <![CDATA[email]]></IconName>
+                                <![CDATA[pdfprint]]></IconName>
                         </Widget>
                     </ToolBar>
                 </ToolBarManager>

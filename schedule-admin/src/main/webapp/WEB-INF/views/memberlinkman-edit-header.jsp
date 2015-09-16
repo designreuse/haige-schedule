@@ -10,7 +10,10 @@
     function initValidator() {
         return $("#classBaseEditForm").validate({
             rules: {
-                "name": {required: true}
+                "name": {required: true},
+                "tel": {digits: true},
+                "tel": {payment: true},
+                "tel": {purchaseCount: true}
             }
         });
     }

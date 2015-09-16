@@ -11,7 +11,8 @@
         return $("#linkmanAddForm").validate({
             rules: {
                 "name": {required: true},
-                "relation": {required: true}
+                "relation": {required: true},
+                "tel": {digits: true}
             }
         });
     }
