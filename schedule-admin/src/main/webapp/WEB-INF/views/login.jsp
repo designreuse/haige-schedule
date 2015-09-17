@@ -30,7 +30,7 @@
 
 <div class="form-box" id="login-box">
     <div class="header">管理系统后台</div>
-    <form action="${ctx}/login" method="post" id="loginForm">
+    <form action="${ctx}/executeLogin" method="post" id="loginForm">
         <div class="body bg-gray">
             <div class="form-group">
                 <input type="text" name="username" id="username" class="form-control" placeholder="用户名"/>
@@ -39,7 +39,7 @@
                 <input type="password" name="password" id="password" class="form-control" placeholder="密码"/>
             </div>
             <div class="form-group">
-                <p>${info}</p>
+                <span style="color: #ff0000;">${checkMessage}</span>
             </div>
             <%--<div class="form-group">--%>
             <%--<input type="checkbox" name="rememberMe" id="rememberMe"/> 记住我--%>
