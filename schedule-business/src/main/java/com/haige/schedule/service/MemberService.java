@@ -65,7 +65,7 @@ public class MemberService {
         List<Object> params = new ArrayList<>();
         List<String> items = new ArrayList<String>();
 
-        String sql = "select * from members where id not in (select memberid from class_schedule_members where scheduleId = :scheduleId)" +
+        String sql = "select * from members where id not in (select memberid from schedule_member where scheduleId = :scheduleId)" +
                 " and leftTime > 0 ";
         items.add("scheduleId");
         params.add(cmScheduleId);

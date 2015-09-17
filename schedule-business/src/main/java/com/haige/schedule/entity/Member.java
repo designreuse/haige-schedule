@@ -73,10 +73,6 @@ public class Member {
     @JsonManagedReference
     private List<MemberPayment> payment = new ArrayList<MemberPayment>();
 
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "linkMember")
-    @JsonManagedReference
-    private List<MemberEvent> event = new ArrayList<MemberEvent>();
-
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "advisorId", nullable = false)
     private User advisor;
@@ -236,13 +232,6 @@ public class Member {
         this.linkman = linkman;
     }
 
-    public List<MemberEvent> getEvent() {
-        return event;
-    }
-
-    public void setEvent(List<MemberEvent> event) {
-        this.event = event;
-    }
 
     public String getProType() {
         return proType;

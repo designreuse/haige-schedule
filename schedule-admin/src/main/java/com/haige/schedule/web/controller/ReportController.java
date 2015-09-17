@@ -2,6 +2,8 @@ package com.haige.schedule.web.controller;
 
 import com.haige.schedule.entity.User;
 import com.haige.schedule.service.RBACService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,15 +31,18 @@ public class ReportController {
     @RequestMapping(value = "/member")
     public ModelAndView member() {
         ModelAndView mv = new ModelAndView("report.haige.report-member");
+        Subject currentUser = SecurityUtils.getSubject();
+        if (currentUser.hasRole("advisor")) {
+            User user = rbacService.getCurrentUser();
+            mv.addObject("currUserId", user.getId());
+        }
         return mv;
     }
 
 
     @RequestMapping(value = "/coach_member")
     public ModelAndView coach_member() {
-        User user = rbacService.getCurrentUser();
         ModelAndView mv = new ModelAndView("report.haige.report-coach-member");
-        mv.addObject("currUserId", user.getId());
         return mv;
     }
 }

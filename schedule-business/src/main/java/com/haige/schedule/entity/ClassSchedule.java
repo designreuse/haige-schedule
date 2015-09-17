@@ -34,8 +34,15 @@ public class ClassSchedule implements Serializable {
     private ClassBase classBase;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "teacherId", nullable = false)
+    @JoinColumn(name = "creatorId", nullable = false)
+    private User creator;
+
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "teacherId")
     private User teacher;
+
+    @Column(nullable = false)
+    private int costTimes;
 
     @Column(length = 5000)
     private String comment;
@@ -43,7 +50,8 @@ public class ClassSchedule implements Serializable {
 
     @ManyToMany(cascade = CascadeType.REFRESH)
 //    @org.hibernate.annotations.Fetch(FetchMode.SELECT)
-    @JoinTable(joinColumns = {@JoinColumn(name = "scheduleId")},
+    @JoinTable(name = "schedule_member",
+            joinColumns = {@JoinColumn(name = "scheduleId")},
             inverseJoinColumns = {@JoinColumn(name = "memberId")})
     @OrderBy("id")
     private Set<Member> members = new HashSet<Member>(0);
@@ -97,12 +105,28 @@ public class ClassSchedule implements Serializable {
         this.teacher = teacher;
     }
 
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
     public Set<Member> getMembers() {
         return members;
     }
 
     public void setMembers(Set<Member> members) {
         this.members = members;
+    }
+
+    public int getCostTimes() {
+        return costTimes;
+    }
+
+    public void setCostTimes(int costTimes) {
+        this.costTimes = costTimes;
     }
 
     public String getComment() {

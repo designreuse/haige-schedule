@@ -85,7 +85,10 @@
                                         class="fa fa-bars"></i></button>
                                 <ul class="dropdown-menu pull-right" role="menu">
                                     <shiro:hasAnyRoles name="root,admin">
-                                        <li><a href="${ctx}/schedule/add">添加课程计划</a></li>
+                                        <li><a href="${ctx}/schedule/1/add">添加课程计划</a></li>
+                                    </shiro:hasAnyRoles>
+                                    <shiro:hasAnyRoles name="root,admin,advisor">
+                                        <li><a href="${ctx}/schedule/2/add">添加会员活动</a></li>
                                     </shiro:hasAnyRoles>
                                     <shiro:hasAnyRoles name="root,admin,advisor,coach">
                                         <li><a href="${ctx}/schedule/list">查看课程计划</a></li>

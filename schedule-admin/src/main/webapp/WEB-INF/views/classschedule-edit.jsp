@@ -10,32 +10,35 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">修改课程安排</h3>
+                        <h3 class="box-title">修改课程活动</h3>
                     </div>
                     <form role="form" class="form-horizontal" method="post" id="scheduleEditForm"
-                          action="${ctx}/schedule/save">
+                          action="${ctx}/schedule/${scheduleType}/save">
                         <div class="box-body">
                             <input type="hidden" id="id" name="id" value="${schedule.id}"/>
+                            <input type="hidden" id="classId" name="classId" value="${schedule.classBase.id}"/>
+                            <input type="hidden" id="creatorId" name="creatorId" value="${schedule.creator.id}"/>
 
                             <div class="form-group">
-                                <label for="classId" class="col-sm-2 control-label">课程</label>
+                                <label for="className" class="col-sm-2 control-label">类型</label>
 
-                                <div class="col-sm-5">
-                                    <select name="classId" id="classId" style="width: 100%">
-                                        <c:forEach items="${classes}" var="r">
-                                            <option value="${r.id}"
-                                                    <c:if test="${schedule.classBase.id==r.id}">selected</c:if> >${r.name}
-                                            </option>
-                                        </c:forEach>
-                                    </select>
+                                <div class="col-sm-2">
+                                    <input disabled name="className" id="className" style="width: 100%"
+                                           value="${schedule.classBase.name}">
                                 </div>
-                            </div>
 
-                            <div class="form-group">
+                                <label for="creatorName" class="col-sm-2 control-label">顾问</label>
+
+                                <div class="col-sm-2">
+                                    <input disabled name="creatorName" id="creatorName" style="width: 100%"
+                                           value="${schedule.creator.realName}">
+                                </div>
+
                                 <label for="teacherId" class="col-sm-2 control-label">教练</label>
 
-                                <div class="col-sm-5">
+                                <div class="col-sm-2">
                                     <select name="teacherId" id="teacherId" style="width: 100%">
+                                        <option value=""></option>
                                         <c:forEach items="${teachers}" var="r">
                                             <option value="${r.id}"
                                                     <c:if test="${schedule.teacher.id==r.id}">selected</c:if> >${r.realName}</option>
@@ -47,26 +50,22 @@
                             <div class="form-group">
                                 <label for="scheduleDate" class="col-sm-2 control-label">日期</label>
 
-                                <div class="col-sm-5">
+                                <div class="col-sm-2">
                                     <input type="text" class="form-control" name="scheduleDate" id="scheduleDate"
                                            value="${schedule.scheduleDate}" placeholder="日期">
                                 </div>
-                            </div>
 
-                            <div class="form-group">
                                 <label for="startTime" class="col-sm-2 control-label">开始时间</label>
 
-                                <div class="col-sm-4">
+                                <div class="col-sm-2">
                                     <input type="text" class="form-control" name="startTime" id="startTime"
                                            value="<fmt:formatDate value="${schedule.startTime}"  pattern="HH:mm"/>"
                                            placeholder="开始时间" readonly style="cursor:pointer">
                                 </div>
-                            </div>
 
-                            <div class="form-group">
                                 <label for="endTime" class="col-sm-2 control-label">结束时间</label>
 
-                                <div class="col-sm-4">
+                                <div class="col-sm-2">
                                     <input type="text" class="form-control" name="endTime" id="endTime"
                                            value="<fmt:formatDate value="${schedule.endTime}"  pattern="HH:mm"/>"
                                            placeholder="结束时间" readonly style="cursor:pointer">
@@ -121,7 +120,7 @@
                                                     <td class="text-center">
                                                         <a class="btn btn-primary btn-xs"
                                                            onclick="deleteCM(${item.id});">
-                                                            <i class="fa fa-times"></i>
+                                                            <i class="fa fa-times">删除</i>
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -200,6 +199,7 @@
                         <th><input type="checkbox" id="allCheckbox" name="allCheckbox"/></th>
                         <th class="text-center">用户名</th>
                         <th class="text-center">姓名</th>
+                        <th class="text-center">剩余课时</th>
                         <th class="text-center">性别</th>
                         <th class="text-center">年龄</th>
                         <th class="text-center">出生日期</th>

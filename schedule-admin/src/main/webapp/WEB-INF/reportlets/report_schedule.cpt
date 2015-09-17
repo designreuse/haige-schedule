@@ -19,6 +19,11 @@
 <![CDATA[]]></O>
 </Parameter>
 <Parameter>
+<Attributes name="filter_class_id"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
 <Attributes name="filter_start"/>
 <O>
 <![CDATA[]]></O>
@@ -38,14 +43,14 @@
 <![CDATA[select * from view_all_schedule
 
 where 1=1
-
+${if(len(filter_class_id) == 0,"","and c_id = '" + filter_class_id + "'")}
 ${if(len(filter_class_type) == 0,"","and c_type = '" + filter_class_type + "'")}
 ${if(len(filter_end) == 0,"","and cs_date <= '" + filter_end + "'")}
 ${if(len(filter_start) == 0,"","and cs_date >='" + filter_start + "'")}
 ${if(len(filter_teacher_id) == 0,"","and u_id = '" + filter_teacher_id + "'")}
 ${if(len(filter_member_id) == 0,"","and m_id = '" + filter_member_id + "'")}
 
-order by cs_id]]></Query>
+order by c_id,cs_date]]></Query>
 </TableData>
 <TableData name="fil_teacher" class="com.fr.data.impl.DBTableData">
 <Parameters/>
@@ -79,56 +84,66 @@ where m_id is not null]]></Query>
 <RowHeight defaultValue="723900">
 <![CDATA[1005840,883920,723900,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
 <ColumnWidth defaultValue="2743200">
-<![CDATA[2468880,2316480,2377440,2164080,1889760,2133600,2103120,3048000,4206240,2743200]]></ColumnWidth>
+<![CDATA[2286000,2895600,2316480,2377440,0,2164080,1676400,2103120,1920240,2651760,4206240,2743200]]></ColumnWidth>
 <CellElementList>
 <C c="0" r="0" s="0">
+<O>
+<![CDATA[类别]]></O>
+<Expand/>
+</C>
+<C c="1" r="0" s="1">
 <O>
 <![CDATA[课程日期]]></O>
 <Expand/>
 </C>
-<C c="1" r="0" s="0">
+<C c="2" r="0" s="1">
 <O>
 <![CDATA[开始时间]]></O>
 <Expand/>
 </C>
-<C c="2" r="0" s="0">
+<C c="3" r="0" s="1">
 <O>
 <![CDATA[结束时间]]></O>
 <Expand/>
 </C>
-<C c="3" r="0" s="0">
+<C c="4" r="0" s="1">
+<O>
+<![CDATA[编号]]></O>
+<Expand/>
+</C>
+<C c="5" r="0" s="1">
 <O>
 <![CDATA[教练]]></O>
 <Expand/>
 </C>
-<C c="4" r="0" s="0">
+<C c="6" r="0" s="1">
 <O>
 <![CDATA[昵称]]></O>
 <Expand/>
 </C>
-<C c="5" r="0" s="0">
+<C c="7" r="0" s="0">
 <O>
 <![CDATA[学员]]></O>
 <Expand/>
 </C>
-<C c="6" r="0" s="0">
+<C c="8" r="0" s="0">
 <O>
 <![CDATA[学员阶段]]></O>
 <Expand/>
 </C>
-<C c="7" r="0" s="0">
+<C c="9" r="0" s="1">
 <O>
 <![CDATA[签到]]></O>
 <Expand/>
 </C>
-<C c="8" r="0" s="0">
+<C c="10" r="0" s="1">
 <O>
 <![CDATA[备注]]></O>
 <Expand/>
 </C>
-<C c="0" r="1" s="1">
+<C c="0" r="1" s="2">
 <O t="DSColumn">
-<Attributes dsName="ds_schedule" columnName="cs_date"/>
+<Attributes dsName="ds_schedule" columnName="c_name"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
 <RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
@@ -140,6 +155,18 @@ where m_id is not null]]></Query>
 </C>
 <C c="1" r="1" s="2">
 <O t="DSColumn">
+<Attributes dsName="ds_schedule" columnName="cs_date"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="2" r="1" s="3">
+<O t="DSColumn">
 <Attributes dsName="ds_schedule" columnName="cs_startTime"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
@@ -150,7 +177,7 @@ where m_id is not null]]></Query>
 </O>
 <Expand dir="0"/>
 </C>
-<C c="2" r="1" s="2">
+<C c="3" r="1" s="3">
 <O t="DSColumn">
 <Attributes dsName="ds_schedule" columnName="cs_endTime"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -162,7 +189,19 @@ where m_id is not null]]></Query>
 </O>
 <Expand dir="0"/>
 </C>
-<C c="3" r="1" s="1">
+<C c="4" r="1" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds_schedule" columnName="cs_id"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="5" r="1" s="2">
 <O t="DSColumn">
 <Attributes dsName="ds_schedule" columnName="u_realName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -174,7 +213,7 @@ where m_id is not null]]></Query>
 </O>
 <Expand dir="0"/>
 </C>
-<C c="4" r="1" s="1">
+<C c="6" r="1" s="2">
 <O t="DSColumn">
 <Attributes dsName="ds_schedule" columnName="m_memberName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -188,7 +227,7 @@ where m_id is not null]]></Query>
 </O>
 <Expand dir="0"/>
 </C>
-<C c="5" r="1" s="1">
+<C c="7" r="1" s="2">
 <O t="DSColumn">
 <Attributes dsName="ds_schedule" columnName="m_realName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -202,7 +241,7 @@ where m_id is not null]]></Query>
 </O>
 <Expand dir="0"/>
 </C>
-<C c="6" r="1" s="1">
+<C c="8" r="1" s="2">
 <O t="DSColumn">
 <Attributes dsName="ds_schedule" columnName="p_name"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -214,10 +253,10 @@ where m_id is not null]]></Query>
 </O>
 <Expand/>
 </C>
-<C c="7" r="1" s="1">
+<C c="9" r="1" s="2">
 <Expand dir="0"/>
 </C>
-<C c="8" r="1" s="1">
+<C c="10" r="1" s="2">
 <Expand dir="0"/>
 </C>
 </CellElementList>
@@ -277,7 +316,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 <Hotkeys>
 <![CDATA[enter]]></Hotkeys>
 </InnerWidget>
-<BoundsAttr x="710" y="27" width="80" height="24"/>
+<BoundsAttr x="844" y="17" width="80" height="24"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.DateEditor">
@@ -293,7 +332,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 </O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="573" y="27" width="109" height="24"/>
+<BoundsAttr x="707" y="17" width="109" height="24"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -306,7 +345,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 <![CDATA[至]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="553" y="27" width="20" height="24"/>
+<BoundsAttr x="687" y="17" width="20" height="24"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.DateEditor">
@@ -322,7 +361,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 </O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="444" y="27" width="109" height="24"/>
+<BoundsAttr x="578" y="17" width="109" height="24"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -335,7 +374,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 <![CDATA[课程日期：]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="362" y="27" width="82" height="24"/>
+<BoundsAttr x="496" y="17" width="82" height="24"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.ComboBox">
@@ -352,7 +391,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 </Dictionary>
 <widgetValue/>
 </InnerWidget>
-<BoundsAttr x="107" y="29" width="80" height="21"/>
+<BoundsAttr x="241" y="19" width="80" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.ComboBox">
@@ -372,7 +411,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 <![CDATA[]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="263" y="30" width="80" height="21"/>
+<BoundsAttr x="397" y="20" width="80" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -385,7 +424,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 <![CDATA[教练：]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="49" y="30" width="58" height="21"/>
+<BoundsAttr x="183" y="20" width="58" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -398,7 +437,39 @@ if( start > end){   //判断开始日期是否大于结束日期
 <![CDATA[学员：]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="215" y="30" width="48" height="21"/>
+<BoundsAttr x="349" y="20" width="48" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="label0_c"/>
+<WidgetAttr/>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<widgetValue>
+<O>
+<![CDATA[类别：]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="20" y="20" width="61" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.ComboBox">
+<WidgetName name="filter_class_id"/>
+<WidgetAttr/>
+<Dictionary class="com.fr.data.impl.DatabaseDictionary">
+<FormulaDictAttr kiName="id" viName="name"/>
+<DBDictAttr tableName="classes" schemaName="" ki="-1" vi="-1" kiName="id" viName="name"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[JDBC]]></DatabaseName>
+</Connection>
+</Dictionary>
+<widgetValue>
+<O>
+<![CDATA[]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="81" y="21" width="80" height="21"/>
 </Widget>
 <LCAttr vgap="0" hgap="0"/>
 </Layout>
@@ -406,6 +477,23 @@ if( start > end){   //判断开始日期是否大于结束日期
 </ParameterUI>
 </ReportParameterAttr>
 <StyleList>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ImageBackground" specifiedImageWidth="-1.0" specifiedImageHeight="-1.0" layout="2">
+<IM>
+<![CDATA[lO<9(kN.ld@UNU%p%320@UNU)#I6cXfRW$ncQ/@&<0O5<@n=S@[oX!K%L!+t*8LGkV28*<fV
+1DR2+&2#M*'iG9!?fn`jEHhj.>Qf/%>^"4u8^;2W-f-"/[-Ps"#=CT4LGm?)6rkX]Ap9;)cg,
+:Xp=M>^R`IX>57);OBFYLBS"_e1Gss7S9)tL+\09b!LY7c2&TIA?%9m4n<NhHK^]A5-XNuS&?
+,PUblK>Iu.A7%J~
+]]></IM>
+</Background>
+<Border>
+<Top style="1" color="-6697729"/>
+<Bottom style="1" color="-6697729"/>
+<Left style="1" color="-6697729"/>
+<Right style="1" color="-6697729"/>
+</Border>
+</Style>
 <Style style_name="Head"/>
 <Style style_name="cell"/>
 <Style horizontal_alignment="0" imageLayout="1">

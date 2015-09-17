@@ -10,7 +10,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            课程安排管理
+            课程活动管理
         </h1>
         <ol class="breadcrumb">
             <li><a href="${ctx}/index"><i class="fa fa-dashboard"></i> 首页</a></li>
@@ -22,23 +22,24 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">课程安排列表</h3>
+                        <h3 class="box-title">课程活动列表</h3>
                         <shiro:hasAnyRoles name="root,admin">
                             <div class="box-tools pull-right" style="margin-right: 80px;">
                                 <a class="btn btn-primary btn-flat" style="color: #ffffff;" role="button"
-                                   onclick="addNewSchedule();">新增课程安排</a>
+                                   onclick="addNewSchedule();">添加</a>
                             </div>
                         </shiro:hasAnyRoles>
                     </div>
                     <div class="box-body table-responsive">
-                        <form class="form-horizontal" role="form" method="post" action="${ctx}/schedule/list">
+                        <form class="form-horizontal" role="form" method="post"
+                              action="${ctx}/schedule/${scheduleType}/list">
                             <div class="form-group">
-                                <label for="queryName" class="col-sm-1 control-label">课程:</label>
+                                <label for="queryName" class="col-sm-1 control-label">类型:</label>
 
                                 <div class="col-sm-2">
                                     <input type="text" value="${queryName}" class="form-control"
                                            id="queryName"
-                                           name="queryName" placeholder="课程">
+                                           name="queryName" placeholder="类型">
                                 </div>
 
                                 <label for="queryTeacherId" class="col-sm-1 control-label">教练:</label>
@@ -76,13 +77,13 @@
                         <table id="scheduleTable" style="margin-top: 10px" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th class="text-center">课程</th>
+                                <th class="text-center">类型</th>
                                 <th class="text-center">教练</th>
                                 <th class="text-center">日期</th>
                                 <th class="text-center">开始时间</th>
                                 <th class="text-center">结束时间</th>
                                 <th class="text-center" width="10%">学员</th>
-                                <th class="text-center" style="width: 100px">操 作</th>
+                                <th class="text-center" style="width: 200px">操 作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -107,21 +108,27 @@
                                             </c:forEach>
                                         </td>
                                         <td class="text-center">
-                                            <shiro:hasAnyRoles name="root,coach">
+                                            <shiro:hasAnyRoles name="root,admin">
+                                                <a class="btn btn-primary btn-xs"
+                                                   onclick="finishSchedule(${item.id});">
+                                                    <i class="fa fa-play">结束</i>
+                                                </a>
+                                            </shiro:hasAnyRoles>
+                                            <shiro:hasAnyRoles name="coach">
                                                 <c:if test="${currUserId== item.teacher.id}">
                                                     <a class="btn btn-primary btn-xs"
                                                        onclick="finishSchedule(${item.id});">
-                                                        <i class="fa fa-play"></i>
+                                                        <i class="fa fa-play">结束</i>
                                                     </a>
                                                 </c:if>
                                             </shiro:hasAnyRoles>
 
                                             <a class="btn btn-primary btn-xs" onclick="editSchedule (${item.id});">
-                                                <i class="fa fa-edit"></i>
+                                                <i class="fa fa-edit">详情</i>
                                             </a>
                                             <shiro:hasAnyRoles name="root,admin">
                                                 <a class="btn btn-primary btn-xs" onclick="deleteSchedule(${item.id});">
-                                                    <i class="fa fa-times"></i>
+                                                    <i class="fa fa-times">删除</i>
                                                 </a>
                                             </shiro:hasAnyRoles>
                                         </td>
@@ -152,7 +159,7 @@
 <div class="modal fade" id="cmModal" tabindex="-100" role="dialog" aria-labelledby="mcModalTitle" aria-hidden="true">
     <div class="modal-dialog">
         <form role="form" class="form-horizontal" method="post" id="scheduleEditForm"
-              action="${ctx}/schedule/finish">
+              action="${ctx}/schedule/${scheduleType}/finish">
             <div class="modal-content" style="width: 550px;">
                 <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <div class="modal-header">

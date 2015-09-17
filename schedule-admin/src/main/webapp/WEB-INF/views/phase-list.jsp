@@ -43,10 +43,10 @@
                                         <td class="text-center">${item.recommend}</td>
                                         <td class="text-center">
                                             <a class="btn btn-primary btn-xs" onclick="editPhase(${item.id});">
-                                                <i class="fa fa-edit"></i>
+                                                <i class="fa fa-edit">详情</i>
                                             </a>
                                             <a class="btn btn-primary btn-xs" onclick="deletePhase(${item.id});">
-                                                <i class="fa fa-times"></i>
+                                                <i class="fa fa-times">删除</i>
                                             </a>
                                         </td>
                                     </tr>

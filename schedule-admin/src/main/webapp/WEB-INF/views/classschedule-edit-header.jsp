@@ -18,7 +18,8 @@
         <td><input type="checkbox" name="idCheckbox" qid={{:id}} /></td>
         <td class="text-center">{{:memberName}}</td>
         <td class="text-center">{{:realName}}</td>
-        <td class="text-center">{{:sex}}</td>
+        <td class="text-center">{{:leftTime}}</td>
+        <td class="text-center">{{:sex.title}}</td>
         <td class="text-center">{{:age}}</td>
         <td class="text-center">{{:birthday}}</td>
         <td class="text-center">{{:advisor.realName}}</td>
@@ -107,7 +108,7 @@
     function saveMC(page) {
         if (mcIds.length > 0) {
             var params = {'scheduleId':${schedule.id}, 'mcIds': mcIds};
-            $.post("${ctx}/schedule/mc/save", {
+            $.post("${ctx}/schedule/${scheduleType}/mc/save", {
                 params: JSON.stringify(params)
             }, function (data) {
                 if (data.success) {
@@ -127,7 +128,7 @@
 
 
     function deleteCM(memberId) {
-        $.post("${ctx}/schedule/mc/deleteMember", {
+        $.post("${ctx}/schedule/${scheduleType}/mc/deleteMember", {
             'scheduleId':${schedule.id},
             'memberId': memberId
         }, function (data) {

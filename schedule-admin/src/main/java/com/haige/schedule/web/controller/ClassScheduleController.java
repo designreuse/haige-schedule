@@ -30,7 +30,7 @@ import java.util.List;
  *          ${tags}
  */
 @Controller
-@RequestMapping(value = "/schedule")
+@RequestMapping(value = "/schedule/{scheduleType}")
 public class ClassScheduleController {
 
     @Autowired
@@ -42,7 +42,8 @@ public class ClassScheduleController {
 
 
     @RequestMapping(value = "/list")
-    public ModelAndView list(@RequestParam(value = "queryName", required = false) String queryName,
+    public ModelAndView list(@PathVariable("scheduleType") long scheduleType,
+                             @RequestParam(value = "queryName", required = false) String queryName,
                              @RequestParam(value = "queryTeacherId", required = false) Long queryTeacherId,
                              @RequestParam(value = "queryDate", required = false) Date queryScheduleDate,
                              @PageableDefault Pageable page) {
@@ -58,8 +59,8 @@ public class ClassScheduleController {
         User user = rbacService.getCurrentUser();
         mv.addObject("currUserId", user.getId());
 
-        schedules = scheduleService.queryClassSchedules(queryName, null, queryScheduleDate, page);
-
+        schedules = scheduleService.queryClassSchedules(scheduleType, queryName, null, queryScheduleDate, page);
+        mv.addObject("scheduleType", scheduleType);
         mv.addObject("schedules", schedules.getContent());
 
         mv.addObject("teachers", rbacService.getAllTeacher());
@@ -75,17 +76,23 @@ public class ClassScheduleController {
     }
 
     @RequestMapping(value = "/add")
-    public String showAddPage(ModelMap map) {
+    public String showAddPage(@PathVariable("scheduleType") long scheduleType,
+                              ModelMap map) {
+        User user = rbacService.getCurrentUser();
+        map.addAttribute("currUserId", user.getId());
         map.addAttribute("teachers", rbacService.getAllTeacher());
         map.addAttribute("classes", classService.getAllClassBases());
+        map.addAttribute("scheduleType", scheduleType);
         return "haige.classschedule-add";
     }
 
 
     @RequestMapping(value = "/edit/{id}")
-    public String showEditPage(@PathVariable("id") Long id, ModelMap map) {
+    public String showEditPage(@PathVariable("scheduleType") long scheduleType,
+                               @PathVariable("id") Long id, ModelMap map) {
         map.addAttribute("teachers", rbacService.getAllTeacher());
         map.addAttribute("classes", classService.getAllClassBases());
+        map.addAttribute("scheduleType", scheduleType);
 
         ClassSchedule schedule = null;
         if (id != null) {
@@ -99,35 +106,42 @@ public class ClassScheduleController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(ClassSchedule schedule,
+                       @PathVariable("scheduleType") long scheduleType,
                        @RequestParam(value = "classId", required = false) Long classId,
+                       @RequestParam(value = "creatorId", required = false) Long creatorId,
                        @RequestParam(value = "teacherId", required = false) Long teacherId) {
         schedule.setClassBase(classService.getClassBase(classId));
         schedule.setTeacher(rbacService.getUserById(teacherId));
+        schedule.setCreator(rbacService.getUserById(creatorId));
         scheduleService.saveClassSchedule(schedule);
-        return "redirect:/schedule/list";
+        return "redirect:/schedule/" + scheduleType + "/list";
     }
 
     @RequestMapping(value = "/finish", method = RequestMethod.POST)
-    public String finish(@RequestParam(value = "ev_scheduleid", required = true) Long evScheduleid,
+    public String finish(@PathVariable("scheduleType") long scheduleType,
+                         @RequestParam(value = "ev_scheduleid", required = true) Long evScheduleid,
                          @RequestParam(value = "evaluation", required = true) String evaluation) {
         scheduleService.finishClassSchedule(evScheduleid, evaluation);
-        return "redirect:/schedule/list";
+        return "redirect:/schedule/" + scheduleType + "/list";
     }
 
     @RequestMapping(value = "/saveNew", method = RequestMethod.POST)
     public String saveNew(ClassSchedule schedule,
+                          @PathVariable("scheduleType") long scheduleType,
                           @RequestParam(value = "classId", required = false) Long classId,
+                          @RequestParam(value = "creatorId", required = false) Long creatorId,
                           @RequestParam(value = "teacherId", required = false) Long teacherId) {
         schedule.setClassBase(classService.getClassBase(classId));
         schedule.setTeacher(rbacService.getUserById(teacherId));
+        schedule.setCreator(rbacService.getUserById(creatorId));
         scheduleService.saveClassSchedule(schedule);
-        return "redirect:/schedule/edit/" + schedule.getId();
+        return "redirect:/schedule/" + scheduleType + "/edit/" + schedule.getId();
     }
 
     @RequestMapping(value = "/delete/{id}")
-    public String delete(@PathVariable("id") long id) {
+    public String delete(@PathVariable("scheduleType") long scheduleType, @PathVariable("id") long id) {
         scheduleService.deleteClassSchedule(id);
-        return "redirect:/schedule/list";
+        return "redirect:/schedule/" + scheduleType + "/list";
     }
 
     @RequestMapping(value = "/mc/save", method = RequestMethod.POST)

@@ -45,10 +45,10 @@
                                         <td class="text-center">${item.comment}</td>
                                         <td class="text-center">
                                             <a class="btn btn-primary btn-xs" onclick="editClassBase(${item.id});">
-                                                <i class="fa fa-edit"></i>
+                                                <i class="fa fa-edit">详情</i>
                                             </a>
                                             <a class="btn btn-primary btn-xs" onclick="deleteClassBase(${item.id});">
-                                                <i class="fa fa-times"></i>
+                                                <i class="fa fa-times">删除</i>
                                             </a>
                                         </td>
                                     </tr>

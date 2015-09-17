@@ -116,12 +116,12 @@
                                         <td class="text-center">${item.address}</td>
                                         <td class="text-center">
                                             <a class="btn btn-primary btn-xs" onclick="editMember(${item.id});">
-                                                <i class="fa fa-edit"></i>
+                                                <i class="fa fa-edit">详情</i>
                                             </a>
 
                                             <shiro:hasAnyRoles name="root,admin">
                                                 <a class="btn btn-primary btn-xs" onclick="deleteMember(${item.id});">
-                                                    <i class="fa fa-times"></i>
+                                                    <i class="fa fa-times">删除</i>
                                                 </a>
                                             </shiro:hasAnyRoles>
                                         </td>

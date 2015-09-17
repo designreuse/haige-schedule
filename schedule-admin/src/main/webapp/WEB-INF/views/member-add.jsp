@@ -37,8 +37,6 @@
 
 
                             <div class="form-group">
-
-
                                 <label for="sex" class="col-sm-2 control-label">性别</label>
 
                                 <div class="col-sm-2">

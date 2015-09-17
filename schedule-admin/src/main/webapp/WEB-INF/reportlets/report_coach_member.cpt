@@ -24,11 +24,6 @@
 <![CDATA[]]></O>
 </Parameter>
 <Parameter>
-<Attributes name="currUserId"/>
-<O>
-<![CDATA[]]></O>
-</Parameter>
-<Parameter>
 <Attributes name="filter_left_time"/>
 <O>
 <![CDATA[]]></O>
@@ -46,8 +41,6 @@
 </Connection>
 <Query>
 <![CDATA[select * from view_members
-
-where u_id=${currUserId} 
 
 ${if(len(filter_member_name) == 0,"","and m_memberName = '" + filter_member_name+ "'")}
 ${if(len(filter_real_name) == 0,"","and m_realName = '" + filter_real_name + "'")}
@@ -109,7 +102,7 @@ where ml_id is not null]]></Query>
 <RowHeight defaultValue="723900">
 <![CDATA[723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
 <ColumnWidth defaultValue="2743200">
-<![CDATA[2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<![CDATA[2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
 <CellElementList>
 <C c="0" r="0" s="0">
 <O>

@@ -34,12 +34,12 @@ public class ClassScheduleService {
     }
 
 
-    public Page<ClassSchedule> queryClassSchedules(String classBasename, Long queryTeacherId, Date queryScheduleDate, Pageable page) {
+    public Page<ClassSchedule> queryClassSchedules(Long type, String classBasename, Long queryTeacherId, Date queryScheduleDate, Pageable page) {
         List<Object> params = new ArrayList<>();
         List<String> items = new ArrayList<String>();
 
         String sql = "select * from class_schedule cs \n" +
-                "left join classes c on cs.classId = c.id where 1=1 ";
+                "left join classes c on cs.classId = c.id where c.id= " + type + " ";
         if (!StringUtils.isEmpty(classBasename)) {
             sql += " and ( c.name like :classBasename or c.type like :classBasename)";
             items.add("classBasename");

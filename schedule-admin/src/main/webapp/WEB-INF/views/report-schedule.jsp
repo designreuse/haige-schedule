@@ -4,7 +4,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <aside class="right-side">
     <section class="content-header">
-        <h1>进行中的教学计划</h1>
+        <h1>进行中的教学/活动</h1>
     </section>
 
     <section class="content">

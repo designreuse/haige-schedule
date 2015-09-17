@@ -4,12 +4,12 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <aside class="right-side">
     <section class="content-header">
-        <h1>进行中的教学计划</h1>
+        <h1>会员信息</h1>
     </section>
 
     <section class="content">
         <iframe id="reportFrame" style="margin-left: 50px;"
-                src="${ctx}/ReportServer?reportlet=report_member.cpt&op=view"
+                src="${ctx}/ReportServer?reportlet=report_member.cpt&currUserId=${currUserId}&op=view"
                 width="90%" height="800px"></iframe>
     </section>
 

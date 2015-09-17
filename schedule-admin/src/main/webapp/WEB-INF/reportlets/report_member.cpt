@@ -4,11 +4,6 @@
 <TableData name="ds_member" class="com.fr.data.impl.DBTableData">
 <Parameters>
 <Parameter>
-<Attributes name="filter_linkman_id"/>
-<O>
-<![CDATA[]]></O>
-</Parameter>
-<Parameter>
 <Attributes name="filter_member_name"/>
 <O>
 <![CDATA[]]></O>
@@ -20,6 +15,11 @@
 </Parameter>
 <Parameter>
 <Attributes name="filter_sex"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="currUserId"/>
 <O>
 <![CDATA[]]></O>
 </Parameter>
@@ -43,6 +43,8 @@
 <![CDATA[select * from view_members
 
 where 1=1
+
+${if(len(currUserId) == 0,"","and u_id = '" + currUserId+ "'")}
 
 ${if(len(filter_member_name) == 0,"","and m_memberName = '" + filter_member_name+ "'")}
 ${if(len(filter_real_name) == 0,"","and m_realName = '" + filter_real_name + "'")}
@@ -94,7 +96,7 @@ order by m_memberName]]></Query>
 <RowHeight defaultValue="723900">
 <![CDATA[723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
 <ColumnWidth defaultValue="2743200">
-<![CDATA[0,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<![CDATA[0,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
 <CellElementList>
 <C c="0" r="0" s="0">
 <O>

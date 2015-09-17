@@ -16,7 +16,7 @@
         return $("#scheduleAddForm").validate({
             rules: {
                 "classId": {required: true},
-                "teacherId": {required: true},
+                "costTimes2": {required: true},
                 "scheduleDate": {required: true},
                 "startTime": {required: true},
                 "endTime": {required: true}

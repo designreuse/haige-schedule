@@ -39,7 +39,8 @@
                         <shiro:hasAnyRoles name="root">
                             <li><a href="${ctx}/classbase/list"><i class="fa fa-angle-double-right"></i>课程基本信息</a></li>
                         </shiro:hasAnyRoles>
-                        <li><a href="${ctx}/schedule/list"><i class="fa fa-angle-double-right"></i>进行中的课程</a></li>
+                        <li><a href="${ctx}/schedule/1/list"><i class="fa fa-angle-double-right"></i>进行中的课程</a></li>
+                        <li><a href="${ctx}/schedule/2/list"><i class="fa fa-angle-double-right"></i>进行中的活动</a></li>
                     </ul>
                 </li>
             </shiro:hasAnyRoles>
@@ -60,7 +61,7 @@
             <shiro:hasAnyRoles name="root,admin">
                 <li class="treeview active">
                     <a href="#">
-                        <i class="fa fa-edit"></i> <span>系统管理</span>
+                        <i class="fa fa-umbrella"></i> <span>系统管理</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
@@ -80,7 +81,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="${ctx}/report/schedule"><i class="fa fa-angle-double-right"></i>进行中的课程</a></li>
+                        <li><a href="${ctx}/report/schedule"><i class="fa fa-angle-double-right"></i>进行中的课程/活动</a></li>
                         <li><a href="${ctx}/report/his_schedule"><i class="fa fa-angle-double-right"></i>历史课程</a></li>
                         <shiro:hasAnyRoles name="root,admin,advisor">
                             <li><a href="${ctx}/report/member"><i class="fa fa-angle-double-right"></i>会员信息</a></li>

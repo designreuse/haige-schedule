@@ -44,7 +44,7 @@
     }
 
     function addNewSchedule() {
-        window.location.href = "${ctx}/schedule/add";
+        window.location.href = "${ctx}/schedule/${scheduleType}/add";
     }
 
     function finishSchedule(id) {
@@ -54,12 +54,12 @@
 
     function deleteSchedule(id) {
         if (window.confirm("您确定要删除该会员吗？")) {
-            window.location.href = "${ctx}/schedule/delete/" + id;
+            window.location.href = "${ctx}/schedule/${scheduleType}/delete/" + id;
         }
     }
 
     function editSchedule(id) {
-        window.location.href = "${ctx}/schedule/edit/" + id;
+        window.location.href = "${ctx}/schedule/${scheduleType}/edit/" + id;
     }
 
     $(document).ready(function () {
@@ -71,7 +71,7 @@
         });
 
         if (${totalPage>0}) {
-            createPaginator("paginator", ${page}, ${totalPage}, "${ctx}/schedule/list");
+            createPaginator("paginator", ${page}, ${totalPage}, "${ctx}/schedule/${scheduleType}/list");
         }
     });
 

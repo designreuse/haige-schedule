@@ -10,31 +10,35 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">修改课程安排</h3>
+                        <h3 class="box-title">添加课程活动</h3>
                     </div>
                     <form role="form" class="form-horizontal" method="post" id="scheduleAddForm"
-                          action="${ctx}/schedule/saveNew">
+                          action="${ctx}/schedule/${scheduleType}/saveNew">
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="classId" class="col-sm-2 control-label">课程</label>
-
-                                <div class="col-sm-3">
-                                    <select name="classId" id="classId" style="width: 100%">
-                                        <c:forEach items="${classes}" var="r">
-                                            <option value="${r.id}">${r.name}</option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
+                                <input hidden name="classId" id="classId" value="${scheduleType}">
+                                <input hidden name="creatorId" id="creatorId" value="${currUserId}">
 
                                 <label for="teacherId" class="col-sm-2 control-label">教练</label>
 
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     <select name="teacherId" id="teacherId" style="width: 100%">
                                         <c:forEach items="${teachers}" var="r">
                                             <option value="${r.id}">${r.realName}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
+                                <c:if test="${scheduleType==1}">
+                                    <input hidden name="costTimes" id="costTimes1" value="1">
+                                </c:if>
+                                <c:if test="${scheduleType==2}">
+                                    <label for="costTimes2" class="col-sm-2 control-label">扣除课时</label>
+
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" name="costTimes" id="costTimes2"
+                                               placeholder="扣除课时">
+                                    </div>
+                                </c:if>
                             </div>
 
                             <div class="form-group">
