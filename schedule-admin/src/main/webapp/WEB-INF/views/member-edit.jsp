@@ -11,6 +11,8 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">修改会员</h3>
+
+                        <img width="200px" height="200px" src="${ctx}/member/getImg?" id="imgId">
                     </div>
                     <form role="form" class="form-horizontal" method="post" id="classMemberEditForm"
                           action="${ctx}/member/save">

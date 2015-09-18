@@ -18,7 +18,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import sun.misc.BASE64Decoder;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -141,6 +148,7 @@ public class MemberController {
         map.addAttribute("advisors", rbacService.getAllAdvisor());
         map.addAttribute("phases", phaseService.getAllPhases());
         map.addAttribute("sex", Constants.Sex.values());
+        map.addAttribute("memberId", id);
 
         Member member = null;
         if (id != null) {
@@ -191,5 +199,92 @@ public class MemberController {
     public String delete(@PathVariable("id") long id) {
         memberService.deleteMember(id);
         return "redirect:/member/list";
+    }
+
+
+    @RequestMapping(value = "/pic/{memberId}")
+    public String pic(@PathVariable("memberId") long memberId, ModelMap map) {
+        map.addAttribute("memberId", memberId);
+        return "member-pic";
+    }
+
+    @RequestMapping(value = "/savePic/{memberId}")
+    public String savePic(@PathVariable("memberId") long memberId,
+                          HttpServletRequest request, HttpServletResponse response) {
+
+
+        String pic = request.getParameter("pic");
+        String pic1 = request.getParameter("pic1");
+        String pic2 = request.getParameter("pic2");
+        String pic3 = request.getParameter("pic3");
+
+        String path = request.getSession().getServletContext().getRealPath("/") + "member_pic/";
+
+        try {
+            if (!pic.equals("") && pic != null) {
+
+                //原图
+                File file = new File(path + "src.png");
+                FileOutputStream fout = null;
+                fout = new FileOutputStream(file);
+                fout.write(new BASE64Decoder().decodeBuffer(pic));
+                fout.close();
+            }
+            Member member = memberService.getMemberById(memberId);
+            member.setPic(new BASE64Decoder().decodeBuffer(pic1));
+            memberService.saveMember(member);
+
+
+            File file1 = new File(path + memberId + "_1.png");
+            FileOutputStream fout1 = null;
+            fout1 = new FileOutputStream(file1);
+            fout1.write(new BASE64Decoder().decodeBuffer(pic1));
+            fout1.close();
+
+
+            File file2 = new File(path + memberId + "_2.png");
+            FileOutputStream fout2 = null;
+            fout2 = new FileOutputStream(file2);
+            fout2.write(new BASE64Decoder().decodeBuffer(pic2));
+            fout2.close();
+
+
+            File file3 = new File(path + memberId + "_3.png");
+            FileOutputStream fout3 = null;
+            fout3 = new FileOutputStream(file3);
+            fout3.write(new BASE64Decoder().decodeBuffer(pic3));
+            fout3.close();
+
+            return "redirect:/member/list";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "member-pic";
+
+        }
+
+//        out.println("{\"status\":1}");
+    }
+
+
+    @RequestMapping("getImg")
+    public void getImg(HttpServletRequest request, HttpServletResponse response) {
+//        String imgId = request.getParameter("imgId");
+        Member member = memberService.getMemberById(1);
+
+        BASE64Decoder decoder = new BASE64Decoder();
+        try {
+            byte[] bytes = member.getPic();
+            for (int i = 0; i < bytes.length; ++i) {
+                if (bytes[i] < 0) {// 调整异常数据
+                    bytes[i] += 256;
+                }
+            }
+            ServletOutputStream out = response.getOutputStream();
+            out.write(bytes);
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

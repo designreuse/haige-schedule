@@ -51,6 +51,10 @@
         window.location.href = "${ctx}/member/edit/" + id;
     }
 
+    function picMember(id) {
+        window.location.href = "${ctx}/member/pic/" + id;
+    }
+
     $(document).ready(function () {
         if (${totalPage>0}) {
             createPaginator("paginator", ${page}, ${totalPage}, "${ctx}/member/list");

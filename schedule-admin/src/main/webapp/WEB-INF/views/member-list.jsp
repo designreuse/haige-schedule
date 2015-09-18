@@ -121,6 +121,13 @@
                                         <td class="text-center">${item.advisor.realName}</td>
                                         <td class="text-center">${item.address}</td>
                                         <td class="text-center">
+
+                                            <shiro:hasAnyRoles name="root,admin,advisor">
+                                                <a class="btn btn-primary btn-xs" target="_blank "
+                                                   onclick="picMember(${item.id});">
+                                                    <i class="fa fa-edit">照片</i>
+                                                </a>
+                                            </shiro:hasAnyRoles>
                                             <a class="btn btn-primary btn-xs" onclick="editMember(${item.id});">
                                                 <i class="fa fa-edit">详情</i>
                                             </a>
