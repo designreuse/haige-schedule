@@ -100,7 +100,7 @@
                                 <th class="text-center">阶段</th>
                                 <th class="text-center">顾问</th>
                                 <th class="text-center">地址</th>
-                                <th class="text-center">操 作</th>
+                                <th class="text-center" style="width: 210px">操 作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -122,15 +122,16 @@
                                         <td class="text-center">${item.address}</td>
                                         <td class="text-center">
 
-                                            <shiro:hasAnyRoles name="root,admin,advisor">
-                                                <a class="btn btn-primary btn-xs" target="_blank "
-                                                   onclick="picMember(${item.id});">
-                                                    <i class="fa fa-edit">照片</i>
-                                                </a>
-                                            </shiro:hasAnyRoles>
                                             <a class="btn btn-primary btn-xs" onclick="editMember(${item.id});">
                                                 <i class="fa fa-edit">详情</i>
                                             </a>
+
+                                            <shiro:hasAnyRoles name="root,admin,advisor">
+                                                <a class="btn btn-primary btn-xs" target="_blank "
+                                                   onclick="picMember(${item.id});">
+                                                    <i class="fa fa-edit">设置照片</i>
+                                                </a>
+                                            </shiro:hasAnyRoles>
 
                                             <shiro:hasAnyRoles name="root,admin">
                                                 <a class="btn btn-primary btn-xs" onclick="deleteMember(${item.id});">

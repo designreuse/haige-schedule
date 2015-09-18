@@ -51,7 +51,8 @@ public class Member {
     @Column(length = 50, nullable = false)
     private String realName;
 
-    @Column(length = 50)
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
     private byte[] pic;
 
     @Column(length = 500)

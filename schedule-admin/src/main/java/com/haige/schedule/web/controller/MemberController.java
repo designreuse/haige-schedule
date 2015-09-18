@@ -2,6 +2,7 @@ package com.haige.schedule.web.controller;
 
 import com.haige.schedule.entity.ClassSchedule;
 import com.haige.schedule.entity.Member;
+import com.haige.schedule.entity.Result;
 import com.haige.schedule.service.ClassScheduleService;
 import com.haige.schedule.service.MemberService;
 import com.haige.schedule.service.PhaseService;
@@ -17,14 +18,13 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import sun.misc.BASE64Decoder;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -209,69 +209,36 @@ public class MemberController {
     }
 
     @RequestMapping(value = "/savePic/{memberId}")
-    public String savePic(@PathVariable("memberId") long memberId,
+    public Result savePic(@PathVariable("memberId") long memberId,
                           HttpServletRequest request, HttpServletResponse response) {
-
-
-        String pic = request.getParameter("pic");
-        String pic1 = request.getParameter("pic1");
-        String pic2 = request.getParameter("pic2");
-        String pic3 = request.getParameter("pic3");
-
-        String path = request.getSession().getServletContext().getRealPath("/") + "member_pic/";
-
+        Result result = new Result(false, "Failure");
         try {
-            if (!pic.equals("") && pic != null) {
+            String contentType = request.getContentType();
 
-                //原图
-                File file = new File(path + "src.png");
-                FileOutputStream fout = null;
-                fout = new FileOutputStream(file);
-                fout.write(new BASE64Decoder().decodeBuffer(pic));
-                fout.close();
+            if (contentType.indexOf("multipart/form-data") >= 0) {
+
+                MultipartHttpServletRequest mureq = (MultipartHttpServletRequest) request;
+
+                Map<String, MultipartFile> files = mureq.getFileMap();
+                Member member = memberService.getMemberById(memberId);
+                member.setPic(files.get("__avatar1").getBytes());
+                memberService.saveMember(member);
+
+                result.setSuccess(true);
+                result.setMessage("Success!");
+
             }
-            Member member = memberService.getMemberById(memberId);
-            member.setPic(new BASE64Decoder().decodeBuffer(pic1));
-            memberService.saveMember(member);
 
-
-            File file1 = new File(path + memberId + "_1.png");
-            FileOutputStream fout1 = null;
-            fout1 = new FileOutputStream(file1);
-            fout1.write(new BASE64Decoder().decodeBuffer(pic1));
-            fout1.close();
-
-
-            File file2 = new File(path + memberId + "_2.png");
-            FileOutputStream fout2 = null;
-            fout2 = new FileOutputStream(file2);
-            fout2.write(new BASE64Decoder().decodeBuffer(pic2));
-            fout2.close();
-
-
-            File file3 = new File(path + memberId + "_3.png");
-            FileOutputStream fout3 = null;
-            fout3 = new FileOutputStream(file3);
-            fout3.write(new BASE64Decoder().decodeBuffer(pic3));
-            fout3.close();
-
-            return "redirect:/member/list";
         } catch (Exception e) {
             e.printStackTrace();
-            return "member-pic";
 
         }
-
-//        out.println("{\"status\":1}");
+        return result;
     }
 
-
-    @RequestMapping("getImg")
-    public void getImg(HttpServletRequest request, HttpServletResponse response) {
-//        String imgId = request.getParameter("imgId");
-        Member member = memberService.getMemberById(1);
-
-        BASE64Decoder decoder = new BASE64Decoder();
+    @RequestMapping("/getImg/{memberId}")
+    public void getImg(@PathVariable("memberId") long memberId, HttpServletResponse response) {
+        Member member = memberService.getMemberById(memberId);
         try {
             byte[] bytes = member.getPic();
             for (int i = 0; i < bytes.length; ++i) {
@@ -287,4 +254,6 @@ public class MemberController {
             e.printStackTrace();
         }
     }
+
+
 }

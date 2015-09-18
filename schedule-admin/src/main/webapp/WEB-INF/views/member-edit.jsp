@@ -12,7 +12,12 @@
                     <div class="box-header">
                         <h3 class="box-title">修改会员</h3>
 
-                        <img width="200px" height="200px" src="${ctx}/member/getImg?" id="imgId">
+                        <div class="form-group">
+                            <div class="col-sm-2 col-sm-offset-9" style="padding-top: 10px">
+                                <img width="90px" height="90px" src="${ctx}/member/getImg/${memberId}" id="imgId">
+                            </div>
+                        </div>
+
                     </div>
                     <form role="form" class="form-horizontal" method="post" id="classMemberEditForm"
                           action="${ctx}/member/save">
@@ -21,7 +26,9 @@
 
 
                             <div class="form-group">
+
                                 <label for="memberName" class="col-sm-2 control-label">用户名</label>
+
 
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="memberName" id="memberName"
