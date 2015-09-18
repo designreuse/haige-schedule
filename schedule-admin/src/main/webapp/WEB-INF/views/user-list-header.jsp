@@ -51,6 +51,13 @@
         window.location.href = "${ctx}/rbac/editUser/" + id;
     }
 
+    function resetPassword(id) {
+        if (window.confirm("您确定重置该用户密码吗？")) {
+            window.location.href = "${ctx}/rbac/resetPassword/" + id;
+        }
+    }
+
+
     $(document).ready(function () {
         if (${totalPage>0}) {
             createPaginator("paginator", ${page}, ${totalPage}, "${ctx}/rbac/userList");

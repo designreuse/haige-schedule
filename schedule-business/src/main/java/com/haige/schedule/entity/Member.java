@@ -45,6 +45,7 @@ public class Member {
     private Date startDate;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @Column(nullable = false)
     private Date endDate;
 
     @Column(length = 50, nullable = false)

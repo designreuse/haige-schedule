@@ -237,13 +237,16 @@
 
     $(document).ready(function () {
         $("#scheduleDate").datetimepicker({
-            format: 'yyyy-mm-dd', language: 'zh-CN',
+            initialDate: new Date(),
+            format: 'yyyy-mm-dd',
+            language: 'zh-CN',
             pickDate: true,
             pickTime: false,
             minView: 2, autoclose: true
         });
 
         $("#startTime").datetimepicker({
+            initialDate: new Date(),
             format: 'hh:ii',
             language: 'zh-CN',
             pickDate: false,
@@ -274,6 +277,7 @@
         });
 
         $("#endTime").datetimepicker({
+            initialDate: new Date(),
             format: 'hh:ii',
             language: 'zh-CN',
             pickDate: false,

@@ -38,6 +38,9 @@
                                 <small><fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/></small>
                             </p>
                         </li>
+                        <li class="user-body bg-light-blue">
+                            <a href="${ctx}/rbac/toChangePassword" class="btn btn-default btn-flat">修改密码</a>
+                        </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
 

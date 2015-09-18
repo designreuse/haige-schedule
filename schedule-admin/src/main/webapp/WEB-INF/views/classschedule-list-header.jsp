@@ -64,6 +64,7 @@
 
     $(document).ready(function () {
         $("#queryDate").datetimepicker({
+            initialDate: new Date(),
             format: 'yyyy-mm-dd', language: 'zh-CN',
             pickDate: true,
             pickTime: false,

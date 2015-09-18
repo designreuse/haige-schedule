@@ -3,6 +3,7 @@ package com.haige.schedule.web.controller;
 import com.haige.schedule.entity.User;
 import com.haige.schedule.service.RBACService;
 import com.haige.schedule.utils.Constants;
+import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -67,7 +68,8 @@ public class RBACController {
 
     @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
     public String saveUser(User user) {
-        user.setPassword(Constants.DEFAULT_PASSWORD);
+        if (user.getId() == null)
+            user.setPassword(Constants.DEFAULT_PASSWORD);
         rbacService.saveUser(user);
         return "redirect:/rbac/userList";
     }
@@ -75,6 +77,41 @@ public class RBACController {
     @RequestMapping(value = "/deleteUser/{id}")
     public String deleteUser(@PathVariable("id") long id) {
         rbacService.deleteUser(id);
+        return "redirect:/rbac/userList";
+    }
+
+    @RequestMapping(value = "/toChangePassword")
+    public String toChangePassword() {
+        return "change-password";
+    }
+
+
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+    public ModelAndView changePassword(@RequestParam(value = "newPassword", required = true) String newPassword,
+                                       @RequestParam(value = "confirmPassword", required = true) String confirmPassword) {
+
+        if (StringUtils.isNullOrEmpty(newPassword) || StringUtils.isNullOrEmpty(confirmPassword)) {
+            ModelAndView mav = new ModelAndView("/change-password");
+            mav.addObject("checkMessage", "密码不可为空");
+            return mav;
+        }
+        if (!newPassword.equals(confirmPassword)) {
+            ModelAndView mav = new ModelAndView("/change-password");
+            mav.addObject("checkMessage", "两次密码输入不一致");
+            return mav;
+        }
+        User user = rbacService.getCurrentUser();
+        user.setPassword(newPassword);
+        rbacService.saveUser(user);
+        ModelAndView mav = new ModelAndView("redirect:/index");
+        return mav;
+    }
+
+    @RequestMapping(value = "/resetPassword/{id}", method = RequestMethod.GET)
+    public String resetPassword(@PathVariable("id") long userId) {
+        User user = rbacService.getUserById(userId);
+        user.setPassword(Constants.DEFAULT_PASSWORD);
+        rbacService.saveUser(user);
         return "redirect:/rbac/userList";
     }
 }

@@ -1,3 +1,4 @@
+<%@ page import="java.util.Date" %>
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -92,6 +93,7 @@
                                 <th class="text-center">昵称</th>
                                 <th class="text-center">姓名</th>
                                 <th class="text-center">剩余课时</th>
+                                <th class="text-center">有效期</th>
                                 <th class="text-center">性别</th>
                                 <th class="text-center">年龄</th>
                                 <th class="text-center">出生日期</th>
@@ -108,6 +110,10 @@
                                         <td class="text-center">${item.memberName}</td>
                                         <td class="text-center">${item.realName}</td>
                                         <td class="text-center">${item.leftTime}</td>
+                                        <c:set var="nowDate" value="<%=new Date()%>"></c:set>
+                                        <td class="text-center"
+                                                <c:if test="${item.endDate < nowDate}"> style="background-color: indianred" </c:if>
+                                                >${item.endDate}</td>
                                         <td class="text-center">${item.sex.title}</td>
                                         <td class="text-center">${item.age}</td>
                                         <td class="text-center">${item.birthday}</td>

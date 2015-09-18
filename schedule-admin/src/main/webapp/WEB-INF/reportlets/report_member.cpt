@@ -40,8 +40,12 @@
 <![CDATA[JDBC]]></DatabaseName>
 </Connection>
 <Query>
-<![CDATA[select * from view_members
-
+<![CDATA[select * from
+(SELECT tm.*, sum(mp.purchaseCount) as m_count
+from view_members tm
+left join member_payment mp on tm.m_id = mp.memberId
+group by tm.m_id
+) re
 where 1=1
 
 ${if(len(currUserId) == 0,"","and u_id = '" + currUserId+ "'")}
@@ -53,7 +57,10 @@ ${if(len(filter_left_time) == 0,"","and m_leftTime = '" + filter_left_time + "'"
 ${if(len(filter_advisor_id) == 0,"","and u_id = '" + filter_advisor_id + "'")}
 
 
-order by m_memberName]]></Query>
+
+
+order by re.m_memberName
+]]></Query>
 </TableData>
 <TableData name="fil_realName" class="com.fr.data.impl.DBTableData">
 <Parameters/>
@@ -123,12 +130,27 @@ order by m_memberName]]></Query>
 <![CDATA[剩余课时]]></O>
 <Expand/>
 </C>
-<C c="5" r="0" s="1">
+<C c="5" r="0" s="0">
+<O>
+<![CDATA[有效期]]></O>
+<Expand/>
+</C>
+<C c="6" r="0" s="1">
 <O>
 <![CDATA[性别]]></O>
 <Expand/>
 </C>
-<C c="6" r="0" s="0">
+<C c="7" r="0" s="0">
+<O>
+<![CDATA[购买总课时]]></O>
+<Expand/>
+</C>
+<C c="8" r="0" s="0">
+<O>
+<![CDATA[产品类型]]></O>
+<Expand/>
+</C>
+<C c="9" r="0" s="0">
 <O>
 <![CDATA[详细信息]]></O>
 <Expand/>
@@ -177,7 +199,9 @@ order by m_memberName]]></Query>
 <Attributes dsName="ds_member" columnName="m_realName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -189,7 +213,9 @@ order by m_memberName]]></Query>
 <Attributes dsName="ds_member" columnName="m_memberName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -201,7 +227,9 @@ order by m_memberName]]></Query>
 <Attributes dsName="ds_member" columnName="u_realName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -213,7 +241,9 @@ order by m_memberName]]></Query>
 <Attributes dsName="ds_member" columnName="m_leftTime"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -222,17 +252,61 @@ order by m_memberName]]></Query>
 </C>
 <C c="5" r="1" s="3">
 <O t="DSColumn">
-<Attributes dsName="ds_member" columnName="m_sex"/>
+<Attributes dsName="ds_member" columnName="m_endDate"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
 </O>
 <Expand dir="0"/>
 </C>
-<C c="6" r="1" s="2">
+<C c="6" r="1" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds_member" columnName="m_sex"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="7" r="1" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds_member" columnName="m_count"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="8" r="1" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds_member" columnName="m_proType"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="9" r="1" s="2">
 <O>
 <![CDATA[查看详情]]></O>
 <NameJavaScriptGroup>

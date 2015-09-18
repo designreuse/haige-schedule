@@ -25,9 +25,16 @@
     }
 
     $(document).ready(function () {
-        $("#scheduleDate").datetimepicker({format: 'yyyy-mm-dd', language: 'zh-CN', minView: 2, autoclose: true});
+        $("#scheduleDate").datetimepicker({
+            initialDate: new Date(),
+            format: 'yyyy-mm-dd',
+            language: 'zh-CN',
+            minView: 2,
+            autoclose: true
+        });
 
         $("#startTime").datetimepicker({
+            initialDate: new Date(),
             format: 'hh:ii',
             language: 'zh-CN',
             pickDate: false,
@@ -58,6 +65,7 @@
         });
 
         $("#endTime").datetimepicker({
+            initialDate: new Date(),
             format: 'hh:ii',
             language: 'zh-CN',
             pickDate: false,

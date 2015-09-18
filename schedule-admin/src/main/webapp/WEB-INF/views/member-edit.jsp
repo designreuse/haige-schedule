@@ -77,6 +77,7 @@
                                         </select>
                                     </div>
                                 </shiro:hasAnyRoles>
+
                             </div>
 
                             <div class="form-group">
@@ -87,12 +88,13 @@
                                     <input type="text" class="form-control" name="birthday" id="birthday"
                                            value="${member.birthday}" placeholder="出生日期">
                                 </div>
+
                                 <shiro:hasAnyRoles name="root,admin,advisor,coach">
                                     <label for="proType" class="col-sm-2 control-label">产品类型</label>
 
                                     <div class="col-sm-2">
                                         <input type="text" class="form-control" name="proType" id="proType"
-                                               placeholder="产品类型">
+                                               value="${member.proType}" placeholder="产品类型">
                                     </div>
 
                                     <label for="registrationChannel" class="col-sm-2 control-label">报名渠道</label>
@@ -111,17 +113,28 @@
                                 <shiro:hasAnyRoles name="root,admin,advisor,coach">
                                     <label for="address" class="col-sm-2 control-label">地址</label>
 
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-2">
                                     <textarea type="text" class="form-control" name="address" id="address"
                                               placeholder="地址">${member.address}</textarea>
                                     </div>
                                 </shiro:hasAnyRoles>
                                 <label for="comment" class="col-sm-2 control-label">备注</label>
 
-                                <div class="col-sm-4">
+                                <div class="col-sm-2">
                                     <textarea type="text" class="form-control" name="comment" id="comment"
                                               placeholder="备注">${member.comment}</textarea>
                                 </div>
+
+
+                                <label for="endDate" class="col-sm-2 control-label">有效期</label>
+
+                                <div class="col-sm-2">
+
+                                    <input type="text" class="form-control" name="endDate" id="endDate"
+                                    <shiro:hasAnyRoles name="advisor,coach,cashier"> disabled</shiro:hasAnyRoles>
+                                           value="${member.endDate}" placeholder="有效期">
+                                </div>
+
                             </div>
 
 

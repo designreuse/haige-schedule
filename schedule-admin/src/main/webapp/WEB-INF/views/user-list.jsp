@@ -67,7 +67,7 @@
                                 <th class="text-center">角色</th>
                                 <th class="text-center">联系电话</th>
                                 <th class="text-center">微信</th>
-                                <th class="text-center">操 作</th>
+                                <th class="text-center" style="width: 210px">操 作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -82,6 +82,9 @@
                                         <td class="text-center">
                                             <a class="btn btn-primary btn-xs" onclick="editUser(${item.id});">
                                                 <i class="fa fa-edit">详情</i>
+                                            </a>
+                                            <a class="btn btn-primary btn-xs" onclick="resetPassword(${item.id});">
+                                                <i class="fa fa-edit">重置密码</i>
                                             </a>
                                             <a class="btn btn-primary btn-xs" onclick="deleteUser(${item.id});">
                                                 <i class="fa fa-times">删除</i>

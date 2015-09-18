@@ -69,7 +69,8 @@
                 "memberName": {required: true},
                 "sex": {required: true},
                 "birthday": {required: true},
-                "realName": {required: true}
+                "realName": {required: true},
+                "endDate": {required: true}
             }
         });
     }
@@ -77,6 +78,16 @@
 
     $(document).ready(function () {
         $("#birthday").datetimepicker({
+            initialDate: new Date(),
+            format: 'yyyy-mm-dd',
+            language: 'zh-CN',
+            pickDate: true,
+            pickTime: false,
+            minView: 2,
+            autoclose: true
+        });
+        $("#endDate").datetimepicker({
+            initialDate: new Date(),
             format: 'yyyy-mm-dd',
             language: 'zh-CN',
             pickDate: true,
