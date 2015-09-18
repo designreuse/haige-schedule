@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">编辑课程</h3>
+                        <h3 class="box-title">编辑类别</h3>
                     </div>
                     <form id="classBaseEditForm" role="form" class="form-horizontal" method="post"
                           action="${ctx}/classbase/save">
@@ -17,7 +17,7 @@
                             <input type="hidden" id="id" name="id" value="${classbase.id}"/>
 
                             <div class="form-group">
-                                <label for="name" class="col-sm-2 control-label">课程名称</label>
+                                <label for="name" class="col-sm-2 control-label">类别名称</label>
 
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="name" id="name" placeholder="名称"
@@ -26,7 +26,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="comment" class="col-sm-2 control-label">课程介绍</label>
+                                <label for="comment" class="col-sm-2 control-label">类别介绍</label>
 
                                 <div class="col-sm-10">
                                     <textarea type="text" class="form-control" name="recommend" id="recommend"

@@ -8,13 +8,13 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">添加课程</h3>
+                        <h3 class="box-title">添加类别</h3>
                     </div>
                     <form role="form" class="form-horizontal" method="post" id="classBaseAddForm"
                           action="${ctx}/classbase/save">
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="name" class="col-sm-2 control-label">课程名称</label>
+                                <label for="name" class="col-sm-2 control-label">类别名称</label>
 
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="name" id="name" placeholder="名称">
@@ -22,7 +22,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="recommend" class="col-sm-2 control-label">课程介绍</label>
+                                <label for="recommend" class="col-sm-2 control-label">类别介绍</label>
 
                                 <div class="col-sm-10">
                                     <textarea type="text" class="form-control" name="recommend" id="recommend"

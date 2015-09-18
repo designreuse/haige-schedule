@@ -6,7 +6,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            课程管理
+            类别管理
         </h1>
         <ol class="breadcrumb">
             <li><a href="${ctx}/index"><i class="fa fa-dashboard"></i> 首页</a></li>
@@ -18,7 +18,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">课程列表</h3>
+                        <h3 class="box-title">类别列表</h3>
 
                         <div class="box-tools pull-right" style="margin-right: 80px;">
                             <a class="btn btn-primary btn-flat" style="color: #ffffff;" role="button"

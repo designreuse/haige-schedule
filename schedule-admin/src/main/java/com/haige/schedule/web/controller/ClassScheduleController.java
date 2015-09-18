@@ -6,6 +6,7 @@ import com.haige.schedule.entity.User;
 import com.haige.schedule.service.ClassBaseService;
 import com.haige.schedule.service.ClassScheduleService;
 import com.haige.schedule.service.RBACService;
+import com.haige.schedule.service.ScheduleMemberService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.json.JSONArray;
@@ -39,7 +40,8 @@ public class ClassScheduleController {
     private RBACService rbacService;
     @Autowired
     private ClassBaseService classService;
-
+    @Autowired
+    private ScheduleMemberService smService;
 
     @RequestMapping(value = "/list")
     public ModelAndView list(@PathVariable("scheduleType") long scheduleType,
@@ -113,6 +115,10 @@ public class ClassScheduleController {
         schedule.setClassBase(classService.getClassBase(classId));
         schedule.setTeacher(rbacService.getUserById(teacherId));
         schedule.setCreator(rbacService.getUserById(creatorId));
+        if (schedule.getId() != null) {
+            ClassSchedule cs = scheduleService.getClassScheduleById(schedule.getId());
+            schedule.setMembers(cs.getMembers());
+        }
         scheduleService.saveClassSchedule(schedule);
         return "redirect:/schedule/" + scheduleType + "/list";
     }
@@ -120,8 +126,16 @@ public class ClassScheduleController {
     @RequestMapping(value = "/finish", method = RequestMethod.POST)
     public String finish(@PathVariable("scheduleType") long scheduleType,
                          @RequestParam(value = "ev_scheduleid", required = true) Long evScheduleid,
-                         @RequestParam(value = "evaluation", required = true) String evaluation) {
-        scheduleService.finishClassSchedule(evScheduleid, evaluation);
+                         @RequestParam(value = "memberIds", required = true) String[] memberIds,
+                         @RequestParam(value = "evaluations", required = true) String[] evaluations) {
+//        for (int i = 0; i < memberIds.length; i++) {
+//            Long memberId = Long.parseLong(memberIds[i]);
+//            ScheduleMember sm = smService.getScheduleMember(evScheduleid, memberId);
+//            sm.setEvaluation(evaluations[i]);
+//            smService.save(sm);
+//        }
+//
+//        scheduleService.finishClassSchedule(evScheduleid);
         return "redirect:/schedule/" + scheduleType + "/list";
     }
 
@@ -143,6 +157,7 @@ public class ClassScheduleController {
         scheduleService.deleteClassSchedule(id);
         return "redirect:/schedule/" + scheduleType + "/list";
     }
+
 
     @RequestMapping(value = "/mc/save", method = RequestMethod.POST)
     @ResponseBody

@@ -82,6 +82,7 @@
                                 <th class="text-center">日期</th>
                                 <th class="text-center">开始时间</th>
                                 <th class="text-center">结束时间</th>
+                                <th class="text-center">扣除课时</th>
                                 <th class="text-center" width="10%">学员</th>
                                 <th class="text-center" style="width: 200px">操 作</th>
                             </tr>
@@ -102,6 +103,7 @@
                                         <td class="text-center">
                                             <fmt:formatDate value="${item.endTime}" pattern="HH:mm"/>
                                         </td>
+                                        <td class="text-center">${item.costTimes}</td>
                                         <td class="text-center" style="WORD-WRAP: break-word">
                                             <c:forEach items="${item.members}" var="member">
                                                 ${member.realName}
@@ -158,36 +160,50 @@
 
 <div class="modal fade" id="cmModal" tabindex="-100" role="dialog" aria-labelledby="mcModalTitle" aria-hidden="true">
     <div class="modal-dialog">
-        <form role="form" class="form-horizontal" method="post" id="scheduleEditForm"
+        <form role="form" class="form-horizontal" method="post" id="evaluationForm"
               action="${ctx}/schedule/${scheduleType}/finish">
-            <div class="modal-content" style="width: 550px;">
+            <div class="modal-content" style="width: 650px;">
                 <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <div class="modal-header">
                     <h4 class="modal-title" id="cmModalTitle">结束课程</h4>
                 </div>
-                <div class="modal-body" style="height: 100px;">
+                <div class="modal-body">
 
                     <div class="box-body">
                         <input type="hidden" id="ev_scheduleid" name="ev_scheduleid"/>
 
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label for="evaluation" class="col-sm-2 control-label">评价</label>
+                        <table id="evaluationTable" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th class="text-center">用户名</th>
+                                <th class="text-center">姓名</th>
+                                <th class="text-center" style="width: 450px;">评价</th>
+                            </tr>
+                            </thead>
+                            <tbody id="evaluationTableBody">
 
-                                <div class="col-sm-10">
-                                    <textarea type="text" class="form-control" name="evaluation" id="evaluation"
-                                              placeholder="评价"></textarea>
-                                </div>
-                            </div>
-                        </div>
+                            </tbody>
+                        </table>
+
+                        <%--<div class="col-sm-12">--%>
+                        <%--<div class="form-group">--%>
+                        <%----%>
+                        <%--<label for="evaluation" class="col-sm-2 control-label">评价</label>--%>
+
+                        <%--<div class="col-sm-10">--%>
+                        <%--<textarea type="text" class="form-control" name="evaluation" id="evaluation"--%>
+                        <%--placeholder="评价"></textarea>--%>
+                        <%--</div>--%>
+                        <%--</div>--%>
+                        <%--</div>--%>
 
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消
                     </button>
-                    <button type="submit" class="btn btn-primary btn-flat">结束课程</button>
+                    <button type="button" class="btn btn-primary btn-flat" onclick="submitFinish()">结束课程</button>
                 </div>
             </div>
         </form>

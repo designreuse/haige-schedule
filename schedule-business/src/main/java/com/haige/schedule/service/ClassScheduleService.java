@@ -70,15 +70,13 @@ public class ClassScheduleService {
         classScheduleDao.save(classSchedule);
     }
 
-    public void finishClassSchedule(Long evScheduleid, String evaluation) {
+    public void finishClassSchedule(Long evScheduleid) {
         ClassSchedule classSchedule = classScheduleDao.findOne(evScheduleid);
         for (Member member : classSchedule.getMembers()) {
-            memberService.changeLeftTime(member.getId(), -1);
+            memberService.changeLeftTime(member.getId(), classSchedule.getCostTimes());
         }
-        classScheduleDao.recordHisSchedule(evScheduleid, evaluation);
+        classScheduleDao.recordHisSchedule(evScheduleid);
         classScheduleDao.delete(evScheduleid);
-
-
     }
 
 

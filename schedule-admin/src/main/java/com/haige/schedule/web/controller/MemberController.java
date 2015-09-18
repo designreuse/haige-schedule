@@ -1,6 +1,8 @@
 package com.haige.schedule.web.controller;
 
+import com.haige.schedule.entity.ClassSchedule;
 import com.haige.schedule.entity.Member;
+import com.haige.schedule.service.ClassScheduleService;
 import com.haige.schedule.service.MemberService;
 import com.haige.schedule.service.PhaseService;
 import com.haige.schedule.service.RBACService;
@@ -39,6 +41,8 @@ public class MemberController {
     @Autowired
     private RBACService rbacService;
 
+    @Autowired
+    private ClassScheduleService scheduleService;
 
     @RequestMapping(value = "/list")
     public ModelAndView list(@RequestParam(value = "queryName", required = false) String queryName,
@@ -96,6 +100,25 @@ public class MemberController {
             result.put("page", members.getNumber() + 1);
             result.put("totalPage", members.getTotalPages());
             result.put("totalCount", members.getTotalElements());
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    @RequestMapping(value = "/cm/memberList", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public Map<String, Object> memberList(Long cmScheduleId) {
+        try {
+            Map<String, Object> result = new HashMap<>();
+            ClassSchedule cs = scheduleService.getClassScheduleById(cmScheduleId);
+
+            result.put("members", cs.getMembers());
+
+            result.put("cmScheduleId", cmScheduleId);
+
             return result;
         } catch (Exception e) {
             e.printStackTrace();

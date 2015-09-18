@@ -35,7 +35,7 @@ public interface ClassScheduleDao extends CommonRepository<ClassSchedule, Long> 
             " m_sex,\n" +
             " m_address,\n" +
             " p_name,\n" +
-            " cs_evaluation)\n" +
+            " csm_evaluation)\n" +
             "SELECT \n" +
             " cs_id,\n" +
             " cs_date,\n" +
@@ -59,12 +59,12 @@ public interface ClassScheduleDao extends CommonRepository<ClassSchedule, Long> 
             " m_birthday,\n" +
             " m_realName,\n" +
             " m_sex,\n" +
-            " m_address\n," +
-            " p_name\n," +
-            " :evaluation\n" +
+            " m_address,\n" +
+            " p_name,\n" +
+            " csm_evaluation\n" +
             "FROM view_all_schedule\n" +
             "WHERE cs_id =:evScheduleid ")
-    public void recordHisSchedule(@Param("evScheduleid") Long evScheduleid, @Param("evaluation") String evaluation);
+    public void recordHisSchedule(@Param("evScheduleid") Long evScheduleid);
 
 
     @Query(nativeQuery = true, value = "SELECT * FROM class_schedule WHERE scheduleDate >= :beginDate AND scheduleDate <= :endDate")

@@ -66,7 +66,7 @@ public class MemberService {
         List<String> items = new ArrayList<String>();
 
         String sql = "select * from members where id not in (select memberid from schedule_member where scheduleId = :scheduleId)" +
-                " and leftTime > 0 ";
+                " and leftTime > 0 and ( TO_DAYS(endDate) - TO_DAYS(NOW()) >= 0) ";
         items.add("scheduleId");
         params.add(cmScheduleId);
         if (!StringUtil.isEmptyIncludeBlank(memberName)) {
@@ -112,9 +112,10 @@ public class MemberService {
     }
 
 
-    public void changeLeftTime(Long id, Integer changeTiems) {
+    public void changeLeftTime(Long id, Integer costTiems) {
         Member member = memberDao.findOne(id);
-        member.setLeftTime(member.getLeftTime() + changeTiems);
+        member.setLeftTime(member.getLeftTime() - costTiems);
+        memberDao.save(member);
     }
 
 }

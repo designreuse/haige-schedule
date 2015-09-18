@@ -107,7 +107,7 @@ order by re.m_memberName
 <CellElementList>
 <C c="0" r="0" s="0">
 <O>
-<![CDATA[学员姓名]]></O>
+<![CDATA[学员编号]]></O>
 <Expand/>
 </C>
 <C c="1" r="0" s="1">

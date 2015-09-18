@@ -24,6 +24,12 @@ public class ScheduleMemberService {
         return smDao.findOne(id);
     }
 
+    public ScheduleMember getScheduleMember(Long scheduleId, Long memberId) {
+
+        return smDao.findByScheduleIdAndMemberId(scheduleId, memberId);
+    }
+
+
     public void save(ScheduleMember classBase) {
         smDao.save(classBase);
     }

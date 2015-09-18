@@ -79,6 +79,19 @@
                                     <textarea type="text" class="form-control" name="comment" id="comment"
                                               placeholder="备注">${schedule.comment}</textarea>
                                 </div>
+
+                                <c:if test="${scheduleType==1}">
+                                    <input hidden name="costTimes" id="costTimes1" value="${schedule.costTimes}">
+                                </c:if>
+                                <c:if test="${scheduleType==2}">
+                                    <label for="costTimes2" class="col-sm-2 control-label">扣除课时</label>
+
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" name="costTimes" id="costTimes2"
+                                               placeholder="扣除课时">
+                                    </div>
+                                </c:if>
+
                             </div>
                             <div class="box box-info">
                                 <h4 class="box-title">课程学员<span class="text-muted">(修改后将会自动保存)</span></h4>
@@ -139,10 +152,11 @@
                                     <button type="submit" class="btn btn-primary btn-flat">保存</button>
                                 </shiro:hasAnyRoles>
                                 <button type="button" class="btn btn-success btn-flat" style="margin-right: 20px"
-                                        onclick="window.location.href = '${ctx}/schedule/list'">返回
+                                        onclick="window.location.href = '${ctx}/schedule/${scheduleType}/list'">返回
                                 </button>
                             </div>
                         </div>
+                    </form>
                 </div>
                 <!-- /.box -->
             </div>
