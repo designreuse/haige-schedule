@@ -11,7 +11,7 @@
 </head>
 <body>
 <div style="width:630px;margin: 0 auto;">
-    <h1 style="text-align:center">富头像上传编辑器演示</h1>
+    <h1 style="text-align:center">会员头像编辑</h1>
 
     <div>
         <p id="swfContainer">

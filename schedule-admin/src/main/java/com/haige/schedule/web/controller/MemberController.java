@@ -180,7 +180,7 @@ public class MemberController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Member member,
                        @RequestParam(value = "phaseId", required = true) Long phaseId,
-                       @RequestParam(value = "advisorId", required = false) Long advisorId) {
+                       @RequestParam(value = "advisorId", required = true) Long advisorId) {
 
         Subject currentUser = SecurityUtils.getSubject();
         if (currentUser.hasRole("root") || currentUser.hasRole("admin")) {
@@ -189,6 +189,7 @@ public class MemberController {
             member.setAdvisor(rbacService.getUserById(rbacService.getCurrentUser().getId()));
         }
 
+        member.setPic(memberService.getMemberById(member.getId()).getPic());
         member.setPhase(phaseService.getPhase(phaseId));
 
         memberService.saveMember(member);

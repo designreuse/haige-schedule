@@ -17,6 +17,7 @@
             rules: {
                 "memberName": {required: true},
                 "sex": {required: true},
+                "birthday": {required: true},
                 "realName": {required: true},
                 "endDate": {required: true}
             }

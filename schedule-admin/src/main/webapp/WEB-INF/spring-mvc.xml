@@ -85,7 +85,6 @@
             <props>
                 <prop key="org.apache.shiro.authz.UnauthorizedException">haige.unauthorized</prop>
                 <prop key="java.lang.Exception">haige.exception</prop>
-
             </props>
         </property>
     </bean>

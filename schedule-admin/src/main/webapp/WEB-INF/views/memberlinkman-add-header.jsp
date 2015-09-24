@@ -12,7 +12,7 @@
             rules: {
                 "name": {required: true},
                 "relation": {required: true},
-                "tel": {digits: true}
+                "tel": {required: true, digits: true}
             }
         });
     }

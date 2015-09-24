@@ -70,6 +70,9 @@ public class RBACController {
     public String saveUser(User user) {
         if (user.getId() == null)
             user.setPassword(Constants.DEFAULT_PASSWORD);
+        else {
+            user.setPassword(rbacService.getUserById(user.getId()).getPassword());
+        }
         rbacService.saveUser(user);
         return "redirect:/rbac/userList";
     }

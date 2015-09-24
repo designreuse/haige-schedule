@@ -69,6 +69,10 @@ public class MemberPaymentController {
         MemberPayment payment = paymentService.getMemberPayment(id);
         Long memberId = payment.getLinkMember().getId();
 
+        Member member = memberService.getMemberById(memberId);
+        member.setLeftTime(member.getLeftTime() - payment.getPurchaseCount());
+        memberService.saveMember(member);
+
         paymentService.delete(id);
 
         return "redirect:/member/edit/" + Long.toString(memberId);

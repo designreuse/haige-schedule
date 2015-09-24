@@ -145,9 +145,12 @@ public class ClassScheduleController {
                           @RequestParam(value = "classId", required = false) Long classId,
                           @RequestParam(value = "creatorId", required = false) Long creatorId,
                           @RequestParam(value = "teacherId", required = false) Long teacherId) {
-        schedule.setClassBase(classService.getClassBase(classId));
-        schedule.setTeacher(rbacService.getUserById(teacherId));
-        schedule.setCreator(rbacService.getUserById(creatorId));
+        if (classId != null)
+            schedule.setClassBase(classService.getClassBase(classId));
+        if (teacherId != null)
+            schedule.setTeacher(rbacService.getUserById(teacherId));
+        if (creatorId != null)
+            schedule.setCreator(rbacService.getUserById(creatorId));
         scheduleService.saveClassSchedule(schedule);
         return "redirect:/schedule/" + scheduleType + "/edit/" + schedule.getId();
     }

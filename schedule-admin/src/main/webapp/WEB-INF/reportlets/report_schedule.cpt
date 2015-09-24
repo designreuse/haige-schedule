@@ -251,7 +251,7 @@ where m_id is not null]]></Query>
 <![CDATA[$$$]]></Result>
 <Parameters/>
 </O>
-<Expand/>
+<Expand dir="0"/>
 </C>
 <C c="9" r="1" s="2">
 <Expand dir="0"/>

@@ -13,7 +13,7 @@
                 "userName": {required: true},
                 "role.id": {required: true},
                 "realName": {required: true},
-                "tel": {required: true}
+                "tel": {required: true, digits: true}
             }
         });
     }

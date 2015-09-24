@@ -38,7 +38,9 @@
 
                                 <div class="col-sm-2">
                                     <select name="teacherId" id="teacherId" style="width: 100%">
-                                        <option value=""></option>
+                                        <c:if test="${scheduleType==2}">
+                                            <option value=""></option>
+                                        </c:if>
                                         <c:forEach items="${teachers}" var="r">
                                             <option value="${r.id}"
                                                     <c:if test="${schedule.teacher.id==r.id}">selected</c:if> >${r.realName}</option>
@@ -87,7 +89,8 @@
                                     <label for="costTimes2" class="col-sm-2 control-label">扣除课时</label>
 
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" name="costTimes" id="costTimes2"
+                                        <input type="text" class="form-control,required,digits" name="costTimes"
+                                               id="costTimes2" value="${schedule.costTimes}"
                                                placeholder="扣除课时">
                                     </div>
                                 </c:if>

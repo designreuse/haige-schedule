@@ -236,7 +236,7 @@ order by re.m_memberName
 </O>
 <Expand dir="0"/>
 </C>
-<C c="4" r="1" s="3">
+<C c="4" r="1" s="4">
 <O t="DSColumn">
 <Attributes dsName="ds_member" columnName="m_leftTime"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -248,7 +248,7 @@ order by re.m_memberName
 <![CDATA[$$$]]></Result>
 <Parameters/>
 </O>
-<Expand dir="0"/>
+<Expand dir="0" order="1"/>
 </C>
 <C c="5" r="1" s="3">
 <O t="DSColumn">
@@ -583,6 +583,18 @@ order by re.m_memberName
 </Border>
 </Style>
 <Style style_name="cell"/>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1" color="-6697729"/>
+<Bottom style="1" color="-6697729"/>
+<Left style="1" color="-6697729"/>
+<Right style="1" color="-6697729"/>
+</Border>
+</Style>
 </StyleList>
 <DesignerVersion DesignerVersion="HAF"/>
 <PreviewType PreviewType="0"/>

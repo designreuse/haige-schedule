@@ -26,13 +26,22 @@
         <td class="text-center">{{:phase.name}}</td>
         <td class="text-center">{{:address}}</td>
     </tr>
+
+
+
 </script>
 
 <script id="advisorItem" type="text/x-jsrender">
     <option value="{{:id}}">{{:realName}}</option>
+
+
+
 </script>
 <script id="phaseItem" type="text/x-jsrender">
     <option value="{{:id}}">{{:name}}</option>
+
+
+
 
 </script>
 
@@ -43,10 +52,10 @@
         return $("#scheduleEditForm").validate({
             rules: {
                 "classId": {required: true},
-                "teacherId": {required: true},
                 "scheduleDate": {required: true},
                 "startTime": {required: true},
-                "endTime": {required: true}
+                "endTime": {required: true},
+                "costTimes": {required: true, number: true, min: 1}
             }
         });
     }

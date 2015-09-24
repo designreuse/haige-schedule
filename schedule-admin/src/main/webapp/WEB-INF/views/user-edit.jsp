@@ -29,7 +29,6 @@
 
                                 <div class="col-sm-5">
                                     <select name="role.id" id="role.id" style="width: 100%">
-                                        <option value=""></option>
                                         <c:forEach items="${roles}" var="r">
                                             <option value="${r.id}"
                                                     <c:if test="${user.role.id==r.id}">selected</c:if> >${r.realName}</option>
@@ -70,10 +69,8 @@
                                 <label for="comment" class="col-sm-2 control-label">备注</label>
 
                                 <div class="col-sm-5">
-                                    <div class="col-sm-5">
                                     <textarea type="text" class="form-control" name="comment" id="comment"
                                               placeholder="备注"> ${user.comment}</textarea>
-                                    </div>
                                 </div>
                             </div>
 

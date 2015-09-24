@@ -23,6 +23,9 @@
 
                                 <div class="col-sm-2">
                                     <select name="teacherId" id="teacherId" style="width: 100%">
+                                        <c:if test="${scheduleType==2}">
+                                            <option value=""></option>
+                                        </c:if>
                                         <c:forEach items="${teachers}" var="r">
                                             <option value="${r.id}">${r.realName}</option>
                                         </c:forEach>

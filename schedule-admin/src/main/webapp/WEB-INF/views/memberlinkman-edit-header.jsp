@@ -11,9 +11,8 @@
         return $("#classBaseEditForm").validate({
             rules: {
                 "name": {required: true},
-                "tel": {digits: true},
-                "tel": {payment: true},
-                "tel": {purchaseCount: true}
+                "relation": {required: true},
+                "tel": {required: true, digits: true}
             }
         });
     }
