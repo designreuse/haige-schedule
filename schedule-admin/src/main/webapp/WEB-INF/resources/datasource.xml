@@ -10,15 +10,6 @@
         </Connection>
     </ConnectionMap>
     <ADHOCMap>
-        <TableData name="员工信息表" class="com.fr.data.impl.ADHOCNamedTableData">
-            <DBTableDataName>
-                <![CDATA[员工信息表]]></DBTableDataName>
-        </TableData>
-        <TableData name="员工信息表_SQL视图" class="com.fr.data.impl.ADHOCSQLTableData">
-            <DBConnectionName>
-                <![CDATA[FRDemo]]></DBConnectionName>
-            <Query>
-                <![CDATA[select * from 员工信息表]]></Query>
-        </TableData>
+
     </ADHOCMap>
 </DatasourceManager>

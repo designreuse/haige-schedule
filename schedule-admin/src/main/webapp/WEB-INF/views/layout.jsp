@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="t" uri="http://tiles.apache.org/tags-tiles" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,10 +19,10 @@
     <t:insertAttribute name="header"/>
 </head>
 <body class="skin-blue">
-    <t:insertAttribute name="top"/>
-    <div class="wrapper row-offcanvas row-offcanvas-left">
-        <t:insertAttribute name="left-menu"/>
-        <t:insertAttribute name="content"/>
-    </div>
+<t:insertAttribute name="top"/>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+    <t:insertAttribute name="left-menu"/>
+    <t:insertAttribute name="content"/>
+</div>
 </body>
 </html>
