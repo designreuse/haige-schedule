@@ -2,6 +2,7 @@ package com.haige.schedule.web.controller;
 
 import com.haige.schedule.entity.ClassSchedule;
 import com.haige.schedule.entity.Result;
+import com.haige.schedule.entity.ScheduleMember;
 import com.haige.schedule.entity.User;
 import com.haige.schedule.service.ClassBaseService;
 import com.haige.schedule.service.ClassScheduleService;
@@ -128,14 +129,14 @@ public class ClassScheduleController {
                          @RequestParam(value = "ev_scheduleid", required = true) Long evScheduleid,
                          @RequestParam(value = "memberIds", required = true) String[] memberIds,
                          @RequestParam(value = "evaluations", required = true) String[] evaluations) {
-//        for (int i = 0; i < memberIds.length; i++) {
-//            Long memberId = Long.parseLong(memberIds[i]);
-//            ScheduleMember sm = smService.getScheduleMember(evScheduleid, memberId);
-//            sm.setEvaluation(evaluations[i]);
-//            smService.save(sm);
-//        }
-//
-//        scheduleService.finishClassSchedule(evScheduleid);
+        for (int i = 0; i < memberIds.length; i++) {
+            Long memberId = Long.parseLong(memberIds[i]);
+            ScheduleMember sm = smService.getScheduleMember(evScheduleid, memberId);
+            sm.setEvaluation(evaluations[i]);
+            smService.save(sm);
+        }
+
+        scheduleService.finishClassSchedule(evScheduleid);
         return "redirect:/schedule/" + scheduleType + "/list";
     }
 
