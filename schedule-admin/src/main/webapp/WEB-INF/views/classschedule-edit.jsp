@@ -98,7 +98,7 @@
                             </div>
                             <div class="box box-info">
                                 <h4 class="box-title">课程学员<span class="text-muted">(修改后将会自动保存)</span></h4>
-                                <shiro:hasAnyRoles name="root,advisor">
+                                <shiro:hasAnyRoles name="root,admin,advisor">
                                     <div class="box-header" style="text-align: center;margin: 0">
                                         <a id="addCMBtn" class="btn btn-primary btn-flat"
                                            onclick="addCM()">添加学员
