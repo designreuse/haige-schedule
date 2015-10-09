@@ -18,7 +18,7 @@
             rules: {
                 "payPerson": {required: true},
                 "payDate": {required: true},
-                "payment": {required: true, number: true, min: 1},
+                "payment": {required: true, number: true, min: 0},
                 "purchaseCount": {required: true, digits: true, min: 1}
             }
         });
