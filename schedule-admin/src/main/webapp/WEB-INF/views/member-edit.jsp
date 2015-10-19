@@ -46,7 +46,8 @@
 
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="leftTime" id="leftTime"
-                                           disabled value="${member.leftTime}" placeholder="剩余课时">
+                                    <shiro:hasAnyRoles name="admin,advisor,coach,cashier"> disabled </shiro:hasAnyRoles>
+                                           value="${member.leftTime}" placeholder="剩余课时">
                                 </div>
                             </div>
 
