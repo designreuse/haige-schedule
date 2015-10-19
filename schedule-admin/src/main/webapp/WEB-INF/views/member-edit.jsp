@@ -141,7 +141,7 @@
                                 <div class="col-sm-2">
 
                                     <input type="text" class="form-control" name="endDate" id="endDate"
-                                    <shiro:hasAnyRoles name="advisor,coach,cashier"> disabled</shiro:hasAnyRoles>
+                                    <shiro:hasAnyRoles name="advisor,coach,cashier"> readonly</shiro:hasAnyRoles>
                                            value="${member.endDate}" placeholder="有效期">
                                 </div>
 

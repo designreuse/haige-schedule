@@ -34,7 +34,7 @@
 
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="leftTime" id="leftTime"
-                                           disabled placeholder="剩余课时">
+                                           readonly placeholder="剩余课时">
                                 </div>
                             </div>
 

@@ -23,14 +23,14 @@
                                 <label for="className" class="col-sm-2 control-label">类型</label>
 
                                 <div class="col-sm-2">
-                                    <input disabled name="className" id="className" style="width: 100%"
+                                    <input readonly name="className" id="className" style="width: 100%"
                                            value="${schedule.classBase.name}">
                                 </div>
 
                                 <label for="creatorName" class="col-sm-2 control-label">顾问</label>
 
                                 <div class="col-sm-2">
-                                    <input disabled name="creatorName" id="creatorName" style="width: 100%"
+                                    <input readonly name="creatorName" id="creatorName" style="width: 100%"
                                            value="${schedule.creator.realName}">
                                 </div>
 
