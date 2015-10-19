@@ -103,13 +103,13 @@
                                         <a id="addCMBtn" class="btn btn-primary btn-flat"
                                            onclick="addCM()">添加学员
                                         </a>
+
+                                        <a type="button" class="btn btn-primary btn-flat"
+                                           onclick="batchFillStudentsByMonth(${schedule.id})">批量填充当月学员
+                                        </a>
                                     </div>
                                 </shiro:hasAnyRoles>
-                                <shiro:hasAnyRoles name="root,admin,advisor">
-                                    <button type="button" class="btn btn-primary btn-flat"
-                                            onclick="batchFillStudentsByMonth(${schedule.id})">批量填充当月学员
-                                    </button>
-                                </shiro:hasAnyRoles>
+
                                 <div class="box-body">
                                     <table id="cmTable" style="margin-top: 10px"
                                            class="table table-bordered table-striped">
