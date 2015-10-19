@@ -1,9 +1,6 @@
 package com.haige.schedule.web.controller;
 
-import com.haige.schedule.entity.ClassSchedule;
-import com.haige.schedule.entity.Result;
-import com.haige.schedule.entity.ScheduleMember;
-import com.haige.schedule.entity.User;
+import com.haige.schedule.entity.*;
 import com.haige.schedule.service.ClassBaseService;
 import com.haige.schedule.service.ClassScheduleService;
 import com.haige.schedule.service.RBACService;
@@ -24,7 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author lzheng
@@ -202,4 +201,74 @@ public class ClassScheduleController {
         return result;
     }
 
+    @RequestMapping(value = "/batchGenerateByMonth", method = RequestMethod.GET)
+    public String batchGenerateByMonth(@PathVariable("scheduleType") long scheduleType,
+                                       @RequestParam(value = "baseScheduleid", required = true) Long baseScheduleid) {
+
+        ClassSchedule baseSchedule = scheduleService.getClassScheduleById(baseScheduleid);
+        Calendar baseCal = Calendar.getInstance();
+        baseCal.setTime(baseSchedule.getScheduleDate());
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(baseSchedule.getScheduleDate());
+        for (int i = 0; i < 6; i++) {
+            cal.add(Calendar.DATE, 7);
+            if (cal.get(Calendar.MONTH) == baseCal.get(Calendar.MONTH)) {
+                ClassSchedule newSchedule = new ClassSchedule();
+                User user = rbacService.getCurrentUser();
+                newSchedule.setCreator(user);
+                newSchedule.setTeacher(baseSchedule.getTeacher());
+                newSchedule.setClassBase(baseSchedule.getClassBase());
+                java.sql.Date newDate = new java.sql.Date(cal.getTime().getTime());
+                newSchedule.setScheduleDate(newDate);
+                newSchedule.setStartTime(baseSchedule.getStartTime());
+                newSchedule.setEndTime(baseSchedule.getEndTime());
+                newSchedule.setCostTimes(baseSchedule.getCostTimes());
+                scheduleService.saveClassSchedule(newSchedule);
+            }
+        }
+        return "redirect:/schedule/" + scheduleType + "/list";
+    }
+
+
+    @RequestMapping(value = "/batchFillStudentsByMonth", method = RequestMethod.GET)
+    public String batchFillStudentsByMonth(@PathVariable("scheduleType") long scheduleType,
+                                           @RequestParam(value = "baseScheduleid", required = true) Long baseScheduleid) {
+        ClassSchedule baseSchedule = scheduleService.getClassScheduleById(baseScheduleid);
+        Set<Member> baseMembers = baseSchedule.getMembers();
+
+        Calendar baseCal = Calendar.getInstance();
+        baseCal.setTime(baseSchedule.getScheduleDate());
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(baseSchedule.getScheduleDate());
+        for (int i = 0; i < 6; i++) {
+            cal.add(Calendar.DATE, 7);
+            if (cal.get(Calendar.MONTH) == baseCal.get(Calendar.MONTH)) {
+                java.sql.Date cuDate = new java.sql.Date(cal.getTime().getTime());
+                List<ClassSchedule> desSchedules = scheduleService.getScheduleByDateTime(cuDate, baseSchedule.getStartTime(), baseSchedule.getEndTime());
+                for (ClassSchedule dcs : desSchedules) {
+                    Boolean modified = false;
+                    Set<Member> members = dcs.getMembers();
+                    for (Member bm : baseMembers) {
+                        if (!memberExists(bm, members)) {
+                            members.add(bm);
+                            modified = true;
+                        }
+                    }
+                    if (modified) {
+                        scheduleService.saveClassSchedule(dcs);
+                    }
+                }
+            }
+        }
+        return "redirect:/schedule/" + scheduleType + "/list";
+    }
+
+    private boolean memberExists(Member srcMember, Set<Member> desMembers) {
+        for (Member m : desMembers) {
+            if (m.getId() == srcMember.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

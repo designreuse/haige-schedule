@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -133,5 +134,10 @@ public class ClassScheduleService {
 
     public Long getCSCount() {
         return classScheduleDao.count();
+    }
+
+
+    public List<ClassSchedule> getScheduleByDateTime(Date scheduleDate, Time startTime, Time endTime) {
+        return classScheduleDao.findScheduleByDateTime(scheduleDate, startTime, endTime);
     }
 }

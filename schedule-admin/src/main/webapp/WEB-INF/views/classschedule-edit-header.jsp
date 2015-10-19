@@ -40,13 +40,19 @@
 <script id="phaseItem" type="text/x-jsrender">
     <option value="{{:id}}">{{:name}}</option>
 
-
-
-
 </script>
 
 <script type="text/javascript">
     var mcIds = [];
+
+
+    function batchFillStudentsByMonth(baseScheduleid) {
+        window.location.href = "${ctx}/schedule/${scheduleType}/batchFillStudentsByMonth?baseScheduleid=" + baseScheduleid;
+    }
+
+    function batchGenerateByMonth(baseScheduleid) {
+        window.location.href = "${ctx}/schedule/${scheduleType}/batchGenerateByMonth?baseScheduleid=" + baseScheduleid;
+    }
 
     function initValidator() {
         return $("#scheduleEditForm").validate({

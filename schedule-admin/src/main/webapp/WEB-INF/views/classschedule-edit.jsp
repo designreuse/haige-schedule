@@ -105,6 +105,11 @@
                                         </a>
                                     </div>
                                 </shiro:hasAnyRoles>
+                                <shiro:hasAnyRoles name="root,admin,advisor">
+                                    <button type="button" class="btn btn-primary btn-flat"
+                                            onclick="batchFillStudentsByMonth(${schedule.id})">批量填充当月学员
+                                    </button>
+                                </shiro:hasAnyRoles>
                                 <div class="box-body">
                                     <table id="cmTable" style="margin-top: 10px"
                                            class="table table-bordered table-striped">
@@ -151,6 +156,11 @@
 
 
                             <div class="box-footer" style="text-align: center;margin: 0">
+                                <shiro:hasAnyRoles name="root,admin">
+                                    <button type="button" class="btn btn-primary btn-flat"
+                                            onclick="batchGenerateByMonth(${schedule.id})">批量生成当月课程
+                                    </button>
+                                </shiro:hasAnyRoles>
                                 <shiro:hasAnyRoles name="root,admin">
                                     <button type="submit" class="btn btn-primary btn-flat">保存</button>
                                 </shiro:hasAnyRoles>

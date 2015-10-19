@@ -29,28 +29,6 @@
          <input style="width: 100%" type="text" class="required" id="evaluation_{{:id}}" name="evaluations"/>
          </td>
      </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 
 <script type="text/javascript">

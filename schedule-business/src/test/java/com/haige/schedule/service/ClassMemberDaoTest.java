@@ -1,16 +1,15 @@
 package com.haige.schedule.service;
 
-import com.haige.schedule.entity.ClassSchedule;
-import com.haige.schedule.entity.Member;
 import com.haige.schedule.repository.ClassScheduleDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.util.Assert;
 
-import java.util.Set;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * @author lcheng
@@ -24,10 +23,22 @@ public class ClassMemberDaoTest {
     private ClassScheduleDao csDao;
 
     @Test
-    public void testSelect() {
-        ClassSchedule cs = csDao.findOne(Long.valueOf(3));
-        Set<Member> members = cs.getMembers();
-        Assert.notEmpty(members);
+    public void testSelect() throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        java.util.Date baseDate = format.parse("2015/10/01");
+        Calendar baseCal = Calendar.getInstance();
+        baseCal.setTime(baseDate);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(baseDate);
+        for (int i = 0; i < 6; i++) {
+            cal.add(Calendar.DATE, 7);
+            if (cal.get(Calendar.MONTH) == baseCal.get(Calendar.MONTH)) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                java.util.Date date = cal.getTime();
+                System.out.println(sdf.format(date));
+            }
+        }
+
     }
 
 }
