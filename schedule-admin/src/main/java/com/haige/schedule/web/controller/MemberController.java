@@ -170,6 +170,9 @@ public class MemberController {
         } else if (currentUser.hasRole("advisor")) {
             member.setAdvisor(rbacService.getUserById(rbacService.getCurrentUser().getId()));
         }
+        if (member.getId() == null) {
+            member.setLeftTime(0);
+        }
 
         member.setPhase(phaseService.getPhase(phaseId));
 
