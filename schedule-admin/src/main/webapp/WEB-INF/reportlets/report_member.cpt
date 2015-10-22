@@ -445,7 +445,7 @@ order by re.m_memberName
 <FRFont name="SimSun" style="0" size="72"/>
 <widgetValue>
 <O>
-<![CDATA[昵称：]]></O>
+<![CDATA[用户名：]]></O>
 </widgetValue>
 </InnerWidget>
 <BoundsAttr x="23" y="22" width="87" height="21"/>

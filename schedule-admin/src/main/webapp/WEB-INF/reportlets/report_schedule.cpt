@@ -118,7 +118,7 @@ where m_id is not null]]></Query>
 </C>
 <C c="6" r="0" s="1">
 <O>
-<![CDATA[昵称]]></O>
+<![CDATA[用户名]]></O>
 <Expand/>
 </C>
 <C c="7" r="0" s="0">
