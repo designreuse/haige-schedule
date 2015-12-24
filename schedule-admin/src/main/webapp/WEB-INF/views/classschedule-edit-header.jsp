@@ -61,7 +61,7 @@
                 "scheduleDate": {required: true},
                 "startTime": {required: true},
                 "endTime": {required: true},
-                "costTimes": {required: true, number: true, min: 1}
+                "costTimes": {required: true, number: true, min: 0}
             }
         });
     }
