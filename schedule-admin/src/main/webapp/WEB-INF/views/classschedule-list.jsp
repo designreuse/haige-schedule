@@ -96,7 +96,7 @@
                                         <c:set var="nowDate" value="<%=new Date()%>"></c:set>
                                         <td class="text-center"
                                                 <c:if test="${item.scheduleDate < nowDate}"> style="background-color: indianred" </c:if>
-                                                >${item.scheduleDate}</td>
+                                        >${item.scheduleDate}</td>
                                         <td class="text-center">
                                             <fmt:formatDate value="${item.startTime}" pattern="HH:mm"/>
                                         </td>
