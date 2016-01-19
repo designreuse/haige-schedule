@@ -84,7 +84,7 @@ where m_id is not null]]></Query>
 <RowHeight defaultValue="723900">
 <![CDATA[1143000,883920,723900,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
 <ColumnWidth defaultValue="2743200">
-<![CDATA[2286000,3291840,2377440,2346960,30480,2407920,1950720,2103120,2286000,2743200,2529840,4907280,3017520,4876800,2743200]]></ColumnWidth>
+<![CDATA[1950720,2377440,2042160,1981200,30480,1645920,1950720,2103120,2377440,2011680,2103120,3169920,2834640,3017520,2743200]]></ColumnWidth>
 <CellElementList>
 <C c="0" r="0" s="0">
 <O>
@@ -319,8 +319,8 @@ where m_id is not null]]></Query>
 </CellElementList>
 <ReportAttrSet>
 <ReportSettings headerHeight="0" footerHeight="0">
-<PaperSetting orientation="1">
-<Margin top="986400" left="2743200" bottom="986400" right="2743200"/>
+<PaperSetting>
+<Margin top="986400" left="295200" bottom="986400" right="295200"/>
 </PaperSetting>
 </ReportSettings>
 <Header reportPageType="0">
