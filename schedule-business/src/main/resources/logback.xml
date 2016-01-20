@@ -17,9 +17,9 @@
     </appender>
 
     <!-- project default level -->
-    <logger name="com.haige.schedule" level="info"/>
+    <logger name="com.haige.schedule" level="error"/>
 
-    <root level="info">
+    <root level="error">
         <appender-ref ref="console"/>
         <appender-ref ref="rollingFile"/>
     </root>

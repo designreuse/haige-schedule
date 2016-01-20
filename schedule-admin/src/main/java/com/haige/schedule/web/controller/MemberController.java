@@ -186,7 +186,7 @@ public class MemberController {
                        @RequestParam(value = "advisorId", required = true) Long advisorId) {
 
         Subject currentUser = SecurityUtils.getSubject();
-        if (currentUser.hasRole("root") || currentUser.hasRole("admin")) {
+        if (currentUser.hasRole("root") || currentUser.hasRole("admin") || currentUser.hasRole("cashier")) {
             member.setAdvisor(rbacService.getUserById(advisorId));
         } else if (currentUser.hasRole("advisor")) {
             member.setAdvisor(rbacService.getUserById(rbacService.getCurrentUser().getId()));

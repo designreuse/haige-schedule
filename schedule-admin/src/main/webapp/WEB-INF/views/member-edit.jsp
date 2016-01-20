@@ -32,6 +32,7 @@
 
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="memberName" id="memberName"
+                                    <shiro:hasAnyRoles name="cashier"> readonly </shiro:hasAnyRoles>
                                            value="${member.memberName}" placeholder="用户名">
                                 </div>
 
@@ -39,6 +40,7 @@
 
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="realName" id="realName"
+                                    <shiro:hasAnyRoles name="cashier"> readonly </shiro:hasAnyRoles>
                                            value="${member.realName}" placeholder="姓名">
                                 </div>
 
@@ -46,8 +48,8 @@
 
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="leftTime" id="leftTime"
-                                    <shiro:hasAnyRoles name="admin,advisor,coach,cashier"> readonly </shiro:hasAnyRoles>
-                                           value="${member.leftTime}" placeholder="剩余课时">
+                                    <shiro:hasAnyRoles name="cashier"> readonly </shiro:hasAnyRoles>
+                                           disabled value="${member.leftTime}" placeholder="剩余课时">
                                 </div>
                             </div>
 
@@ -55,31 +57,42 @@
                                 <label for="sex" class="col-sm-2 control-label">性别</label>
 
                                 <div class="col-sm-2">
-                                    <select name="sex" id="sex" style="width: 100%">
+                                    <select name="sex" id="sex"
+                                            <shiro:hasAnyRoles name="cashier"> disabled</shiro:hasAnyRoles>
+                                            style="width: 100%">
                                         <c:forEach items="${sex}" var="r">
                                             <option value="${r}"
                                                     <c:if test="${member.sex==r}">selected</c:if>>${r.title}</option>
                                         </c:forEach>
-
                                     </select>
+                                    <shiro:hasAnyRoles name="cashier">
+                                        <input hidden name="sex" value="${member.sex}">
+                                    </shiro:hasAnyRoles>
                                 </div>
 
                                 <label for="phaseId" class="col-sm-2 control-label">阶段</label>
 
                                 <div class="col-sm-2">
-                                    <select name="phaseId" id="phaseId" style="width: 100%">
+                                    <select name="phaseId" id="phaseId"
+                                            <shiro:hasAnyRoles name="cashier"> disabled </shiro:hasAnyRoles>
+                                            style="width: 100%">
                                         <c:forEach items="${phases}" var="r">
                                             <option value="${r.id}"
                                                     <c:if test="${member.phase.id==r.id}">selected</c:if>>${r.name}</option>
                                         </c:forEach>
                                     </select>
+                                    <shiro:hasAnyRoles name="cashier">
+                                        <input hidden name="phaseId" value="${member.phase.id}">
+                                    </shiro:hasAnyRoles>
                                 </div>
 
-                                <shiro:hasAnyRoles name="root,admin">
+                                <shiro:hasAnyRoles name="root,admin, cashier">
                                     <label for="advisorId" class="col-sm-2 control-label">顾问</label>
 
                                     <div class="col-sm-2">
-                                        <select name="advisorId" id="advisorId" style="width: 100%">
+                                        <select name="advisorId" id="advisorId"
+                                                <shiro:hasAnyRoles name="cashier"> disabled</shiro:hasAnyRoles>
+                                                style="width: 100%">
                                             <c:forEach items="${advisors}" var="r">
                                                 <option value="${r.id}"
                                                         <c:if test="${member.advisor.id==r.id}">selected</c:if> >${r.realName}</option>
@@ -87,15 +100,17 @@
                                         </select>
                                     </div>
                                 </shiro:hasAnyRoles>
-
+                                <shiro:hasAnyRoles name="advisor, cashier">
+                                    <input hidden name="advisorId" value="${member.advisor.id}">
+                                </shiro:hasAnyRoles>
                             </div>
 
                             <div class="form-group">
                                 <label for="birthday" class="col-sm-2 control-label">出生日期</label>
 
                                 <div class="col-sm-2">
-
                                     <input type="text" class="form-control" name="birthday" id="birthday"
+                                    <shiro:hasAnyRoles name="cashier"> readonly</shiro:hasAnyRoles>
                                            value="${member.birthday}" placeholder="出生日期">
                                 </div>
 
@@ -104,6 +119,7 @@
 
                                     <div class="col-sm-2">
                                         <input type="text" class="form-control" name="proType" id="proType"
+                                        <shiro:hasAnyRoles name="cashier"> readonly</shiro:hasAnyRoles>
                                                value="${member.proType}" placeholder="产品类型">
                                     </div>
 
@@ -113,6 +129,7 @@
 
                                         <input type="text" class="form-control" name="registrationChannel"
                                                id="registrationChannel"
+                                        <shiro:hasAnyRoles name="cashier"> readonly</shiro:hasAnyRoles>
                                                value="${member.registrationChannel}" placeholder="报名渠道">
                                     </div>
                                 </shiro:hasAnyRoles>
@@ -125,6 +142,7 @@
 
                                     <div class="col-sm-2">
                                     <textarea type="text" class="form-control" name="address" id="address"
+                                            <shiro:hasAnyRoles name="cashier"> readonly</shiro:hasAnyRoles>
                                               placeholder="地址">${member.address}</textarea>
                                     </div>
                                 </shiro:hasAnyRoles>
@@ -132,6 +150,7 @@
 
                                 <div class="col-sm-2">
                                     <textarea type="text" class="form-control" name="comment" id="comment"
+                                            <shiro:hasAnyRoles name="cashier"> readonly</shiro:hasAnyRoles>
                                               placeholder="备注">${member.comment}</textarea>
                                 </div>
 
@@ -141,7 +160,7 @@
                                 <div class="col-sm-2">
 
                                     <input type="text" class="form-control" name="endDate" id="endDate"
-                                    <shiro:hasAnyRoles name="advisor,coach,cashier"> readonly</shiro:hasAnyRoles>
+                                    <shiro:hasAnyRoles name="coach"> readonly</shiro:hasAnyRoles>
                                            value="${member.endDate}" placeholder="有效期">
                                 </div>
 
@@ -149,7 +168,7 @@
 
 
                             <div class="box-footer" style="text-align: center;margin: 0">
-                                <shiro:hasAnyRoles name="root,admin,advisor">
+                                <shiro:hasAnyRoles name="root,admin,advisor,cashier">
                                     <button type="submit" class="btn btn-primary btn-flat">保存</button>
                                 </shiro:hasAnyRoles>
                                 <button type="button" class="btn btn-success btn-flat" style="margin-right: 20px"
