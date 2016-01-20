@@ -11,8 +11,7 @@ import java.util.List;
 
 public interface ClassScheduleDao extends CommonRepository<ClassSchedule, Long> {
     @Modifying
-    @Query(nativeQuery = true, value = "" +
-            "INSERT INTO his_schedule(cs_id,\n" +
+    @Query(nativeQuery = true, value = "INSERT INTO his_schedule(cs_id,\n" +
             " cs_date,\n" +
             " cs_comment,\n" +
             " cs_startTime,\n" +
@@ -21,7 +20,6 @@ public interface ClassScheduleDao extends CommonRepository<ClassSchedule, Long> 
             " u_userName,\n" +
             " u_realName,\n" +
             " u_tel,\n" +
-            " u_tel1,\n" +
             " u_weChat,\n" +
             " u_comment,\n" +
             " c_id,\n" +
@@ -45,9 +43,8 @@ public interface ClassScheduleDao extends CommonRepository<ClassSchedule, Long> 
             " cs_endTime,\n" +
             " u_id,\n" +
             " u_userName,\n" +
-            " u_realName,\n" +
-            " u_tel,\n" +
-            " u_tel1,\n" +
+            " u_teacherName,\n" +
+            " tel,\n" +
             " u_weChat,\n" +
             " u_comment,\n" +
             " c_id,\n" +
@@ -71,7 +68,7 @@ public interface ClassScheduleDao extends CommonRepository<ClassSchedule, Long> 
     @Query(nativeQuery = true, value = "SELECT * FROM class_schedule WHERE scheduleDate >= :beginDate AND scheduleDate <= :endDate")
     public List<ClassSchedule> findScheduleByDateFilter(@Param("beginDate") Date beginDate, @Param("endDate") Date endDate);
 
-        @Query(nativeQuery = true, value = "SELECT * FROM class_schedule WHERE scheduleDate = :scheduleDate AND startTime = :startTime AND endTime = :endTime")
-        public List<ClassSchedule> findScheduleByDateTime(@Param("scheduleDate") Date scheduleDate, @Param("startTime") Time startTime, @Param("endTime") Time endTime);
+    @Query(nativeQuery = true, value = "SELECT * FROM class_schedule WHERE scheduleDate = :scheduleDate AND startTime = :startTime AND endTime = :endTime")
+    public List<ClassSchedule> findScheduleByDateTime(@Param("scheduleDate") Date scheduleDate, @Param("startTime") Time startTime, @Param("endTime") Time endTime);
 
 }

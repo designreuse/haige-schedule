@@ -73,7 +73,7 @@
                 </li>
             </shiro:hasAnyRoles>
 
-            <shiro:hasAnyRoles name="root,admin,advisor,coach">
+            <shiro:hasAnyRoles name="root,admin,advisor,coach,cashier">
                 <li class="treeview active">
                     <a href="#">
                         <i class="fa fa-laptop"></i>
