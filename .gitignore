@@ -5,5 +5,4 @@ target/
 *.backup
 *.lck
 *.log
-*.log
 schedule-admin/src/main/webapp/WEB-INF/finedb/db.log
