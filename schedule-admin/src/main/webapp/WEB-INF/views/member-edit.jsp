@@ -48,8 +48,7 @@
 
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="leftTime" id="leftTime"
-                                    <shiro:hasAnyRoles name="cashier"> readonly </shiro:hasAnyRoles>
-                                           disabled value="${member.leftTime}" placeholder="剩余课时">
+                                           readonly value="${member.leftTime}" placeholder="剩余课时">
                                 </div>
                             </div>
 
