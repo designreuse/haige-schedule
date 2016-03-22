@@ -25,13 +25,19 @@ public class ScheduleMemberService {
     }
 
     public ScheduleMember getScheduleMember(Long scheduleId, Long memberId) {
-
         return smDao.findByScheduleIdAndMemberId(scheduleId, memberId);
     }
 
 
     public void save(ScheduleMember classBase) {
         smDao.save(classBase);
+    }
+
+
+    public void updateComment(long id, String comment) {
+        ScheduleMember sm = getScheduleMember(id);
+        sm.setComment(comment);
+        smDao.save(sm);
     }
 
     public void delete(Long id) {

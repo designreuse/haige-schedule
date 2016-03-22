@@ -98,7 +98,7 @@
                             </div>
                             <div class="box box-info">
                                 <h4 class="box-title">课程学员<span class="text-muted">(修改后将会自动保存)</span></h4>
-                                <shiro:hasAnyRoles name="root,admin,advisor">
+                                <shiro:hasAnyRoles name="root,admin,advisor,manager">
                                     <div class="box-header" style="text-align: center;margin: 0">
                                         <a id="addCMBtn" class="btn btn-primary btn-flat"
                                            onclick="addCM()">添加学员
@@ -123,21 +123,32 @@
                                             <th class="text-center">顾问</th>
                                             <th class="text-center">阶段</th>
                                             <th class="text-center">地址</th>
+                                            <th class="text-center">备注</th>
                                             <th class="text-center">操 作</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:if test="${not empty schedule.members}">
-                                            <c:forEach items="${schedule.members}" var="item">
+                                        <c:if test="${not empty schedule.scheduleMembers}">
+                                            <c:forEach items="${schedule.scheduleMembers}" var="item"
+                                                       varStatus="status">
                                                 <tr>
-                                                    <td class="text-center">${item.memberName}</td>
-                                                    <td class="text-center">${item.realName}</td>
-                                                    <td class="text-center">${item.sex.title}</td>
-                                                    <td class="text-center">${item.age}</td>
-                                                    <td class="text-center">${item.birthday}</td>
-                                                    <td class="text-center">${item.advisor.realName}</td>
-                                                    <td class="text-center">${item.phase.name}</td>
-                                                    <td class="text-center">${item.address}</td>
+                                                    <input type="hidden" class="form-control"
+                                                           name="scheduleMembers[${status.index}].id"
+                                                           id="smId" value="${item.id}">
+                                                    <td class="text-center">${item.member.memberName}</td>
+                                                    <td class="text-center">${item.member.realName}</td>
+                                                    <td class="text-center">${item.member.sex.title}</td>
+                                                    <td class="text-center">${item.member.age}</td>
+                                                    <td class="text-center">${item.member.birthday}</td>
+                                                    <td class="text-center">${item.member.advisor.realName}</td>
+                                                    <td class="text-center">${item.member.phase.name}</td>
+                                                    <td class="text-center">${item.member.address}</td>
+                                                    <td class="text-center">
+                                                        <input type="text" class="form-control"
+                                                               name="scheduleMembers[${status.index}].comment"
+                                                               id="scheduleMembersComment" value="${item.comment}"
+                                                               placeholder="备注">
+                                                    </td>
                                                     <td class="text-center">
                                                         <a class="btn btn-primary btn-xs"
                                                            onclick="deleteCM(${item.id});">
@@ -156,12 +167,12 @@
 
 
                             <div class="box-footer" style="text-align: center;margin: 0">
-                                <shiro:hasAnyRoles name="root,admin">
+                                <shiro:hasAnyRoles name="root,admin,manager">
                                     <button type="button" class="btn btn-primary btn-flat"
                                             onclick="batchGenerateByMonth(${schedule.id})">批量生成当月课程
                                     </button>
                                 </shiro:hasAnyRoles>
-                                <shiro:hasAnyRoles name="root,admin">
+                                <shiro:hasAnyRoles name="root,admin,manager">
                                     <button type="submit" class="btn btn-primary btn-flat">保存</button>
                                 </shiro:hasAnyRoles>
                                 <button type="button" class="btn btn-success btn-flat" style="margin-right: 20px"

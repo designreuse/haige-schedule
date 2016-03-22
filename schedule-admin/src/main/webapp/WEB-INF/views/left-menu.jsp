@@ -28,7 +28,7 @@
             </li>
 
 
-            <shiro:hasAnyRoles name="root,admin,advisor,coach,cashier">
+            <shiro:hasAnyRoles name="root,admin,advisor,coach,cashier,manager">
                 <li class="treeview active">
                     <a href="#">
                         <i class="fa fa-bar-chart-o"></i>
@@ -45,7 +45,7 @@
                 </li>
             </shiro:hasAnyRoles>
 
-            <shiro:hasAnyRoles name="root,admin,advisor,cashier">
+            <shiro:hasAnyRoles name="root,admin,advisor,cashier,manager">
                 <li class="treeview active">
                     <a href="#">
                         <i class="fa fa-laptop"></i>
@@ -73,7 +73,7 @@
                 </li>
             </shiro:hasAnyRoles>
 
-            <shiro:hasAnyRoles name="root,admin,advisor,coach,cashier">
+            <shiro:hasAnyRoles name="root,admin,advisor,coach,cashier,manager">
                 <li class="treeview active">
                     <a href="#">
                         <i class="fa fa-laptop"></i>
@@ -83,7 +83,7 @@
                     <ul class="treeview-menu">
                         <li><a href="${ctx}/report/schedule"><i class="fa fa-angle-double-right"></i>进行中的课程/活动</a></li>
                         <li><a href="${ctx}/report/his_schedule"><i class="fa fa-angle-double-right"></i>历史课程</a></li>
-                        <shiro:hasAnyRoles name="root,admin,advisor">
+                        <shiro:hasAnyRoles name="root,admin,advisor,manager">
                             <li><a href="${ctx}/report/member"><i class="fa fa-angle-double-right"></i>会员信息</a></li>
                         </shiro:hasAnyRoles>
                         <shiro:hasAnyRoles name="coach">

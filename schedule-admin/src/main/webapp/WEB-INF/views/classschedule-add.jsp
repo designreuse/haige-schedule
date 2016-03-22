@@ -116,7 +116,7 @@
 
 
                             <div class="box-footer" style="text-align: center;margin: 0">
-                                <shiro:hasAnyRoles name="root,admin">
+                                <shiro:hasAnyRoles name="root,admin,manager">
                                     <button type="submit" class="btn btn-primary btn-flat">保存</button>
                                 </shiro:hasAnyRoles>
                                 <button type="button" class="btn btn-success btn-flat" style="margin-right: 20px"

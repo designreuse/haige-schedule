@@ -23,7 +23,7 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">课程活动列表</h3>
-                        <shiro:hasAnyRoles name="root,admin">
+                        <shiro:hasAnyRoles name="root,admin,manager">
                             <div class="box-tools pull-right" style="margin-right: 80px;">
                                 <a class="btn btn-primary btn-flat" style="color: #ffffff;" role="button"
                                    onclick="addNewSchedule();">添加</a>
@@ -128,7 +128,7 @@
                                             <a class="btn btn-primary btn-xs" onclick="editSchedule (${item.id});">
                                                 <i class="fa fa-edit">详情</i>
                                             </a>
-                                            <shiro:hasAnyRoles name="root,admin">
+                                            <shiro:hasAnyRoles name="root,admin,manager">
                                                 <a class="btn btn-primary btn-xs" onclick="deleteSchedule(${item.id});">
                                                     <i class="fa fa-times">删除</i>
                                                 </a>

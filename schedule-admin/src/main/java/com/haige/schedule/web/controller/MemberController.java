@@ -60,7 +60,8 @@ public class MemberController {
         ModelAndView mv = new ModelAndView("haige.member-list");
         Page<Member> members = new PageImpl<Member>(new ArrayList<Member>());
         Subject currentUser = SecurityUtils.getSubject();
-        if (currentUser.hasRole("root") || currentUser.hasRole("admin") || currentUser.hasRole("cashier")) {
+        if (currentUser.hasRole("root") || currentUser.hasRole("admin") || currentUser.hasRole("cashier")
+                || currentUser.hasRole("manager")) {
             members = memberService.queryMembers(queryName, queryBirthYear, queryPhaseId, queryAdvisorId, page);
         } else if (currentUser.hasRole("advisor")) {
             members = memberService.queryMembers(queryName, queryBirthYear, queryPhaseId, rbacService.getCurrentUser().getId(), page);
@@ -90,7 +91,7 @@ public class MemberController {
             Map<String, Object> result = new HashMap<>();
             Page<Member> members = null;
             Subject currentUser = SecurityUtils.getSubject();
-            if (currentUser.hasRole("root") || currentUser.hasRole("admin")) {
+            if (currentUser.hasRole("root") || currentUser.hasRole("admin") || currentUser.hasRole("manager")) {
                 members = memberService.queryValidMembers(cmScheduleId, cmQueryName, cmQueryPhaseId, cmQueryAdvisorId, page);
             } else if (currentUser.hasRole("advisor")) {
                 members = memberService.queryValidMembers(cmScheduleId, cmQueryName, cmQueryPhaseId, rbacService.getCurrentUser().getId(), page);
@@ -186,7 +187,8 @@ public class MemberController {
                        @RequestParam(value = "advisorId", required = true) Long advisorId) {
 
         Subject currentUser = SecurityUtils.getSubject();
-        if (currentUser.hasRole("root") || currentUser.hasRole("admin") || currentUser.hasRole("cashier")) {
+        if (currentUser.hasRole("root") || currentUser.hasRole("admin") || currentUser.hasRole("cashier")
+                || currentUser.hasRole("manager")) {
             member.setAdvisor(rbacService.getUserById(advisorId));
         } else if (currentUser.hasRole("advisor")) {
             member.setAdvisor(rbacService.getUserById(rbacService.getCurrentUser().getId()));

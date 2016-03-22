@@ -109,7 +109,7 @@
 
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" name="birthday" id="birthday"
-                                    <shiro:hasAnyRoles name="cashier"> readonly</shiro:hasAnyRoles>
+                                    <shiro:hasAnyRoles name="cashier"> disabled </shiro:hasAnyRoles>
                                            value="${member.birthday}" placeholder="出生日期">
                                 </div>
 

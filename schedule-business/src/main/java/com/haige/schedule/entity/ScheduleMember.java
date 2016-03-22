@@ -20,14 +20,26 @@ public class ScheduleMember implements Serializable {
     @Column(nullable = false)
     private Long scheduleId;
 
-    @Column(nullable = false)
-    private Long memberId;
+//    @Column(nullable = false)
+//    private Long memberId;
 
     @Column(length = 500)
     private String evaluation;
 
     @Column(length = 5000)
     private String comment;
+
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "memberId")
+    private Member member;
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
 
     public Long getId() {
         return id;
@@ -45,13 +57,13 @@ public class ScheduleMember implements Serializable {
         this.scheduleId = scheduleId;
     }
 
-    public Long getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
-    }
+//    public Long getMemberId() {
+//        return memberId;
+//    }
+//
+//    public void setMemberId(Long memberId) {
+//        this.memberId = memberId;
+//    }
 
     public String getEvaluation() {
         return evaluation;
@@ -69,4 +81,5 @@ public class ScheduleMember implements Serializable {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
 }

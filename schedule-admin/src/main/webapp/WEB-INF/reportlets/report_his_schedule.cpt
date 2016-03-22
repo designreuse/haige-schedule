@@ -146,7 +146,7 @@ where m_id is not null]]></Query>
 </C>
 <C c="1" r="1" s="1">
 <O t="DSColumn">
-<Attributes dsName="ds_his_schedule" columnName="cs_date"/>
+<Attributes dsName="ds_his_schedule" columnName="c_name"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
 <RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>

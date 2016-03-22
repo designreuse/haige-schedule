@@ -32,7 +32,7 @@
                         <i class="ion ion-person-add"></i>
                     </div>
 
-                    <shiro:hasAnyRoles name="root,admin,advisor">
+                    <shiro:hasAnyRoles name="root,admin,advisor,manager">
                         <a href="${ctx}/member/list" class="small-box-footer">
                             查看我的会员 <i class="fa fa-arrow-circle-right"></i>
                         </a>
@@ -58,7 +58,7 @@
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
                     </div>
-                    <shiro:hasAnyRoles name="root,admin,advisor,coach">
+                    <shiro:hasAnyRoles name="root,admin,advisor,coach,manager">
                         <a href="${ctx}/schedule/1/list" class="small-box-footer">
                             查看 <i class="fa fa-arrow-circle-right"></i>
                         </a>
@@ -84,10 +84,10 @@
                                 <button class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown"><i
                                         class="fa fa-bars"></i></button>
                                 <ul class="dropdown-menu pull-right" role="menu">
-                                    <shiro:hasAnyRoles name="root,admin">
+                                    <shiro:hasAnyRoles name="root,admin,manager">
                                         <li><a href="${ctx}/schedule/1/add">添加课程计划</a></li>
                                     </shiro:hasAnyRoles>
-                                    <shiro:hasAnyRoles name="root,admin,advisor">
+                                    <shiro:hasAnyRoles name="root,admin,advisor,manager">
                                         <li><a href="${ctx}/schedule/2/add">添加会员活动</a></li>
                                     </shiro:hasAnyRoles>
 

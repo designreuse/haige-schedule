@@ -6,7 +6,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -47,6 +49,9 @@ public class ClassSchedule implements Serializable {
     @Column(length = 5000)
     private String comment;
 
+    @OneToMany(cascade = {CascadeType.REFRESH})
+    @JoinColumn(name = "scheduleId")
+    private List<ScheduleMember> scheduleMembers = new ArrayList<ScheduleMember>();
 
     @ManyToMany(cascade = CascadeType.REFRESH)
 //    @org.hibernate.annotations.Fetch(FetchMode.SELECT)
@@ -135,5 +140,13 @@ public class ClassSchedule implements Serializable {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public List<ScheduleMember> getScheduleMembers() {
+        return scheduleMembers;
+    }
+
+    public void setScheduleMembers(List<ScheduleMember> scheduleMembers) {
+        this.scheduleMembers = scheduleMembers;
     }
 }

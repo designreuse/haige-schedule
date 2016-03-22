@@ -119,6 +119,9 @@ public class ClassScheduleController {
             ClassSchedule cs = scheduleService.getClassScheduleById(schedule.getId());
             schedule.setMembers(cs.getMembers());
         }
+        for (ScheduleMember sm : schedule.getScheduleMembers()) {
+            smService.updateComment(sm.getId(), sm.getComment());
+        }
         scheduleService.saveClassSchedule(schedule);
         return "redirect:/schedule/" + scheduleType + "/list";
     }

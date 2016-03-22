@@ -70,7 +70,7 @@
     }
 
     function deleteSchedule(id) {
-        if (window.confirm("您确定要删除该会员吗？")) {
+        if (window.confirm("您确定要删除该课程吗？")) {
             window.location.href = "${ctx}/schedule/${scheduleType}/delete/" + id;
         }
     }
