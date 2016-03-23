@@ -9,7 +9,4 @@
             </JDBCDatabaseAttr>
         </Connection>
     </ConnectionMap>
-    <ADHOCMap>
-
-    </ADHOCMap>
 </DatasourceManager>

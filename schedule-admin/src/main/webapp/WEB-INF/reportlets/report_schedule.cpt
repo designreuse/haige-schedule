@@ -333,7 +333,18 @@ where m_id is not null]]></Query>
 <Expand dir="0"/>
 </C>
 <C c="14" r="1" s="4">
-<Expand dir="0"/>
+<O t="DSColumn">
+<Attributes dsName="ds_schedule" columnName="csm_comment"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="0" leftParentDefault="false" left="M2"/>
 </C>
 </CellElementList>
 <ReportAttrSet>
@@ -607,5 +618,5 @@ if( start > end){   //判断开始日期是否大于结束日期
 </Style>
 </StyleList>
 <DesignerVersion DesignerVersion="HAF"/>
-<PreviewType PreviewType="2"/>
+<PreviewType PreviewType="0"/>
 </WorkBook>
