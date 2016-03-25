@@ -4,27 +4,17 @@
 <TableData name="ds_member" class="com.fr.data.impl.DBTableData">
 <Parameters>
 <Parameter>
-<Attributes name="filter_linkman_id"/>
-<O>
-<![CDATA[]]></O>
-</Parameter>
-<Parameter>
-<Attributes name="filter_member_name"/>
-<O>
-<![CDATA[]]></O>
-</Parameter>
-<Parameter>
 <Attributes name="filter_advisor_id"/>
 <O>
 <![CDATA[]]></O>
 </Parameter>
 <Parameter>
-<Attributes name="filter_sex"/>
+<Attributes name="filter_start"/>
 <O>
 <![CDATA[]]></O>
 </Parameter>
 <Parameter>
-<Attributes name="filter_left_time"/>
+<Attributes name="filter_end"/>
 <O>
 <![CDATA[]]></O>
 </Parameter>
@@ -40,19 +30,17 @@
 <![CDATA[JDBC]]></DatabaseName>
 </Connection>
 <Query>
-<![CDATA[select * from view_members
+<![CDATA[select * from view_members m
+left join member_payment mp on m.m_id = mp.memberId
 
 where 1=1
 
-${if(len(filter_member_name) == 0,"","and m_memberName = '" + filter_member_name+ "'")}
-${if(len(filter_real_name) == 0,"","and m_realName = '" + filter_real_name + "'")}
-${if(len(filter_sex) == 0,"","and m_sex = '" + filter_sex + "'")}
-${if(len(filter_left_time) == 0,"","and m_leftTime = '" + filter_left_time + "'")}
-${if(len(filter_advisor_id) == 0,"","and u_id = '" + filter_advisor_id + "'")}
-${if(len(filter_linkman_id) == 0,"","and ml_id = '" + filter_linkman_id + "'")}
-]]></Query>
+${if(len(filter_real_name) == 0,""," and m_realName = '" + filter_real_name + "'")}
+${if(len(filter_advisor_id) == 0,""," and u_id = '" + filter_advisor_id + "'")}
+${if(len(filter_end) == 0,""," and payDate <= '" + filter_end + "'")}
+${if(len(filter_start) == 0,""," and payDate >='" + filter_start + "'")}]]></Query>
 </TableData>
-<TableData name="fil_teacher" class="com.fr.data.impl.DBTableData">
+<TableData name="fil_advisor" class="com.fr.data.impl.DBTableData">
 <Parameters/>
 <Attributes maxMemRowCount="-1"/>
 <Connection class="com.fr.data.impl.NameDatabaseConnection">
@@ -60,9 +48,9 @@ ${if(len(filter_linkman_id) == 0,"","and ml_id = '" + filter_linkman_id + "'")}
 <![CDATA[JDBC]]></DatabaseName>
 </Connection>
 <Query>
-<![CDATA[select distinct u_id, u_realName from view_all_schedule]]></Query>
+<![CDATA[select distinct u_id,u_realname from view_members]]></Query>
 </TableData>
-<TableData name="fil_member" class="com.fr.data.impl.DBTableData">
+<TableData name="fil_realName" class="com.fr.data.impl.DBTableData">
 <Parameters/>
 <Attributes maxMemRowCount="-1"/>
 <Connection class="com.fr.data.impl.NameDatabaseConnection">
@@ -70,8 +58,7 @@ ${if(len(filter_linkman_id) == 0,"","and ml_id = '" + filter_linkman_id + "'")}
 <![CDATA[JDBC]]></DatabaseName>
 </Connection>
 <Query>
-<![CDATA[select distinct m_id,m_realName from view_all_schedule
-where m_id is not null]]></Query>
+<![CDATA[select distinct m_realname from view_members]]></Query>
 </TableData>
 </TableDataMap>
 <Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
@@ -82,9 +69,9 @@ where m_id is not null]]></Query>
 <FC/>
 </ReportPageAttr>
 <RowHeight defaultValue="723900">
-<![CDATA[723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
+<![CDATA[1143000,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
 <ColumnWidth defaultValue="2743200">
-<![CDATA[2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<![CDATA[2164080,2743200,2743200,2743200,1432560,2194560,2042160,2743200,3779520,3657600,2743200]]></ColumnWidth>
 <CellElementList>
 <C c="0" r="0" s="0">
 <O>
@@ -103,42 +90,41 @@ where m_id is not null]]></Query>
 </C>
 <C c="3" r="0" s="0">
 <O>
-<![CDATA[顾问]]></O>
+<![CDATA[生日]]></O>
 <Expand/>
 </C>
 <C c="4" r="0" s="0">
 <O>
-<![CDATA[剩余课时]]></O>
+<![CDATA[性别]]></O>
 <Expand/>
 </C>
 <C c="5" r="0" s="0">
 <O>
-<![CDATA[生日]]></O>
+<![CDATA[顾问]]></O>
 <Expand/>
 </C>
 <C c="6" r="0" s="0">
 <O>
-<![CDATA[性别]]></O>
+<![CDATA[剩余课时]]></O>
 <Expand/>
 </C>
 <C c="7" r="0" s="0">
 <O>
-<![CDATA[联系人]]></O>
+<![CDATA[有效期]]></O>
 <Expand/>
 </C>
 <C c="8" r="0" s="0">
 <O>
-<![CDATA[联系人关系]]></O>
+<![CDATA[地址]]></O>
 <Expand/>
 </C>
 <C c="9" r="0" s="0">
 <O>
-<![CDATA[联系人电话]]></O>
-<Expand/>
+<![CDATA[产品类型]]></O>
 </C>
 <C c="10" r="0" s="0">
 <O>
-<![CDATA[联系人微信]]></O>
+<![CDATA[报名渠道]]></O>
 <Expand/>
 </C>
 <C c="11" r="0" s="0">
@@ -199,7 +185,7 @@ where m_id is not null]]></Query>
 </C>
 <C c="3" r="1" s="1">
 <O t="DSColumn">
-<Attributes dsName="ds_member" columnName="u_realName"/>
+<Attributes dsName="ds_member" columnName="m_birthday"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
 <RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
@@ -211,7 +197,7 @@ where m_id is not null]]></Query>
 </C>
 <C c="4" r="1" s="1">
 <O t="DSColumn">
-<Attributes dsName="ds_member" columnName="m_leftTime"/>
+<Attributes dsName="ds_member" columnName="m_sex"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
 <RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
@@ -223,7 +209,7 @@ where m_id is not null]]></Query>
 </C>
 <C c="5" r="1" s="1">
 <O t="DSColumn">
-<Attributes dsName="ds_member" columnName="m_birthday"/>
+<Attributes dsName="ds_member" columnName="u_realName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
 <RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
@@ -235,7 +221,7 @@ where m_id is not null]]></Query>
 </C>
 <C c="6" r="1" s="1">
 <O t="DSColumn">
-<Attributes dsName="ds_member" columnName="m_sex"/>
+<Attributes dsName="ds_member" columnName="m_leftTime"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
 <RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
@@ -245,14 +231,12 @@ where m_id is not null]]></Query>
 </O>
 <Expand dir="0"/>
 </C>
-<C c="7" r="1" s="1">
+<C c="7" r="1" s="2">
 <O t="DSColumn">
-<Attributes dsName="ds_member" columnName="ml_name"/>
+<Attributes dsName="ds_member" columnName="m_endDate"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -261,7 +245,7 @@ where m_id is not null]]></Query>
 </C>
 <C c="8" r="1" s="1">
 <O t="DSColumn">
-<Attributes dsName="ds_member" columnName="ml_relation"/>
+<Attributes dsName="ds_member" columnName="m_address"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
 <RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
@@ -273,7 +257,7 @@ where m_id is not null]]></Query>
 </C>
 <C c="9" r="1" s="1">
 <O t="DSColumn">
-<Attributes dsName="ds_member" columnName="ml_tel"/>
+<Attributes dsName="ds_member" columnName="m_proType"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
 <RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
@@ -285,7 +269,7 @@ where m_id is not null]]></Query>
 </C>
 <C c="10" r="1" s="1">
 <O t="DSColumn">
-<Attributes dsName="ds_member" columnName="ml_weChat"/>
+<Attributes dsName="ds_member" columnName="m_rChannel"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
 <RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
@@ -297,7 +281,7 @@ where m_id is not null]]></Query>
 </C>
 <C c="11" r="1" s="1">
 <O t="DSColumn">
-<Attributes dsName="ds_member" columnName="mp_payDate"/>
+<Attributes dsName="ds_member" columnName="payDate"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
 <RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
@@ -311,10 +295,12 @@ where m_id is not null]]></Query>
 </C>
 <C c="12" r="1" s="1">
 <O t="DSColumn">
-<Attributes dsName="ds_member" columnName="mp_payment"/>
+<Attributes dsName="ds_member" columnName="payment"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -323,10 +309,12 @@ where m_id is not null]]></Query>
 </C>
 <C c="13" r="1" s="1">
 <O t="DSColumn">
-<Attributes dsName="ds_member" columnName="mp_pPerson"/>
+<Attributes dsName="ds_member" columnName="payPerson"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -335,10 +323,12 @@ where m_id is not null]]></Query>
 </C>
 <C c="14" r="1" s="1">
 <O t="DSColumn">
-<Attributes dsName="ds_member" columnName="mp_pCount"/>
+<Attributes dsName="ds_member" columnName="purchaseCount"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -373,25 +363,6 @@ where m_id is not null]]></Query>
 <WidgetName name="para"/>
 <WidgetAttr/>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
-<InnerWidget class="com.fr.form.ui.ComboBox">
-<WidgetName name="filter_class_id"/>
-<WidgetAttr/>
-<Dictionary class="com.fr.data.impl.DatabaseDictionary">
-<FormulaDictAttr kiName="id" viName="name"/>
-<DBDictAttr tableName="classes" schemaName="" ki="-1" vi="-1" kiName="id" viName="name"/>
-<Connection class="com.fr.data.impl.NameDatabaseConnection">
-<DatabaseName>
-<![CDATA[JDBC]]></DatabaseName>
-</Connection>
-</Dictionary>
-<widgetValue>
-<O>
-<![CDATA[]]></O>
-</widgetValue>
-</InnerWidget>
-<BoundsAttr x="84" y="22" width="80" height="21"/>
-</Widget>
-<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.parameter.FormSubmitButton">
 <Listener event="click">
 <JavaScript class="com.fr.js.JavaScriptImpl">
@@ -421,7 +392,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 <Hotkeys>
 <![CDATA[enter]]></Hotkeys>
 </InnerWidget>
-<BoundsAttr x="849" y="19" width="80" height="24"/>
+<BoundsAttr x="839" y="19" width="80" height="24"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.DateEditor">
@@ -437,7 +408,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 </O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="712" y="19" width="109" height="24"/>
+<BoundsAttr x="700" y="19" width="109" height="24"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -450,7 +421,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 <![CDATA[至]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="692" y="19" width="20" height="24"/>
+<BoundsAttr x="680" y="19" width="20" height="24"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.DateEditor">
@@ -466,7 +437,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 </O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="583" y="19" width="109" height="24"/>
+<BoundsAttr x="571" y="19" width="109" height="24"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -476,38 +447,38 @@ if( start > end){   //判断开始日期是否大于结束日期
 <FRFont name="SimSun" style="0" size="72"/>
 <widgetValue>
 <O>
-<![CDATA[课程日期：]]></O>
+<![CDATA[缴费日期：]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="501" y="19" width="82" height="24"/>
+<BoundsAttr x="489" y="19" width="82" height="24"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.ComboBox">
-<WidgetName name="filter_teacher_id"/>
+<WidgetName name="filter_advisor_id"/>
 <WidgetAttr/>
 <Dictionary class="com.fr.data.impl.TableDataDictionary">
 <FormulaDictAttr kiName="u_id" viName="u_realName"/>
 <TableDataDictAttr>
 <TableData class="com.fr.data.impl.NameTableData">
 <Name>
-<![CDATA[fil_teacher]]></Name>
+<![CDATA[fil_advisor]]></Name>
 </TableData>
 </TableDataDictAttr>
 </Dictionary>
 <widgetValue/>
 </InnerWidget>
-<BoundsAttr x="244" y="21" width="80" height="21"/>
+<BoundsAttr x="84" y="21" width="150" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.ComboBox">
-<WidgetName name="filter_member_id"/>
+<WidgetName name="filter_real_name"/>
 <WidgetAttr/>
 <Dictionary class="com.fr.data.impl.TableDataDictionary">
-<FormulaDictAttr kiName="m_id" viName="m_realName"/>
+<FormulaDictAttr kiName="m_realName" viName="m_realName"/>
 <TableDataDictAttr>
 <TableData class="com.fr.data.impl.NameTableData">
 <Name>
-<![CDATA[fil_member]]></Name>
+<![CDATA[fil_realName]]></Name>
 </TableData>
 </TableDataDictAttr>
 </Dictionary>
@@ -516,20 +487,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 <![CDATA[]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="400" y="22" width="80" height="21"/>
-</Widget>
-<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
-<InnerWidget class="com.fr.form.ui.Label">
-<WidgetName name="label0"/>
-<WidgetAttr/>
-<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
-<FRFont name="SimSun" style="0" size="72"/>
-<widgetValue>
-<O>
-<![CDATA[课程：]]></O>
-</widgetValue>
-</InnerWidget>
-<BoundsAttr x="23" y="21" width="61" height="21"/>
+<BoundsAttr x="293" y="22" width="175" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -539,10 +497,10 @@ if( start > end){   //判断开始日期是否大于结束日期
 <FRFont name="SimSun" style="0" size="72"/>
 <widgetValue>
 <O>
-<![CDATA[教练：]]></O>
+<![CDATA[顾问：]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="186" y="22" width="58" height="21"/>
+<BoundsAttr x="26" y="22" width="58" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -555,7 +513,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 <![CDATA[学员：]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="352" y="22" width="48" height="21"/>
+<BoundsAttr x="245" y="22" width="48" height="21"/>
 </Widget>
 <LCAttr vgap="0" hgap="0"/>
 </Layout>
@@ -565,7 +523,19 @@ if( start > end){   //判断开始日期是否大于结束日期
 <StyleList>
 <Style style_name="Head"/>
 <Style style_name="cell"/>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM-dd]]></Format>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1" color="-6697729"/>
+<Bottom style="1" color="-6697729"/>
+<Left style="1" color="-6697729"/>
+<Right style="1" color="-6697729"/>
+</Border>
+</Style>
 </StyleList>
 <DesignerVersion DesignerVersion="HAF"/>
-<PreviewType PreviewType="0"/>
+<PreviewType PreviewType="2"/>
 </WorkBook>

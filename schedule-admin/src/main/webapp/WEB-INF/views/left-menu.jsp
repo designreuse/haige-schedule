@@ -83,8 +83,14 @@
                     <ul class="treeview-menu">
                         <li><a href="${ctx}/report/schedule"><i class="fa fa-angle-double-right"></i>进行中的课程/活动</a></li>
                         <li><a href="${ctx}/report/his_schedule"><i class="fa fa-angle-double-right"></i>历史课程</a></li>
+                        <shiro:hasAnyRoles name="root,admin,">
+                            <li><a href="${ctx}/report/member_payment"><i class="fa fa-angle-double-right"></i>缴费信息</a>
+                            </li>
+                        </shiro:hasAnyRoles>
                         <shiro:hasAnyRoles name="root,admin,advisor">
-                            <li><a href="${ctx}/report/member"><i class="fa fa-angle-double-right"></i>会员信息</a></li>
+                            <li><a href="${ctx}/report/member"><i class="fa fa-angle-double-right"></i>会员列表</a></li>
+                            <li><a href="${ctx}/report/member_full"><i class="fa fa-angle-double-right"></i>会员信息(全)</a>
+                            </li>
                         </shiro:hasAnyRoles>
                         <shiro:hasAnyRoles name="coach">
                             <li><a href="${ctx}/report/coach_member"><i class="fa fa-angle-double-right"></i>会员信息</a>

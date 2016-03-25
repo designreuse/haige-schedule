@@ -295,7 +295,7 @@ where ml_id is not null]]></Query>
 <![CDATA[]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="112" y="22" width="80" height="21"/>
+<BoundsAttr x="112" y="22" width="151" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.parameter.FormSubmitButton">
@@ -327,7 +327,7 @@ where ml_id is not null]]></Query>
 <Hotkeys>
 <![CDATA[enter]]></Hotkeys>
 </InnerWidget>
-<BoundsAttr x="541" y="61" width="80" height="24"/>
+<BoundsAttr x="807" y="61" width="80" height="24"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.ComboBox">
@@ -347,7 +347,7 @@ where ml_id is not null]]></Query>
 <![CDATA[]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="259" y="22" width="80" height="21"/>
+<BoundsAttr x="349" y="22" width="160" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -373,7 +373,7 @@ where ml_id is not null]]></Query>
 <![CDATA[姓名：]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="211" y="22" width="48" height="21"/>
+<BoundsAttr x="301" y="22" width="48" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -386,7 +386,7 @@ where ml_id is not null]]></Query>
 <![CDATA[性别：]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="358" y="22" width="63" height="21"/>
+<BoundsAttr x="563" y="22" width="63" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.ComboBox">
@@ -403,7 +403,7 @@ where ml_id is not null]]></Query>
 <![CDATA[]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="421" y="22" width="80" height="21"/>
+<BoundsAttr x="626" y="22" width="153" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -429,7 +429,7 @@ where ml_id is not null]]></Query>
 <![CDATA[顾问：]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="211" y="64" width="48" height="21"/>
+<BoundsAttr x="301" y="64" width="48" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.ComboBox">
@@ -449,7 +449,7 @@ where ml_id is not null]]></Query>
 <![CDATA[]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="259" y="64" width="80" height="21"/>
+<BoundsAttr x="349" y="64" width="160" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.ComboBox">
@@ -469,7 +469,7 @@ where ml_id is not null]]></Query>
 <![CDATA[]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="421" y="64" width="80" height="21"/>
+<BoundsAttr x="626" y="64" width="153" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -482,7 +482,7 @@ where ml_id is not null]]></Query>
 <![CDATA[联系人：]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="358" y="64" width="63" height="21"/>
+<BoundsAttr x="563" y="64" width="63" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.TextEditor">
@@ -491,7 +491,7 @@ where ml_id is not null]]></Query>
 <TextAttr/>
 <widgetValue/>
 </InnerWidget>
-<BoundsAttr x="112" y="67" width="80" height="21"/>
+<BoundsAttr x="112" y="67" width="151" height="21"/>
 </Widget>
 <LCAttr vgap="0" hgap="0"/>
 </Layout>

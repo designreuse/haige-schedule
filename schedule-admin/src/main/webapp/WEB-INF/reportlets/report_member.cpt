@@ -383,7 +383,7 @@ order by re.m_memberName
 <![CDATA[]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="112" y="22" width="80" height="21"/>
+<BoundsAttr x="112" y="22" width="148" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.parameter.FormSubmitButton">
@@ -415,7 +415,7 @@ order by re.m_memberName
 <Hotkeys>
 <![CDATA[enter]]></Hotkeys>
 </InnerWidget>
-<BoundsAttr x="617" y="61" width="80" height="24"/>
+<BoundsAttr x="750" y="61" width="80" height="24"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.ComboBox">
@@ -435,7 +435,7 @@ order by re.m_memberName
 <![CDATA[]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="316" y="22" width="80" height="21"/>
+<BoundsAttr x="363" y="22" width="153" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -461,7 +461,7 @@ order by re.m_memberName
 <![CDATA[姓名：]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="243" y="22" width="73" height="21"/>
+<BoundsAttr x="290" y="22" width="73" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -474,7 +474,7 @@ order by re.m_memberName
 <![CDATA[性别：]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="434" y="22" width="63" height="21"/>
+<BoundsAttr x="554" y="22" width="63" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.ComboBox">
@@ -491,7 +491,7 @@ order by re.m_memberName
 <![CDATA[]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="497" y="22" width="80" height="21"/>
+<BoundsAttr x="617" y="22" width="80" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -517,7 +517,7 @@ order by re.m_memberName
 <![CDATA[顾问：]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="243" y="64" width="73" height="21"/>
+<BoundsAttr x="290" y="64" width="73" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.ComboBox">
@@ -537,7 +537,7 @@ order by re.m_memberName
 <![CDATA[]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="316" y="64" width="80" height="21"/>
+<BoundsAttr x="363" y="64" width="153" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.TextEditor">
@@ -546,7 +546,7 @@ order by re.m_memberName
 <TextAttr/>
 <widgetValue/>
 </InnerWidget>
-<BoundsAttr x="112" y="67" width="80" height="21"/>
+<BoundsAttr x="112" y="67" width="148" height="21"/>
 </Widget>
 <LCAttr vgap="0" hgap="0"/>
 </Layout>

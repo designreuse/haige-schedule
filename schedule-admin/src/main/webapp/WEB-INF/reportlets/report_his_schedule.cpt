@@ -35,7 +35,7 @@
 <![CDATA[JDBC]]></DatabaseName>
 </Connection>
 <Query>
-<![CDATA[select * from his_schedule
+<![CDATA[select hs.*, date_format(cs_startTime,'%H:%i') str_startTime, date_format(cs_endTime,'%H:%i') str_endTime from his_schedule hs
 
 where 1=1
 
@@ -80,7 +80,7 @@ where m_id is not null]]></Query>
 <RowHeight defaultValue="723900">
 <![CDATA[723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
 <ColumnWidth defaultValue="2743200">
-<![CDATA[0,2743200,3596640,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<![CDATA[0,2255520,2712720,1950720,1920240,2072640,6614160,3048000,2042160,2072640,2743200]]></ColumnWidth>
 <CellElementList>
 <C c="0" r="0" s="0">
 <O>
@@ -170,7 +170,7 @@ where m_id is not null]]></Query>
 </C>
 <C c="3" r="1" s="2">
 <O t="DSColumn">
-<Attributes dsName="ds_his_schedule" columnName="cs_startTime"/>
+<Attributes dsName="ds_his_schedule" columnName="str_startTime"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
 <RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
@@ -182,7 +182,7 @@ where m_id is not null]]></Query>
 </C>
 <C c="4" r="1" s="2">
 <O t="DSColumn">
-<Attributes dsName="ds_his_schedule" columnName="cs_endTime"/>
+<Attributes dsName="ds_his_schedule" columnName="str_endTime"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
 <RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
@@ -297,7 +297,7 @@ where m_id is not null]]></Query>
 <![CDATA[]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="84" y="22" width="80" height="21"/>
+<BoundsAttr x="70" y="22" width="100" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.parameter.FormSubmitButton">
@@ -329,7 +329,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 <Hotkeys>
 <![CDATA[enter]]></Hotkeys>
 </InnerWidget>
-<BoundsAttr x="849" y="19" width="80" height="24"/>
+<BoundsAttr x="883" y="19" width="80" height="24"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.DateEditor">
@@ -345,7 +345,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 </O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="712" y="19" width="109" height="24"/>
+<BoundsAttr x="759" y="19" width="109" height="24"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -358,7 +358,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 <![CDATA[至]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="692" y="19" width="20" height="24"/>
+<BoundsAttr x="739" y="19" width="20" height="24"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.DateEditor">
@@ -374,7 +374,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 </O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="583" y="19" width="109" height="24"/>
+<BoundsAttr x="630" y="19" width="109" height="24"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -387,7 +387,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 <![CDATA[课程日期：]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="501" y="19" width="82" height="24"/>
+<BoundsAttr x="548" y="19" width="82" height="24"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.ComboBox">
@@ -404,7 +404,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 </Dictionary>
 <widgetValue/>
 </InnerWidget>
-<BoundsAttr x="244" y="21" width="80" height="21"/>
+<BoundsAttr x="244" y="21" width="108" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.ComboBox">
@@ -424,7 +424,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 <![CDATA[]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="400" y="22" width="80" height="21"/>
+<BoundsAttr x="416" y="22" width="113" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -437,7 +437,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 <![CDATA[类别：]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="23" y="21" width="61" height="21"/>
+<BoundsAttr x="9" y="21" width="61" height="21"/>
 </Widget>
 <Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
 <InnerWidget class="com.fr.form.ui.Label">
@@ -463,7 +463,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 <![CDATA[学员：]]></O>
 </widgetValue>
 </InnerWidget>
-<BoundsAttr x="352" y="22" width="48" height="21"/>
+<BoundsAttr x="368" y="22" width="48" height="21"/>
 </Widget>
 <LCAttr vgap="0" hgap="0"/>
 </Layout>
@@ -475,7 +475,7 @@ if( start > end){   //判断开始日期是否大于结束日期
 <Style style_name="cell"/>
 <Style horizontal_alignment="0" imageLayout="1">
 <Format class="java.text.SimpleDateFormat">
-<![CDATA[HH:mm:ss]]></Format>
+<![CDATA[HH:mm]]></Format>
 <FRFont name="SimSun" style="0" size="72"/>
 <Background name="NullBackground"/>
 <Border>

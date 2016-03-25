@@ -28,6 +28,19 @@ public class ReportController {
         return mv;
     }
 
+    @RequestMapping(value = "/member_payment")
+    public ModelAndView member_payment() {
+        ModelAndView mv = new ModelAndView("report.haige.report-member-payment");
+        return mv;
+    }
+
+
+    @RequestMapping(value = "/member_full")
+    public ModelAndView member_full() {
+        ModelAndView mv = new ModelAndView("report.haige.report-member-full");
+        return mv;
+    }
+
     @RequestMapping(value = "/member")
     public ModelAndView member() {
         ModelAndView mv = new ModelAndView("report.haige.report-member");
