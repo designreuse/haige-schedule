@@ -83,7 +83,7 @@
                     <ul class="treeview-menu">
                         <li><a href="${ctx}/report/schedule"><i class="fa fa-angle-double-right"></i>进行中的课程/活动</a></li>
                         <li><a href="${ctx}/report/his_schedule"><i class="fa fa-angle-double-right"></i>历史课程</a></li>
-                        <shiro:hasAnyRoles name="root,admin,advisor,manager">
+                        <shiro:hasAnyRoles name="root,admin,advisor">
                             <li><a href="${ctx}/report/member"><i class="fa fa-angle-double-right"></i>会员信息</a></li>
                         </shiro:hasAnyRoles>
                         <shiro:hasAnyRoles name="coach">

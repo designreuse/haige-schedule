@@ -151,7 +151,7 @@
                                                     </td>
                                                     <td class="text-center">
                                                         <a class="btn btn-primary btn-xs"
-                                                           onclick="deleteCM(${item.id});">
+                                                           onclick="deleteCM(${item.member.id});">
                                                             <i class="fa fa-times">删除</i>
                                                         </a>
                                                     </td>

@@ -2,8 +2,10 @@ package com.haige.schedule.service;
 
 import com.haige.schedule.entity.ClassSchedule;
 import com.haige.schedule.entity.Member;
+import com.haige.schedule.entity.ScheduleMember;
 import com.haige.schedule.repository.ClassScheduleDao;
 import com.haige.schedule.repository.MemberDao;
+import com.haige.schedule.repository.ScheduleMemberDao;
 import com.haige.schedule.vo.ScheduleDateVO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,6 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class ClassScheduleService {
@@ -29,6 +30,9 @@ public class ClassScheduleService {
 
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private ScheduleMemberDao smDao;
+
 
     public Page<ClassSchedule> getAllClassSchedule(Pageable page) {
         return classScheduleDao.findAll(page);
@@ -95,15 +99,17 @@ public class ClassScheduleService {
     }
 
     public void deleteCSMember(Long id, Long memberId) {
-        ClassSchedule cs = classScheduleDao.findOne(id);
-        Set<Member> members = cs.getMembers();
-        for (Member member : members) {
-            if (member.getId().equals(memberId)) {
-                members.remove(member);
-                classScheduleDao.save(cs);
-                break;
-            }
-        }
+        ScheduleMember sm = smDao.findByScheduleIdAndMemberId(id, memberId);
+        smDao.delete(sm.getId());
+//        ClassSchedule cs = classScheduleDao.findOne(id);
+//        Set<Member> members = cs.getMembers();
+//        for (Member member : members) {
+//            if (member.getId().equals(memberId)) {
+//                members.remove(member);
+//                classScheduleDao.save(cs);
+//                break;
+//            }
+//        }
 
     }
 
