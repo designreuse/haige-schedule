@@ -40,12 +40,11 @@
 <![CDATA[JDBC]]></DatabaseName>
 </Connection>
 <Query>
-<![CDATA[select * from
-(SELECT tm.*, sum(mp.purchaseCount) as m_count
+<![CDATA[SELECT tm.*,
+ml.id as ml_id, ml.name as ml_name, ml.relation as ml_relation, ml.sex as ml_sex, ml.tel as ml_tel, ml.tel1 as ml_tel1, ml.weChat as ml_weChat
 from view_members tm
+left join member_linkman ml on tm.m_id=ml.memberId 
 left join member_payment mp on tm.m_id = mp.memberId
-group by tm.m_id
-) re
 where 1=1
 
 ${if(len(currUserId) == 0,"","and u_id = '" + currUserId+ "'")}
@@ -59,7 +58,7 @@ ${if(len(filter_advisor_id) == 0,"","and u_id = '" + filter_advisor_id + "'")}
 
 
 
-order by re.m_memberName
+order by tm.m_memberName
 ]]></Query>
 </TableData>
 <TableData name="fil_realName" class="com.fr.data.impl.DBTableData">
@@ -103,7 +102,7 @@ order by re.m_memberName
 <RowHeight defaultValue="723900">
 <![CDATA[822960,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
 <ColumnWidth defaultValue="2743200">
-<![CDATA[0,4419600,2743200,2743200,2743200,2743200,4632960,2743200,2743200,2743200,2743200,2743200,2743200,3413760,5394960,2743200]]></ColumnWidth>
+<![CDATA[0,4419600,2743200,2743200,2743200,2743200,4632960,2743200,2743200,2743200,2743200,4876800,2743200,2712720,3566160,2743200]]></ColumnWidth>
 <CellElementList>
 <C c="0" r="0" s="0">
 <O>
@@ -160,24 +159,24 @@ order by re.m_memberName
 <![CDATA[有效期]]></O>
 <Expand/>
 </C>
-<C c="11" r="0" s="1">
+<C c="11" r="0" s="0">
 <O>
-<![CDATA[联系人]]></O>
+<![CDATA[地址]]></O>
 <Expand/>
 </C>
 <C c="12" r="0" s="0">
 <O>
-<![CDATA[关系]]></O>
+<![CDATA[联系人]]></O>
 <Expand/>
 </C>
 <C c="13" r="0" s="0">
 <O>
-<![CDATA[联系人电话]]></O>
+<![CDATA[关系]]></O>
 <Expand/>
 </C>
 <C c="14" r="0" s="0">
 <O>
-<![CDATA[地址]]></O>
+<![CDATA[联系人电话]]></O>
 <Expand/>
 </C>
 <C c="0" r="1" s="2">
@@ -224,51 +223,43 @@ order by re.m_memberName
 <Attributes dsName="ds_member" columnName="m_realName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
 </O>
-<Expand dir="0"/>
+<Expand/>
 </C>
 <C c="2" r="1" s="3">
 <O t="DSColumn">
 <Attributes dsName="ds_member" columnName="m_memberName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
 </O>
-<Expand dir="0"/>
+<Expand/>
 </C>
 <C c="3" r="1" s="3">
 <O t="DSColumn">
 <Attributes dsName="ds_member" columnName="m_sex"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
 </O>
-<Expand dir="0"/>
+<Expand/>
 </C>
 <C c="4" r="1" s="3">
 <O t="DSColumn">
 <Attributes dsName="ds_member" columnName="m_birthday"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -280,23 +271,19 @@ order by re.m_memberName
 <Attributes dsName="ds_member" columnName="u_realName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
 </O>
-<Expand dir="0"/>
+<Expand/>
 </C>
 <C c="6" r="1" s="3">
 <O t="DSColumn">
 <Attributes dsName="ds_member" columnName="m_proType"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -308,9 +295,7 @@ order by re.m_memberName
 <Attributes dsName="ds_member" columnName="m_rChannel"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -322,46 +307,40 @@ order by re.m_memberName
 <Attributes dsName="ds_member" columnName="m_count"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
 </O>
-<Expand dir="0"/>
+<Expand/>
 </C>
 <C c="9" r="1" s="3">
 <O t="DSColumn">
 <Attributes dsName="ds_member" columnName="m_leftTime"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
 </O>
-<Expand dir="0" order="1"/>
+<Expand/>
 </C>
 <C c="10" r="1" s="3">
 <O t="DSColumn">
 <Attributes dsName="ds_member" columnName="m_endDate"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
 </O>
-<Expand dir="0"/>
+<Expand/>
 </C>
 <C c="11" r="1" s="3">
 <O t="DSColumn">
-<Attributes dsName="ds_member" columnName="ml_name"/>
+<Attributes dsName="ds_member" columnName="m_address"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
 <RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
@@ -373,6 +352,18 @@ order by re.m_memberName
 </C>
 <C c="12" r="1" s="3">
 <O t="DSColumn">
+<Attributes dsName="ds_member" columnName="ml_name"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="13" r="1" s="3">
+<O t="DSColumn">
 <Attributes dsName="ds_member" columnName="ml_relation"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
@@ -381,9 +372,9 @@ order by re.m_memberName
 <![CDATA[$$$]]></Result>
 <Parameters/>
 </O>
-<Expand/>
+<Expand dir="0"/>
 </C>
-<C c="13" r="1" s="3">
+<C c="14" r="1" s="3">
 <O t="DSColumn">
 <Attributes dsName="ds_member" columnName="ml_tel"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -393,21 +384,7 @@ order by re.m_memberName
 <![CDATA[$$$]]></Result>
 <Parameters/>
 </O>
-<Expand/>
-</C>
-<C c="14" r="1" s="3">
-<O t="DSColumn">
-<Attributes dsName="ds_member" columnName="m_address"/>
-<Condition class="com.fr.data.condition.ListCondition"/>
-<Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
-<Result>
-<![CDATA[$$$]]></Result>
-<Parameters/>
-</O>
-<Expand/>
+<Expand dir="0"/>
 </C>
 </CellElementList>
 <ReportAttrSet>
@@ -493,7 +470,7 @@ order by re.m_memberName
 <WidgetName name="filter_real_name"/>
 <WidgetAttr/>
 <Dictionary class="com.fr.data.impl.TableDataDictionary">
-<FormulaDictAttr kiName="m_realName" viName="m_realName"/>
+<FormulaDictAttr kiName="m_realname" viName="m_realname"/>
 <TableDataDictAttr>
 <TableData class="com.fr.data.impl.NameTableData">
 <Name>
@@ -656,5 +633,5 @@ order by re.m_memberName
 <Style style_name="cell"/>
 </StyleList>
 <DesignerVersion DesignerVersion="HAF"/>
-<PreviewType PreviewType="0"/>
+<PreviewType PreviewType="2"/>
 </WorkBook>

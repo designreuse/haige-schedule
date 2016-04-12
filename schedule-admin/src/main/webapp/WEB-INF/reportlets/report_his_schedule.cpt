@@ -35,8 +35,11 @@
 <![CDATA[JDBC]]></DatabaseName>
 </Connection>
 <Query>
-<![CDATA[select hs.*, date_format(cs_startTime,'%H:%i') str_startTime, date_format(cs_endTime,'%H:%i') str_endTime from his_schedule hs
-
+<![CDATA[select hs.*, date_format(cs_startTime,'%H:%i') str_startTime, date_format(cs_endTime,'%H:%i') str_endTime ,
+adv.realName as advisor_name
+from his_schedule hs
+left join members m on m.id = hs.m_id
+left join users adv on adv.id = m.advisorId
 where 1=1
 
 ${if(len(filter_class_id) == 0,"","and c_id = '" + filter_class_id + "'")}
@@ -78,9 +81,9 @@ where m_id is not null]]></Query>
 <FC/>
 </ReportPageAttr>
 <RowHeight defaultValue="723900">
-<![CDATA[723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
+<![CDATA[579120,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
 <ColumnWidth defaultValue="2743200">
-<![CDATA[0,2255520,2712720,1950720,1920240,2072640,6614160,3048000,2042160,2072640,2743200]]></ColumnWidth>
+<![CDATA[0,2560320,1981200,1920240,1950720,1950720,2103120,1767840,1371600,2286000,4328160,2377440,2743200]]></ColumnWidth>
 <CellElementList>
 <C c="0" r="0" s="0">
 <O>
@@ -89,47 +92,57 @@ where m_id is not null]]></Query>
 </C>
 <C c="1" r="0" s="0">
 <O>
-<![CDATA[类别]]></O>
+<![CDATA[课程日期]]></O>
 <Expand/>
 </C>
 <C c="2" r="0" s="0">
 <O>
-<![CDATA[课程日期]]></O>
+<![CDATA[开始时间]]></O>
 <Expand/>
 </C>
 <C c="3" r="0" s="0">
 <O>
-<![CDATA[开始时间]]></O>
+<![CDATA[结束时间]]></O>
 <Expand/>
 </C>
 <C c="4" r="0" s="0">
 <O>
-<![CDATA[结束时间]]></O>
+<![CDATA[教练]]></O>
 <Expand/>
 </C>
 <C c="5" r="0" s="0">
 <O>
-<![CDATA[教练]]></O>
+<![CDATA[类别]]></O>
 <Expand/>
 </C>
 <C c="6" r="0" s="0">
 <O>
-<![CDATA[教练评价]]></O>
+<![CDATA[学员]]></O>
 <Expand/>
 </C>
 <C c="7" r="0" s="0">
 <O>
-<![CDATA[学员]]></O>
+<![CDATA[阶段]]></O>
 <Expand/>
 </C>
 <C c="8" r="0" s="0">
 <O>
-<![CDATA[学员阶段]]></O>
+<![CDATA[性别]]></O>
 <Expand/>
 </C>
 <C c="9" r="0" s="0">
 <O>
-<![CDATA[学员性别]]></O>
+<![CDATA[顾问]]></O>
+<Expand/>
+</C>
+<C c="10" r="0" s="0">
+<O>
+<![CDATA[教练评价]]></O>
+<Expand/>
+</C>
+<C c="11" r="0" s="0">
+<O>
+<![CDATA[备注]]></O>
 <Expand/>
 </C>
 <C c="0" r="1" s="1">
@@ -146,18 +159,6 @@ where m_id is not null]]></Query>
 </C>
 <C c="1" r="1" s="1">
 <O t="DSColumn">
-<Attributes dsName="ds_his_schedule" columnName="c_name"/>
-<Condition class="com.fr.data.condition.ListCondition"/>
-<Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
-<Result>
-<![CDATA[$$$]]></Result>
-<Parameters/>
-</O>
-<Expand dir="0"/>
-</C>
-<C c="2" r="1" s="1">
-<O t="DSColumn">
 <Attributes dsName="ds_his_schedule" columnName="cs_date"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
@@ -168,7 +169,7 @@ where m_id is not null]]></Query>
 </O>
 <Expand dir="0"/>
 </C>
-<C c="3" r="1" s="2">
+<C c="2" r="1" s="2">
 <O t="DSColumn">
 <Attributes dsName="ds_his_schedule" columnName="str_startTime"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -180,7 +181,7 @@ where m_id is not null]]></Query>
 </O>
 <Expand dir="0"/>
 </C>
-<C c="4" r="1" s="2">
+<C c="3" r="1" s="2">
 <O t="DSColumn">
 <Attributes dsName="ds_his_schedule" columnName="str_endTime"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -190,9 +191,9 @@ where m_id is not null]]></Query>
 <![CDATA[$$$]]></Result>
 <Parameters/>
 </O>
-<Expand dir="0"/>
+<Expand dir="0" leftParentDefault="false" left="B2"/>
 </C>
-<C c="5" r="1" s="1">
+<C c="4" r="1" s="1">
 <O t="DSColumn">
 <Attributes dsName="ds_his_schedule" columnName="u_realName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -202,23 +203,21 @@ where m_id is not null]]></Query>
 <![CDATA[$$$]]></Result>
 <Parameters/>
 </O>
-<Expand dir="0"/>
+<Expand leftParentDefault="false" left="C2"/>
 </C>
-<C c="6" r="1" s="1">
+<C c="5" r="1" s="1">
 <O t="DSColumn">
-<Attributes dsName="ds_his_schedule" columnName="csm_evaluation"/>
+<Attributes dsName="ds_his_schedule" columnName="c_name"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
 </O>
-<Expand dir="0"/>
+<Expand leftParentDefault="false" left="C2"/>
 </C>
-<C c="7" r="1" s="1">
+<C c="6" r="1" s="1">
 <O t="DSColumn">
 <Attributes dsName="ds_his_schedule" columnName="m_realName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -230,9 +229,9 @@ where m_id is not null]]></Query>
 <![CDATA[$$$]]></Result>
 <Parameters/>
 </O>
-<Expand dir="0"/>
+<Expand dir="0" leftParentDefault="false" left="C2"/>
 </C>
-<C c="8" r="1" s="1">
+<C c="7" r="1" s="1">
 <O t="DSColumn">
 <Attributes dsName="ds_his_schedule" columnName="p_name"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
@@ -242,11 +241,46 @@ where m_id is not null]]></Query>
 <![CDATA[$$$]]></Result>
 <Parameters/>
 </O>
-<Expand/>
+<Expand dir="0"/>
+</C>
+<C c="8" r="1" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_his_schedule" columnName="m_sex"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
 </C>
 <C c="9" r="1" s="1">
 <O t="DSColumn">
-<Attributes dsName="ds_his_schedule" columnName="m_sex"/>
+<Attributes dsName="ds_his_schedule" columnName="advisor_name"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="10" r="1" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_his_schedule" columnName="csm_evaluation"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
+<Attr divideMode="1"/>
+</RG>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="0" leftParentDefault="false" left="G2"/>
+</C>
+<C c="11" r="1" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds_his_schedule" columnName="cs_comment"/>
 <Complex/>
 <RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Parameters/>
@@ -487,5 +521,5 @@ if( start > end){   //判断开始日期是否大于结束日期
 </Style>
 </StyleList>
 <DesignerVersion DesignerVersion="HAF"/>
-<PreviewType PreviewType="0"/>
+<PreviewType PreviewType="2"/>
 </WorkBook>

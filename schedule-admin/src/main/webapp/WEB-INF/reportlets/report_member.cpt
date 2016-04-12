@@ -40,12 +40,7 @@
 <![CDATA[JDBC]]></DatabaseName>
 </Connection>
 <Query>
-<![CDATA[select * from
-(SELECT tm.*, sum(mp.purchaseCount) as m_count
-from view_members tm
-left join member_payment mp on tm.m_id = mp.memberId
-group by tm.m_id
-) re
+<![CDATA[select * from view_members
 where 1=1
 
 ${if(len(currUserId) == 0,"","and u_id = '" + currUserId+ "'")}
@@ -57,9 +52,7 @@ ${if(len(filter_left_time) == 0,"","and m_leftTime = '" + filter_left_time + "'"
 ${if(len(filter_advisor_id) == 0,"","and u_id = '" + filter_advisor_id + "'")}
 
 
-
-
-order by re.m_memberName
+order by m_memberName
 ]]></Query>
 </TableData>
 <TableData name="fil_realName" class="com.fr.data.impl.DBTableData">
@@ -199,9 +192,7 @@ order by re.m_memberName
 <Attributes dsName="ds_member" columnName="m_realName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -213,9 +204,7 @@ order by re.m_memberName
 <Attributes dsName="ds_member" columnName="m_memberName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -227,9 +216,7 @@ order by re.m_memberName
 <Attributes dsName="ds_member" columnName="u_realName"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -241,9 +228,7 @@ order by re.m_memberName
 <Attributes dsName="ds_member" columnName="m_leftTime"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -255,9 +240,7 @@ order by re.m_memberName
 <Attributes dsName="ds_member" columnName="m_endDate"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -269,9 +252,7 @@ order by re.m_memberName
 <Attributes dsName="ds_member" columnName="m_sex"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -283,9 +264,7 @@ order by re.m_memberName
 <Attributes dsName="ds_member" columnName="m_count"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -297,9 +276,7 @@ order by re.m_memberName
 <Attributes dsName="ds_member" columnName="m_proType"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -422,7 +399,7 @@ order by re.m_memberName
 <WidgetName name="filter_real_name"/>
 <WidgetAttr/>
 <Dictionary class="com.fr.data.impl.TableDataDictionary">
-<FormulaDictAttr kiName="m_realName" viName="m_realName"/>
+<FormulaDictAttr kiName="m_realname" viName="m_realname"/>
 <TableDataDictAttr>
 <TableData class="com.fr.data.impl.NameTableData">
 <Name>
@@ -597,5 +574,5 @@ order by re.m_memberName
 </Style>
 </StyleList>
 <DesignerVersion DesignerVersion="HAF"/>
-<PreviewType PreviewType="0"/>
+<PreviewType PreviewType="2"/>
 </WorkBook>

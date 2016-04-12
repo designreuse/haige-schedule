@@ -30,8 +30,14 @@
 <![CDATA[JDBC]]></DatabaseName>
 </Connection>
 <Query>
-<![CDATA[select * from view_members m
-left join member_payment mp on m.m_id = mp.memberId
+<![CDATA[SELECT m.id as m_id, m.memberName as m_memberName, m.age as m_age, m.birthday as m_birthday, m.realName as m_realName,
+CASE WHEN m.sex=0 THEN '男' WHEN m.sex=1 THEN '女' ELSE '' END as m_sex,m.endDate as m_endDate,m.proType as m_proType,
+m.address as m_address,m.registrationChannel as m_rChannel,m.leftTime as m_leftTime, m.`comment` as m_comment,
+u.id as u_id, u.realName as u_realName, u.userName as u_userName, u.tel as u_tel, u.weChat as u_weChat,
+mp.*
+from members m
+left join users u on m.advisorid = u.id
+left join member_payment mp on m.id = mp.memberId
 
 where 1=1
 
@@ -121,6 +127,7 @@ ${if(len(filter_start) == 0,""," and payDate >='" + filter_start + "'")}]]></Que
 <C c="9" r="0" s="0">
 <O>
 <![CDATA[产品类型]]></O>
+<Expand/>
 </C>
 <C c="10" r="0" s="0">
 <O>
@@ -129,17 +136,17 @@ ${if(len(filter_start) == 0,""," and payDate >='" + filter_start + "'")}]]></Que
 </C>
 <C c="11" r="0" s="0">
 <O>
-<![CDATA[缴费日期]]></O>
+<![CDATA[缴费人]]></O>
 <Expand/>
 </C>
 <C c="12" r="0" s="0">
 <O>
-<![CDATA[缴费金额]]></O>
+<![CDATA[缴费日期]]></O>
 <Expand/>
 </C>
 <C c="13" r="0" s="0">
 <O>
-<![CDATA[缴费人]]></O>
+<![CDATA[缴费金额]]></O>
 <Expand/>
 </C>
 <C c="14" r="0" s="0">
@@ -281,12 +288,10 @@ ${if(len(filter_start) == 0,""," and payDate >='" + filter_start + "'")}]]></Que
 </C>
 <C c="11" r="1" s="1">
 <O t="DSColumn">
-<Attributes dsName="ds_member" columnName="payDate"/>
+<Attributes dsName="ds_member" columnName="payPerson"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
-<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
-<Attr divideMode="1"/>
-</RG>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
 <Result>
 <![CDATA[$$$]]></Result>
 <Parameters/>
@@ -295,7 +300,7 @@ ${if(len(filter_start) == 0,""," and payDate >='" + filter_start + "'")}]]></Que
 </C>
 <C c="12" r="1" s="1">
 <O t="DSColumn">
-<Attributes dsName="ds_member" columnName="payment"/>
+<Attributes dsName="ds_member" columnName="payDate"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
 <RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
@@ -309,7 +314,7 @@ ${if(len(filter_start) == 0,""," and payDate >='" + filter_start + "'")}]]></Que
 </C>
 <C c="13" r="1" s="1">
 <O t="DSColumn">
-<Attributes dsName="ds_member" columnName="payPerson"/>
+<Attributes dsName="ds_member" columnName="payment"/>
 <Condition class="com.fr.data.condition.ListCondition"/>
 <Complex/>
 <RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper">
@@ -319,7 +324,7 @@ ${if(len(filter_start) == 0,""," and payDate >='" + filter_start + "'")}]]></Que
 <![CDATA[$$$]]></Result>
 <Parameters/>
 </O>
-<Expand/>
+<Expand dir="0"/>
 </C>
 <C c="14" r="1" s="1">
 <O t="DSColumn">
@@ -537,5 +542,5 @@ if( start > end){   //判断开始日期是否大于结束日期
 </Style>
 </StyleList>
 <DesignerVersion DesignerVersion="HAF"/>
-<PreviewType PreviewType="2"/>
+<PreviewType PreviewType="1"/>
 </WorkBook>

@@ -129,8 +129,13 @@ public class ClassScheduleController {
     @RequestMapping(value = "/finish", method = RequestMethod.POST)
     public String finish(@PathVariable("scheduleType") long scheduleType,
                          @RequestParam(value = "ev_scheduleid", required = true) Long evScheduleid,
-                         @RequestParam(value = "memberIds", required = true) String[] memberIds,
-                         @RequestParam(value = "evaluations", required = true) String[] evaluations) {
+                         @RequestParam(value = "memberIds", required = false) String[] memberIds,
+                         @RequestParam(value = "evaluations", required = false) String[] evaluations) {
+        if (memberIds == null) {
+            scheduleService.deleteClassSchedule(evScheduleid);
+            return "redirect:/schedule/" + scheduleType + "/list";
+        }
+
         for (int i = 0; i < memberIds.length; i++) {
             Long memberId = Long.parseLong(memberIds[i]);
             ScheduleMember sm = smService.getScheduleMember(evScheduleid, memberId);

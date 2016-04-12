@@ -41,7 +41,7 @@
 </Connection>
 <Query>
 <![CDATA[select * from view_members
-
+where 1=1
 ${if(len(filter_member_name) == 0,"","and m_memberName = '" + filter_member_name+ "'")}
 ${if(len(filter_real_name) == 0,"","and m_realName = '" + filter_real_name + "'")}
 ${if(len(filter_sex) == 0,"","and m_sex = '" + filter_sex + "'")}
@@ -513,5 +513,5 @@ where ml_id is not null]]></Query>
 <Style style_name="cell"/>
 </StyleList>
 <DesignerVersion DesignerVersion="HAF"/>
-<PreviewType PreviewType="0"/>
+<PreviewType PreviewType="2"/>
 </WorkBook>
